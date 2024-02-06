@@ -6,7 +6,6 @@
 #  define _AREA_H_
 
 
-
 struct area {
     unsigned char id;
     char name[255];

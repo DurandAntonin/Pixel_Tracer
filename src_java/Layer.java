@@ -34,4 +34,8 @@ public class Layer {
     public void removeShapeFromLayer(Shape shapeToRemove){
         listShapes.remove(shapeToRemove);
     }
+
+    public void deleteAllShapeFromLayer(){
+        listShapes = new ArrayList<>();
+    }
 }

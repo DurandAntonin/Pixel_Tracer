@@ -47,7 +47,7 @@ public class PointTest {
     @Test
     public void testToString() {
         String stringPointReal = point.toString();
-        String stringPointExpected = "Point [posX:" + point.getPosX() + ",posY" + point.getPosY() + "]";
+        String stringPointExpected = "Point [posX: " + point.getPosX() + ", posY: " + point.getPosY() + "]";
         Assert.assertEquals("Test méthode toString", stringPointExpected, stringPointReal);
     }
 

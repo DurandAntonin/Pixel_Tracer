@@ -27,6 +27,10 @@ public class Pixel {
         // TODO implement here
     }
 
+    public Pixel(int parX, int parY) {
+        // TODO implement here
+    }
+
     /**
      * @return
      */

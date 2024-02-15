@@ -1,19 +1,21 @@
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class RectangleTest {
 
-    Point p1;
+    Point p1, p2;
     Integer w, h;
     Pixel px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12,px13,px14,px15,px16,px17,px18,px19,px20;
-    Rectangle rec1;
+    Rectangle rec1, rec2;
 
     @Before
     public void init() {
         p1 = new Point(5, 5);
+        p2 = new Point(4, 4);
         w = 4;
         h = 8;
         rec1 = new Rectangle(p1, w, h);
@@ -62,5 +64,23 @@ public class RectangleTest {
     @Test
     public void testToString() {
         assertEquals(rec1.toString(), "Rectangle [point: " + rec1.getPoint().toString() + ", width: " + rec1.getWidth() + ", height: " + rec1.getHeight() + "]");
+    }
+
+    @Test
+    public void testEquals(){
+        //cas meme instance
+        Assert.assertTrue(rec1.equals(rec1));
+
+        //cas 2eme objet null
+        Assert.assertEquals(rec1, null);
+
+        //cas objets de classes différentes
+        Assert.assertFalse(rec1.equals(new String()));
+
+        //cas objets de meme classe et valeur des champs différentes
+        Assert.assertFalse(rec1.equals(new Rectangle(p2, w, h)));
+
+        //cas objets de meme classe et valeur des champs identique
+        Assert.assertTrue(rec1.equals(new Rectangle(p1, w, h)));
     }
 }

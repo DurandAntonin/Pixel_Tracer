@@ -1,11 +1,12 @@
 import static org.junit.Assert.assertArrayEquals;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class SquareTest {
 
-    Point p1;
+    Point p1,p2;
     Integer len;
     Pixel px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12;
     Square sq1;
@@ -13,6 +14,7 @@ public class SquareTest {
     @Before
     public void init() {
         p1 = new Point(5, 5);
+        p2 = new Point(4, 4);
         len = 4;
         sq1 = new Square(p1, len);
         px1 = new Pixel(5, 5);
@@ -33,6 +35,24 @@ public class SquareTest {
     public void testDraw() {
         Pixel[] pixels = {px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12};
         assertArrayEquals(sq1.draw().toArray(), pixels);
+    }
+
+    @Test
+    public void testEquals(){
+        //cas meme instance
+        Assert.assertTrue(sq1.equals(sq1));
+
+        //cas 2eme objet null
+        Assert.assertEquals(sq1, null);
+
+        //cas objets de classes différentes
+        Assert.assertFalse(sq1.equals(new String()));
+
+        //cas objets de meme classe et valeur des champs différentes
+        Assert.assertFalse(sq1.equals(new Square(p2, len)));
+
+        //cas objets de meme classe et valeur des champs identique
+        Assert.assertTrue(sq1.equals(new Square(p1, len)));
     }
 
 }

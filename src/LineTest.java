@@ -4,12 +4,14 @@ import static org.junit.Assert.assertEquals;
 import java.util.Arrays;
 import java.util.List;
 
+
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 public class LineTest {
 
-    Point p1,p2;
+    Point p1,p2,p3,p4;
     Line l1;
     Pixel px1, px2, px3, px4, px5, px6, px7, px8, px9, px10, px11;
 
@@ -18,7 +20,9 @@ public class LineTest {
     public void init()  {
         p1 = new Point(3, 9);
         p2 = new Point(13, 5);
-        l1 = new Line( p1, p2);
+        p3 = new Point(1, 4);
+        p4 = new Point(7, 6);
+        l1 = new Line(p1, p2);
         px1 = new Pixel(3,9);
         px2 = new Pixel(4,9);
         px3 = new Pixel(5,8);
@@ -49,5 +53,23 @@ public class LineTest {
     @Test
     public void testGetP2() {
         assertEquals(l1.getP2(),p2);
+    }
+
+    @Test
+    public void testEquals(){
+        //cas meme instance
+        Assert.assertTrue(l1.equals(l1));
+
+        //cas 2eme objet null
+        Assert.assertEquals(l1, null);
+
+        //cas objets de classes différentes
+        Assert.assertFalse(l1.equals(new String()));
+
+        //cas objets de meme classe et valeur des champs différentes
+        Assert.assertFalse(l1.equals(new Line(p3, p4)));
+
+        //cas objets de meme classe et valeur des champs identique
+        Assert.assertTrue(l1.equals(new Line(p1, p2)));
     }
 }

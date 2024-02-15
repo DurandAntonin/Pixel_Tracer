@@ -57,7 +57,7 @@ public class PointTest {
         Assert.assertTrue(point.equals(point));
 
         //cas 2eme objet null
-        Assert.assertEquals(point, null );
+        Assert.assertEquals(point, null);
 
         //cas objets de classes différentes
         Assert.assertFalse(point.equals(new String()));

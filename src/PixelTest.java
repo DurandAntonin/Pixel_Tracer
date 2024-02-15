@@ -35,6 +35,6 @@ public class PixelTest {
 
     @Test
     public void testToString() {
-        assertEquals(pixel.toString(),"Pixel:\nX:1\nY:1\nColor:BLACK");
+        assertEquals(pixel.toString(),"Pixel [x:1,x:1,color:BLACK]");
     }
 }

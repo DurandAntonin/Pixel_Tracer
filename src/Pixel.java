@@ -7,12 +7,12 @@ public class Pixel {
     /**
      * 
      */
-    private int x;
+    private Integer x;
 
     /**
      * 
      */
-    private int y;
+    private Integer y;
 
     /**
      * 
@@ -23,11 +23,11 @@ public class Pixel {
      * @param parX 
      * @param parY
      */
-    public Pixel(int parX, int parY, COLOR parColor) {
+    public Pixel(Integer parX, Integer parY, COLOR parColor) {
         // TODO implement here
     }
 
-    public Pixel(int parX, int parY) {
+    public Pixel(Integer parX, Integer parY) {
         // TODO implement here
     }
 
@@ -39,11 +39,11 @@ public class Pixel {
         return "";
     }
 
-    public int getX() {
+    public Integer getX() {
         return this.x;
     }
 
-    public int getY() {
+    public Integer getY() {
         return this.y;
     }
 

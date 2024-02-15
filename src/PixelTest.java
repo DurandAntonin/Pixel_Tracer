@@ -7,10 +7,13 @@ import org.junit.Test;
 public class PixelTest {
 
     private Pixel pixel;
+    private final Integer x = 1;
+    private final Integer y = 1;
+    private final COLOR color = COLOR.BLACK;
 
     @Before
     public void beforeTest() {
-        pixel = new Pixel(1, 1, COLOR.BLACK);
+        pixel = new Pixel(x, y, color);
     }
 
     @After 
@@ -20,21 +23,21 @@ public class PixelTest {
 
     @Test
     public void testGetColor() {
-        assertEquals(pixel.getColor(), COLOR.BLACK);
+        assertEquals(pixel.getColor(), color);
     }
 
     @Test
     public void testGetX() {
-        assertEquals(pixel.getX(), 1);
+        assertEquals(pixel.getX(), x);
     }
 
     @Test
     public void testGetY() {
-        assertEquals(pixel.getY(), 1);
+        assertEquals(pixel.getY(), y);
     }
 
     @Test
     public void testToString() {
-        assertEquals(pixel.toString(),"Pixel [x:1,x:1,color:BLACK]");
+        assertEquals(pixel.toString(),"Pixel [x: "+pixel.getX()+", y: "+pixel.getY()+", color: "+pixel.getColor()+"]");
     }
 }

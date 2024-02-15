@@ -35,4 +35,15 @@ public class Pixel {
         return "";
     }
 
+    public Integer getX() {
+        return this.x;
+    }
+
+    public Integer getY() {
+        return this.y;
+    }
+
+    public COLOR getColor() {
+        return this.color;
+    }
 }

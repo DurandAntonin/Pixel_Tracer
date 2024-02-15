@@ -87,4 +87,28 @@ public class Command {
         return;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public List<Integer> getIntParams() {
+        return this.intParams;
+    }
+
+    public List<String> getStrParams() {
+        return this.strParams;
+    }
+
+
+    public List<Float> getFloatParams() {
+        return this.floatParams;
+    }
+
+    public Integer getMaxParamNumber() {
+        return this.maxParamNumber;
+    }
+
+    public List<String> getListErrorMessages() {
+        return this.listErrorMessages;
+    }
 }

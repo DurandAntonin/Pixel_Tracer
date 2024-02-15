@@ -40,4 +40,11 @@ public class Square extends Shape {
         return "";
     }
 
+    public Point getPoint() {
+        return this.point;
+    }
+
+    public Integer getLength() {
+        return this.length;
+    }
 }

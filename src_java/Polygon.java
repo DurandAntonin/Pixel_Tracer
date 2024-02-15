@@ -40,4 +40,11 @@ public class Polygon extends Shape {
         return "";
     }
 
+    public Integer getNbOfPoints() {
+        return this.nbOfPoints;
+    }
+
+    public List<Point> getPointList() {
+        return this.pointList;
+    }
 }

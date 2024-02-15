@@ -13,7 +13,7 @@ public class Main {
      * @param Args 
      * @return
      */
-    public static void Main(String[] Args) {
+    public static void main(String[] Args) {
         // TODO implement here
     }
 

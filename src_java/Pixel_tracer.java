@@ -74,4 +74,27 @@ public class Pixel_tracer {
         return;
     }
 
+    public List<Area> getListArea() {
+        return this.listArea;
+    }
+
+    public Area getCurrentArea() {
+        return this.currentArea;
+    }
+
+    public Layer getCurrentLayer() {
+        return this.currentLayer;
+    }
+
+    public Shape getCurrentShape() {
+        return this.currentShape;
+    }
+
+    public String getEmptyChar() {
+        return this.emptyChar;
+    }
+
+    public String getFullChar() {
+        return this.fullChar;
+    }
 }

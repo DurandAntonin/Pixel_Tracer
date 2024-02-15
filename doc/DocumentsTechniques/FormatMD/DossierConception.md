@@ -20,7 +20,8 @@ _Zehren William_
         </ol>
         <li> <a href="#concepDeta"> Conception détaillée </a> </li>
         <ol>
-            <li> <a href="#diagClasses"> Diagramme de classes </a> </li>
+            <li> <a href="#diagClassesC"> Diagramme de classes C</a> </li>
+            <li> <a href="#diagClassesJava"> Diagramme de classes Java</a> </li>
         </ol>
     </ol>
 </ol>
@@ -59,19 +60,60 @@ L'objectif premier d'un diagramme de packages est de représenter de manière si
 <p> Diagramme de package de Pixel Tracer </p>
 </div>
 
-Le diagramme de packages de Pixel Tracer contient plusieurs packages principaux :  
+Le diagramme de packages de Pixel Tracer contient plusieurs packages principaux, chacun correspondant à des fonctionnalités :  
 
 - Readline 
 - List
 - LIBC
 - Pixel Tracer (Shape, Draw, Command, Display, ID héritent du package Pixel Tracer)
 
+En Java, certaines de ces fonctionnalités ne seront plus présentes car pas utiles. Dans notre cas, seul le package ID ne sera pas présent. 
+
 <h4 style="color:#5d79e7" id=diagComposants> Diagramme de composants </h4>
+
+Un **diagramme de composants** permet de représenter les différentes fonctionnalités d'une application à travers des composants.
+
+Un composant représente une fonctionnalité de l'application. On peut ensuite représenter les relations qu'ont les différents composants (et donc les différents fonctionnalités) entre eux à l'aide de dépendances. 
+
+L'objectif premier d'un diagramme de composants est de représenter de manière détaillée et plus complexe les différentes fonctionnalités d'une application en créant un composant par fonctionnalité.
+
+<div style="text-align:center">
+<img src="../Images/diagrammeComposants.PNG" width="700px">
+<p> Diagramme de composants de Pixel Tracer </p>
+</div>
+
+On retrouve donc dans ce diagramme, les fonctionnalités suivantes de l'application : 
+- Command
+- Main 
+- Shape
+- Pixel 
+- Area
+- Layers 
+- Render
+- List 
+- Id
+
+En Java, certaines de ces fonctionnalités ne seront plus présentes car pas utiles. Dans notre cas, seul le composant ID ne sera pas présent. 
 
 <h3 style="color:#5d79e7" id=concepDeta> Conception détaillée </h3>
 
-<h4 style="color:#5d79e7" id=diagClasses> Diagramme de classes </h4>
+Les diagrammes présentés dans cette section seront les suivants : 
 
+- **Diagramme de classes C** 
+- **Diagramme de classes Java**
 
+<h4 style="color:#5d79e7" id=diagClassesC> Diagramme de classes C</h4>
+
+<div style="text-align:center">
+<img src="../Images/diagrammeClassesC.PNG" width="700px">
+<p> Diagramme de classes C de Pixel Tracer </p>
+</div>
+
+<h4 style="color:#5d79e7" id=diagClassesJava> Diagramme de classes Java</h4>
+
+<div style="text-align:center">
+<img src="../Images/diagrammeClassesJava.PNG" width="700px">
+<p> Diagramme de classes Java de Pixel Tracer </p>
+</div>
 
 

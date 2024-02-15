@@ -24,6 +24,8 @@ public class Line extends Shape {
     }
 
     /**
+     * Utilise l'algorithme de tracé de segment version Nicolas Flasque
+     * 
      * @return
      */
     public List<Pixel> draw() {

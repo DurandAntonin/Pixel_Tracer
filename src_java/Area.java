@@ -117,4 +117,35 @@ public class Area {
         return;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String[][] getArea() {
+        return this.area;
+    }
+
+    public List<Layer> getListLayers() {
+        return this.listLayers;
+    }
+
+    public String getEmptyChar() {
+        return this.emptyChar;
+    }
+
+    public String getFullChar() {
+        return this.fullChar;
+    }
 }

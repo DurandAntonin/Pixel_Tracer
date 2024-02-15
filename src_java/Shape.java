@@ -59,4 +59,23 @@ public class Shape {
         return "";
     }
 
+    public Integer getX() {
+        return this.x;
+    }
+
+    public Integer getY() {
+        return this.y;
+    }
+
+    public COLOR getColor() {
+        return this.color;
+    }
+
+    public Integer getId() {
+        return this.id;
+    }
+
+    public Integer getThickness() {
+        return this.thickness;
+    }
 }

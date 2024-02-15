@@ -6,13 +6,6 @@ import java.util.*;
  * 
  */
 public class Cercle extends Shape {
-
-    /**
-     * Default constructor
-     */
-    public Cercle() {
-    }
-
     /**
      * 
      */
@@ -29,6 +22,7 @@ public class Cercle extends Shape {
      */
     public Cercle(Point parCenter, Integer parRadius) {
         // TODO implement here
+        super(parRadius, parRadius, parRadius, null, parRadius);
     }
 
     /**
@@ -47,4 +41,11 @@ public class Cercle extends Shape {
         return "";
     }
 
+    public Point getCenter() {
+        return this.center;
+    }
+
+    public int getRadius() {
+        return this.radius;
+    }
 }

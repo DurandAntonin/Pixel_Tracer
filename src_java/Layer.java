@@ -76,4 +76,25 @@ public class Layer {
         return;
     }
 
+    public Integer getId() {
+        return this.id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public Boolean isVisible() {
+        return this.visible;
+    }
+
+    public Boolean getVisible() {
+        return this.visible;
+    }
+
+
+    public List<Shape> getListShapes() {
+        return this.listShapes;
+    }
+
 }

@@ -40,4 +40,11 @@ public class Point extends Shape {
         return "";
     }
 
+    public Integer getPosX() {
+        return this.posX;
+    }
+
+    public Integer getPosY() {
+        return this.posY;
+    }
 }

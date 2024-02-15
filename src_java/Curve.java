@@ -8,12 +8,6 @@ import java.util.*;
 public class Curve extends Shape {
 
     /**
-     * Default constructor
-     */
-    public Curve() {
-    }
-
-    /**
      * 
      */
     private Point p1;
@@ -41,6 +35,7 @@ public class Curve extends Shape {
      */
     public Curve(Integer parP1, Integer parP2, Integer parP3, Integer parP4) {
         // TODO implement here
+        super(null, null, null, null, null);
     }
 
     /**
@@ -59,4 +54,19 @@ public class Curve extends Shape {
         return "";
     }
 
+    public Point getP1() {
+        return this.p1;
+    }
+
+    public Point getP2() {
+        return this.p2;
+    }
+
+    public Point getP3() {
+        return this.p3;
+    }
+
+    public Point getP4() {
+        return this.p4;
+    }
 }

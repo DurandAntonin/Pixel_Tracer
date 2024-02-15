@@ -46,4 +46,15 @@ public class Rectangle extends Shape {
         return "";
     }
 
+    public Point getPoint() {
+        return this.point;
+    }
+
+    public Integer getWidth() {
+        return this.width;
+    }
+
+    public Integer getHeight() {
+        return this.height;
+    }
 }

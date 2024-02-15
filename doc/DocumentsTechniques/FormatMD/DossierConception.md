@@ -34,6 +34,8 @@ Ce document est un dossier de conception divisé en plusieurs parties. Il sera c
 
 Pixel tracer est une application sur Linux et sur Windows, qui permet de réaliser des dessins vectoriels en ligne de commande sans interface graphique.
 
+L'objectif du projet est d'effectuer du rétro-engineering sur le code C de Pixel Tracer pour définir des classes objet et donc passer l'application en Java. 
+
 <h2 style="color:#5d79e7" id=con_pt> Conception de Pixel Tracer </h2>
 
 Ce dossier de conception plus léger ne servira qu'a présenter les différents diagrammes représentatifs de la structure de l'application Pixel Tracer.
@@ -104,6 +106,10 @@ Les diagrammes présentés dans cette section seront les suivants :
 
 <h4 style="color:#5d79e7" id=diagClassesC> Diagramme de classes C</h4>
 
+Un **diagramme de classes** permet de représenter l'organisation et la structure d'une application, en modélisant les différentes classes qui la composent ainsi que leurs attributs et leurs méthodes.
+
+Dans notre cas, on réalise en premier lieu un diagramme de classes pour le code C de l'application.
+
 <div style="text-align:center">
 <img src="../Images/diagrammeClassesC.PNG" width="700px">
 <p> Diagramme de classes C de Pixel Tracer </p>
@@ -111,8 +117,10 @@ Les diagrammes présentés dans cette section seront les suivants :
 
 <h4 style="color:#5d79e7" id=diagClassesJava> Diagramme de classes Java</h4>
 
+En étudiant le diagramme de classes du code C, on peut établir un diagramme de classe en Java qui nous permettra de définir nos classes dans le code Java de l'application. 
+
 <div style="text-align:center">
-<img src="../Images/diagrammeClassesJava.PNG" width="700px">
+<img      src="../Images/diagrammeClassesJava.PNG" width="700px">
 <p> Diagramme de classes Java de Pixel Tracer </p>
 </div>
 

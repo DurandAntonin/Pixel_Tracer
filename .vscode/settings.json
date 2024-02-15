@@ -1,0 +1,7 @@
+{
+    "java.project.sourcePaths": ["Pixel_Tracer/src_java"],
+    "java.project.outputPath": "bin",
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar"
+    ]
+}

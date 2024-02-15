@@ -13,6 +13,11 @@ public class Render {
         return;
     }
 
+    @Override
+    public boolean equals(Object object){
+        return true;
+    }
+
     /**
      * @param area 
      * @return

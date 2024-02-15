@@ -27,9 +27,14 @@ public class Point extends Shape {
     /**
      * @return
      */
-    public List<Pixel> draw() {
+    public ArrayList<Pixel> draw() {
         // TODO implement here
-        return null;
+        return new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object object){
+        return true;
     }
 
     /**

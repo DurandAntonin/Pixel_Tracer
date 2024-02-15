@@ -33,6 +33,11 @@ public class Line extends Shape {
         return null;
     }
 
+    @Override
+    public boolean equals(Object object){
+        return true;
+    }
+
     /**
      * @return
      */

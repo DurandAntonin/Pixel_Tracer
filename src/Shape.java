@@ -5,7 +5,7 @@ import java.util.*;
 /**
  * 
  */
-public class Shape {
+public abstract class Shape {
 
     /**
      * 
@@ -46,10 +46,10 @@ public class Shape {
     /**
      * @return
      */
-    public List<Pixel> draw() {
-        // TODO implement here
-        return null;
-    }
+    public abstract List<Pixel> draw();
+
+    @Override
+    public abstract boolean equals(Object object);
 
     /**
      * @return

@@ -49,7 +49,7 @@ public class Polygon extends Shape {
         return this.nbOfPoints;
     }
 
-    public List<Point> getPointList() {
-        return this.pointList;
+    public ArrayList<Point> getPointList() {
+        return (ArrayList<Point>) this.pointList;
     }
 }

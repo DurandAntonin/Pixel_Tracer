@@ -90,7 +90,7 @@ public class Area {
      * @param layerToAdd 
      * @return
      */
-    public void addLayerToList(Layer layerToAdd) {
+    public void addLayer(Layer layerToAdd) {
         // TODO implement here
         return;
     }

@@ -45,7 +45,7 @@ public class CercleTest {
 
     @Test
     public void testToString() {
-        assertEquals(cercle.toString(), "Cercle [centre:Point[posX:0,posY:0],radius:3]");
+        assertEquals(cercle.toString(), "Cercle [centre: Point [posX: 0, posY: 0], radius: 3]");
     }
 
     @Test
@@ -54,7 +54,7 @@ public class CercleTest {
         Assert.assertTrue(cercle.equals(cercle));
 
         //cas 2eme objet null
-        Assert.assertEquals(cercle, null);
+        Assert.assertFalse(cercle.equals(null));
 
         //cas objets de classes différentes
         Assert.assertFalse(cercle.equals(new String()));

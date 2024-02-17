@@ -43,7 +43,7 @@ public class SquareTest {
         Assert.assertTrue(sq1.equals(sq1));
 
         //cas 2eme objet null
-        Assert.assertEquals(sq1, null);
+        Assert.assertFalse(sq1.equals(null));
 
         //cas objets de classes différentes
         Assert.assertFalse(sq1.equals(new String()));
@@ -55,4 +55,11 @@ public class SquareTest {
         Assert.assertTrue(sq1.equals(new Square(p1, len)));
     }
 
+    @Test
+    public void testToString(){
+        String sq1StringActual = sq1.toString();
+        String sq1StringExcepted = "Square [point: " + sq1.getPoint().toString() + ", length: " + sq1.getLength().toString() + "]";
+
+        Assert.assertEquals(sq1StringExcepted, sq1StringActual);
+    }
 }

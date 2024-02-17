@@ -37,7 +37,6 @@ public class LineTest {
 
     }
 
-
     @Test
     public void testDraw() {
         List<Pixel> pixels = Arrays.asList(px1, px2, px3, px4, px5, px6, px7, px8, px9, px10, px11);
@@ -61,7 +60,7 @@ public class LineTest {
         Assert.assertTrue(l1.equals(l1));
 
         //cas 2eme objet null
-        Assert.assertEquals(l1, null);
+        Assert.assertFalse(l1.equals(null));
 
         //cas objets de classes différentes
         Assert.assertFalse(l1.equals(new String()));
@@ -71,5 +70,13 @@ public class LineTest {
 
         //cas objets de meme classe et valeur des champs identique
         Assert.assertTrue(l1.equals(new Line(p1, p2)));
+    }
+
+    @Test
+    public void testToString(){
+        String l1StringActual = l1.toString();
+        String l1StringExcepted = "Line [p1: " + l1.getP1().toString() + ", p2: " + l1.getP2().toString() + "]";
+
+        Assert.assertEquals(l1StringExcepted, l1StringActual);
     }
 }

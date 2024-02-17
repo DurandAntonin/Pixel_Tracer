@@ -48,7 +48,7 @@ public class PixelTest {
         Assert.assertTrue(pixel.equals(pixel));
 
         //cas 2eme objet null
-        Assert.assertEquals(pixel, null);
+        Assert.assertFalse(pixel.equals(null));
 
         //cas objets de classes différentes
         Assert.assertFalse(pixel.equals(new String()));

@@ -72,7 +72,7 @@ public class RectangleTest {
         Assert.assertTrue(rec1.equals(rec1));
 
         //cas 2eme objet null
-        Assert.assertEquals(rec1, null);
+        Assert.assertFalse(rec1.equals(null));
 
         //cas objets de classes différentes
         Assert.assertFalse(rec1.equals(new String()));

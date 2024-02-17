@@ -42,6 +42,10 @@ public class Pixel_tracer {
         // TODO implement here
     }
 
+    public void createArea(String areaName){
+        return;
+    }
+
     /**
      * @return
      */
@@ -69,7 +73,7 @@ public class Pixel_tracer {
     /**
      * @return
      */
-    public void deleteArea() {
+    public void deleteArea(Integer areaIdToDelete) {
         // TODO implement here
         return;
     }

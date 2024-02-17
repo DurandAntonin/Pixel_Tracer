@@ -35,6 +35,10 @@ public class Command {
      */
     private List<String> listErrorMessages;
 
+    public Command(String parName){
+        
+    }
+
     /**
      * @param p 
      * @return
@@ -70,6 +74,14 @@ public class Command {
         return;
     }
 
+    public boolean checkNbParams(Integer nbStrParams, Integer nbIntParams, Integer nbFloatParams){
+        return true;
+    }
+
+    public boolean checkNbParamsPolygon(Integer nbStrParams, Integer nbIntParams, Integer nbFloatParams){
+        return true;
+    }
+
     /**
      * @param app 
      * @return
@@ -91,24 +103,24 @@ public class Command {
         return this.name;
     }
 
-    public List<Integer> getIntParams() {
-        return this.intParams;
+    public ArrayList<Integer> getIntParams() {
+        return (ArrayList<Integer>) this.intParams;
     }
 
-    public List<String> getStrParams() {
-        return this.strParams;
+    public ArrayList<String> getStrParams() {
+        return (ArrayList<String>) this.strParams;
     }
 
 
-    public List<Float> getFloatParams() {
-        return this.floatParams;
+    public ArrayList<Float> getFloatParams() {
+        return (ArrayList<Float>) this.floatParams;
     }
 
     public Integer getMaxParamNumber() {
         return this.maxParamNumber;
     }
 
-    public List<String> getListErrorMessages() {
-        return this.listErrorMessages;
+    public ArrayList<String> getListErrorMessages() {
+        return (ArrayList<String>) this.listErrorMessages;
     }
 }

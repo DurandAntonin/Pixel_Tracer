@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -23,15 +25,13 @@ public class PointTest {
 
     @Test
     public void testDraw() {
-        ArrayList<Pixel> drawnPointReal = point.draw();
+        ArrayList<Pixel> drawnPointActual = point.draw();
         ArrayList<Pixel> drawnPointExpected = new ArrayList<>();
         drawnPointExpected.add(new Pixel(x, y));
 
         Assert.assertEquals(drawnPointExpected.size(), drawnPointExpected.size());
         
-        for (int i=0;i<drawnPointExpected.size();i++) {
-            Assert.assertTrue(drawnPointExpected.get(i).equals(drawnPointReal.get(i)));
-        }
+        assertEquals(drawnPointExpected, drawnPointActual);
     }
 
     @Test

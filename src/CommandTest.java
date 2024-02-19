@@ -23,7 +23,7 @@ public class CommandTest {
         command = null;
     }
 
-    void provideInput(String data) {
+    public void provideInput(String data) {
         ByteArrayInputStream testIn = new ByteArrayInputStream(data.getBytes());
         System.setIn(testIn);
     }   

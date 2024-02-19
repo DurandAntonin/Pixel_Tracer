@@ -35,28 +35,6 @@ public class PolygonTest {
     }
 
     @Test
-    public void testDraw() {
-        ArrayList<Pixel> listPixelsActual = polygon.draw();
-        ArrayList<Pixel> listPixelsExcepted = new ArrayList<>();
-        listPixelsExcepted.add(new Pixel(5, 5));
-        listPixelsExcepted.add(new Pixel(6, 5));
-        listPixelsExcepted.add(new Pixel(7, 5));
-        listPixelsExcepted.add(new Pixel(7, 6));
-        listPixelsExcepted.add(new Pixel(7, 7));
-        listPixelsExcepted.add(new Pixel(7, 8));
-        listPixelsExcepted.add(new Pixel(7, 9));
-        listPixelsExcepted.add(new Pixel(7, 10));
-        listPixelsExcepted.add(new Pixel(8, 10));
-        listPixelsExcepted.add(new Pixel(9, 10));
-        listPixelsExcepted.add(new Pixel(10, 10));
-
-        Assert.assertEquals(listPixelsExcepted.size(), listPixelsActual.size());
-        for (int i=0;i<listPixelsActual.size();i++){
-            Assert.assertTrue(listPixelsActual.get(i).equals(listPixelsExcepted.get(i)));
-        }
-    }
-
-    @Test
     public void testEquals(){
         //cas meme instance
         Assert.assertTrue(polygon.equals(polygon));
@@ -88,6 +66,27 @@ public class PolygonTest {
     }
 
     @Test
+    public void testDraw() {
+        ArrayList<Pixel> listPixelsActual = polygon.draw();
+        ArrayList<Pixel> listPixelsExcepted = new ArrayList<>();
+        listPixelsExcepted.add(new Pixel(5, 5));
+        listPixelsExcepted.add(new Pixel(6, 5));
+        listPixelsExcepted.add(new Pixel(7, 5));
+        listPixelsExcepted.add(new Pixel(7, 6));
+        listPixelsExcepted.add(new Pixel(7, 7));
+        listPixelsExcepted.add(new Pixel(7, 8));
+        listPixelsExcepted.add(new Pixel(7, 9));
+        listPixelsExcepted.add(new Pixel(7, 10));
+        listPixelsExcepted.add(new Pixel(8, 10));
+        listPixelsExcepted.add(new Pixel(9, 10));
+        listPixelsExcepted.add(new Pixel(10, 10));
+
+        Assert.assertEquals(listPixelsExcepted.size(), listPixelsActual.size());
+
+        assertEquals(listPixelsExcepted, listPixelsActual);
+    }
+
+    @Test
     public void testGetNbOfPoints() {
         assertEquals((Integer)pointList.size(), polygon.getNbOfPoints());
     }
@@ -95,9 +94,7 @@ public class PolygonTest {
     @Test
     public void testGetPointList() {
         ArrayList<Point> pointListPolygon = polygon.getPointList();
-        for (int i=0;i<pointListPolygon.size();i++){
-            Assert.assertTrue(pointListPolygon.get(i).equals(pointList.get(i)));
-        }
+        assertEquals(pointList, pointListPolygon);
     }
 
     @Test

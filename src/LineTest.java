@@ -38,23 +38,6 @@ public class LineTest {
     }
 
     @Test
-    public void testDraw() {
-        List<Pixel> pixels = Arrays.asList(px1, px2, px3, px4, px5, px6, px7, px8, px9, px10, px11);
-        assertArrayEquals(l1.draw().toArray(), pixels.toArray());
-    }
-
-    @Test
-    public void testGetP1() {
-        assertEquals(l1.getP1(),p1);
-
-    }
-
-    @Test
-    public void testGetP2() {
-        assertEquals(l1.getP2(),p2);
-    }
-
-    @Test
     public void testEquals(){
         //cas meme instance
         Assert.assertTrue(l1.equals(l1));
@@ -70,6 +53,23 @@ public class LineTest {
 
         //cas objets de meme classe et valeur des champs identique
         Assert.assertTrue(l1.equals(new Line(p1, p2)));
+    }
+
+    @Test
+    public void testDraw() {
+        List<Pixel> pixels = Arrays.asList(px1, px2, px3, px4, px5, px6, px7, px8, px9, px10, px11);
+        assertArrayEquals(l1.draw().toArray(), pixels.toArray());
+    }
+
+    @Test
+    public void testGetP1() {
+        assertEquals(l1.getP1(),p1);
+
+    }
+
+    @Test
+    public void testGetP2() {
+        assertEquals(l1.getP2(),p2);
     }
 
     @Test

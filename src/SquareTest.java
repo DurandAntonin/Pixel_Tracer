@@ -32,12 +32,6 @@ public class SquareTest {
     }
 
     @Test
-    public void testDraw() {
-        Pixel[] pixels = {px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12};
-        assertArrayEquals(sq1.draw().toArray(), pixels);
-    }
-
-    @Test
     public void testEquals(){
         //cas meme instance
         Assert.assertTrue(sq1.equals(sq1));
@@ -53,6 +47,12 @@ public class SquareTest {
 
         //cas objets de meme classe et valeur des champs identique
         Assert.assertTrue(sq1.equals(new Square(p1, len)));
+    }
+
+    @Test
+    public void testDraw() {
+        Pixel[] pixels = {px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12};
+        assertArrayEquals(sq1.draw().toArray(), pixels);
     }
 
     @Test

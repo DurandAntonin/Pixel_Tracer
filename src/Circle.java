@@ -1,11 +1,9 @@
-
-import java.io.*;
 import java.util.*;
 
 /**
  * 
  */
-public class Cercle extends Shape {
+public class Circle extends Shape {
     /**
      * 
      */
@@ -20,7 +18,7 @@ public class Cercle extends Shape {
      * @param parCenter 
      * @param parRadius
      */
-    public Cercle(Point parCenter, Integer parRadius) {
+    public Circle(Point parCenter, Integer parRadius) {
         // TODO implement here
         super(parRadius, parRadius, parRadius, null, parRadius);
     }

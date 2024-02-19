@@ -5,9 +5,9 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class CercleTest {
+public class CircleTest {
 
-    private Cercle cercle;
+    private Circle cercle;
     private Point centre, centre2;
     private int rayon;
     private Pixel p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16;
@@ -17,7 +17,7 @@ public class CercleTest {
         centre = new Point(0, 0);
         centre2 = new Point(1, 1);
         rayon = 3;
-        cercle = new Cercle(centre, rayon);
+        cercle = new Circle(centre, rayon);
         p1 = new Pixel(3, 0);
         p2 = new Pixel(0, 3);
         p3 = new Pixel(0, -3);
@@ -60,9 +60,9 @@ public class CercleTest {
         Assert.assertFalse(cercle.equals(new String()));
 
         //cas objets de meme classe et valeur des champs différentes
-        Assert.assertFalse(cercle.equals(new Cercle(centre2, rayon)));
+        Assert.assertFalse(cercle.equals(new Circle(centre2, rayon)));
 
         //cas objets de meme classe et valeur des champs identique
-        Assert.assertTrue(cercle.equals(new Cercle(centre, rayon)));
+        Assert.assertTrue(cercle.equals(new Circle(centre, rayon)));
     }
 }

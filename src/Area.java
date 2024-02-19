@@ -45,10 +45,31 @@ public class Area {
         // TODO implement here
     }
 
+    public String toString(){
+        return null;
+    }
+
+    /**
+     * @return
+     */
+    public void drawArea() {
+        // TODO implement here
+        return;
+    }
+
     /**
      * @return
      */
     public void printArea() {
+        // TODO implement here
+        return;
+    }
+
+    /**
+     * @param layerToAdd 
+     * @return
+     */
+    public void addLayer(Layer layerToAdd) {
         // TODO implement here
         return;
     }
@@ -65,9 +86,22 @@ public class Area {
     /**
      * @return
      */
-    public List<Layer> getAllLayers() {
+    public void deleteLayersList() {
+        // TODO implement here
+        return;
+    }
+
+    /**
+     * @return
+     */
+    public ArrayList<Layer> getAllLayers() {
         // TODO implement here
         return null;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        return true;
     }
 
     /**
@@ -78,61 +112,16 @@ public class Area {
         return null;
     }
 
-    /**
-     * @return
-     */
-    public void deleteLayersList() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @param layerToAdd 
-     * @return
-     */
-    public void addLayer(Layer layerToAdd) {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public void drawArea() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public void initArea() {
-        // TODO implement here
-        return;
-    }
-
     public Integer getId() {
         return this.id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
         return this.name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public String[][] getArea() {
         return this.area;
-    }
-
-    public List<Layer> getListLayers() {
-        return this.listLayers;
     }
 
     public String getEmptyChar() {

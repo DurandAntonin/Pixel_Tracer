@@ -33,7 +33,7 @@ public class Curve extends Shape {
      * @param parP3 
      * @param parP4
      */
-    public Curve(Integer parP1, Integer parP2, Integer parP3, Integer parP4) {
+    public Curve(Point parP1, Point parP2, Point parP3, Point parP4) {
         // TODO implement here
         super(null, null, null, null, null);
     }
@@ -75,3 +75,4 @@ public class Curve extends Shape {
         return this.p4;
     }
 }
+

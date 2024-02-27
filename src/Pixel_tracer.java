@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * 
@@ -8,7 +8,7 @@ public class Pixel_tracer {
     /**
      * 
      */
-    private List<Area> listArea;
+    private ArrayList<Area> listArea;
 
     /**
      * 
@@ -36,49 +36,104 @@ public class Pixel_tracer {
     private String fullChar;
 
     /**
-     * @return
      */
-    public void Pixel_Tracer() {
-        // TODO implement here
+    public Pixel_tracer() {
+        //on initialise les autre champs
+        this.listArea = new ArrayList<>();
+        this.currentShape = null;
+        this.emptyChar = ".";
+        this.fullChar = "#";
+
+        //on créé une area par défaut
+        this.createArea("Default Area");
+
+        //le layer par défaut est le premier layer de l'area créée
+        ArrayList<Layer> layerList = this.currentArea.getAllLayers();
+        if (layerList.size() > 0)
+            this.currentLayer = layerList.get(0);
     }
 
     public void createArea(String areaName){
-        return;
+        //on créé une nouvelle area et on l'ajoute dans la liste des area
+        Area newArea = new Area(this.listArea.size(), 50, 80, "Default area");
+        this.listArea.add(newArea);
+
+        //cette nouvelle area devient l'area sélectionnée
+        this.currentArea = newArea;
     }
 
     /**
      * @return
      */
     public void destroyApp() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public void clearArea() {
-        // TODO implement here
-        return;
+        //on reinitialise les champs pour supprimer les valeurs
+        this.listArea = new ArrayList<>();
+        this.currentArea = null;
+        this.currentLayer = null;
+        this.fullChar = null;
+        this.emptyChar = null;
     }
 
     /**
      * @return
      */
     public void eraseArea() {
-        // TODO implement here
-        return;
+        //on supprime toutes les formes de l'area sélectionnée
+        ArrayList<Layer> layerList = this.currentArea.getAllLayers();
+
+        for (int i=0; i<layerList.size(); i++){
+            layerList.get(i).deleteAllShapeFromLayer();
+        }
     }
 
     /**
      * @return
      */
-    public void deleteArea(Integer areaIdToDelete) {
-        // TODO implement here
-        return;
+    public void deleteArea(int areaIdToDelete) {
+        //on supprime l'area ayant l'id indiqué en paramètre
+        for (int i=0; i<this.listArea.size(); i++) {
+            Area area = this.listArea.get(i);
+            if (area.getId() == areaIdToDelete){
+                this.listArea.remove(i);
+
+                //on change l'area sélectionnée 
+                if (this.currentArea == area){
+                    //la nouvelle area sélectionnée par défaut est la première de la liste
+                    if (this.listArea.size() > 0)
+                        this.currentArea = this.listArea.get(0);
+                    
+                    //il n'y a plus d'area, on met l'area par défaut à null
+                    else
+                        this.currentArea = null;
+
+                }
+            }
+        }
     }
 
-    public List<Area> getListArea() {
+    public void drawArea(){
+        //pour l'area sélectionnée, on convertit toutes les formes de chaque layer en pixels pour être ensuite affiché
+        this.currentArea.drawAllShapeFromLayer();
+    }
+
+    public String toString(){
+        String pixelTracerString = "Pixel_tracer [listArea: [";
+        
+        //on affiche chaque area de l'appli
+        for (Area area : this.listArea) {
+            pixelTracerString += area.toString() + ", ";
+        }
+
+        //on enleve la virgule et l'espace en trop s'il y a des layer
+        if (this.listArea.size() > 0)
+            pixelTracerString = pixelTracerString.substring(0, pixelTracerString.length()-2);
+
+        pixelTracerString += "], currentArea : " + this.currentArea + ", currentLayer : " + this.currentLayer + ", currentShape : " + this.currentShape + ", emptyChar: " + this.emptyChar + ", fullChar: " + this.fullChar + "]";
+
+        return pixelTracerString;
+    }
+
+    public ArrayList<Area> getListArea() {
         return this.listArea;
     }
 

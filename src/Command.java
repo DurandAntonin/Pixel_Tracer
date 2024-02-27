@@ -1,4 +1,6 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 /**
  * 
@@ -87,8 +89,19 @@ public class Command {
      * @return
      */
     public Integer readExecCommand(Pixel_tracer app) {
-        // TODO implement here
-        return null;
+        int resultCommand = 7;
+
+        //on demande à l'utilisateur d'entrer une valeur
+        Scanner scanner = new Scanner(System.in);
+
+        //on récupère la valeur entrée par l'utilisateur
+        String input = scanner.nextLine();
+        System.out.println("Valeur entrée : " + input);
+
+        //on arrete la mise à l'écoute de l'input
+        //scanner.close();
+
+        return resultCommand;
     }
 
     /**

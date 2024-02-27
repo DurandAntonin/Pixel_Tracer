@@ -84,10 +84,6 @@ public class Layer {
         return this.name;
     }
 
-    public Boolean isVisible() {
-        return this.visible;
-    }
-
     public Boolean getVisible() {
         return this.visible;
     }

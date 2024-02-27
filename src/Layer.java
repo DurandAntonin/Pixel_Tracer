@@ -76,7 +76,12 @@ public class Layer {
         return;
     }
 
-    public Integer getId() {
+    @Override
+    public boolean equals(Object object){
+        return false;
+    }
+
+    public int getId() {
         return this.id;
     }
 

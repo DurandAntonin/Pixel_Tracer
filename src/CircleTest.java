@@ -40,12 +40,12 @@ public class CircleTest {
     @Test
     public void testDraw() {
         Pixel[] pixels = {p1,p2,p3,p4,p5,p6,p7,p8,p9,p10,p11,p12,p13,p14,p15,p16};
-        assertArrayEquals(cercle.draw().toArray(),pixels);
+        assertArrayEquals(pixels, cercle.draw().toArray());
     }
 
     @Test
     public void testToString() {
-        assertEquals(cercle.toString(), "Cercle [centre: Point [posX: 0, posY: 0], radius: 3]");
+        assertEquals("Cercle [centre: Point [posX: 0, posY: 0], radius: 3]", cercle.toString());
     }
 
     @Test

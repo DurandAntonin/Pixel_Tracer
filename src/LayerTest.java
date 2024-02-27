@@ -3,6 +3,8 @@ import org.junit.Before;
 import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Assert;
+
 public class LayerTest {
 
     int i,j;
@@ -27,60 +29,80 @@ public class LayerTest {
 
     @Test
     public void testAddShapeToLayer() {
-        assertArrayEquals(l1.getListShapes().toArray(), emptyList);
+        assertArrayEquals(emptyList, l1.getListShapes().toArray());
         l1.addShapeToLayer(rec1);
         l1.addShapeToLayer(cir1);
-        assertArrayEquals(l1.getListShapes().toArray(), fullList);
+        assertArrayEquals(fullList, l1.getListShapes().toArray());
     }
 
     @Test
     public void testDeleteAllShapeFromLayer() {
-        assertArrayEquals(l1.getListShapes().toArray(), fullList);
+        assertArrayEquals(fullList, l1.getListShapes().toArray());
         l1.deleteAllShapeFromLayer();
-        assertArrayEquals(l1.getListShapes().toArray(), emptyList);
+        assertArrayEquals(emptyList, l1.getListShapes().toArray());
     }
 
     @Test
     public void testGetId() {
-        assertEquals((int)l1.getId(), i);
+        assertEquals(l1.getId(), i);
     }
 
     @Test
     public void testGetListShapes() {
         l1.addShapeToLayer(rec1);
         l1.addShapeToLayer(cir1);
-        assertArrayEquals(l1.getListShapes().toArray(), fullList);
+        assertArrayEquals(fullList, l1.getListShapes().toArray());
     }
 
     @Test
     public void testGetName() {
-        assertEquals(l1.getName(), "layer_1");
-        assertEquals(l2.getName(), s1);
+        assertEquals("layer_1", l1.getName());
+        assertEquals(s1, l2.getName());
     }
 
     @Test
     public void testGetVisible() {
-        assertEquals(l1.getVisible(), 0);
+        assertEquals(0, l1.getVisible());
         l1.setLayerUnvisible();
-        assertEquals(l1.getVisible(), 1);
+        assertEquals(1, l1.getVisible());
     }
 
     @Test
     public void testRemoveShapeFromLayer() {
-        assertArrayEquals(l1.getListShapes().toArray(), fullList);
+        assertArrayEquals(fullList, l1.getListShapes().toArray());
         l1.removeShapeFromLayer(rec1);
-        assertArrayEquals(l1.getListShapes().toArray(), partList);
+        assertArrayEquals(partList, l1.getListShapes().toArray());
     }
 
     @Test
     public void testSetLayerUnvisible() {
         l2.setLayerUnvisible();
-        assertEquals(l2.getVisible(), 1);
+        assertEquals(1, l2.getVisible());
     }
 
     @Test
     public void testSetLayerVisible() {
         l2.setLayerVisible();
-        assertEquals(l2.getVisible(), 0);
+        assertEquals(0, l2.getVisible());
+    }
+
+    @Test
+    public void testEquals(){
+        //cas meme instance
+        Assert.assertTrue(l2.equals(l2));
+
+        //cas 2eme objet null
+        Assert.assertFalse(l2.equals(null));
+
+        //cas objets de classes différentes
+        Assert.assertFalse(l2.equals(new String()));
+
+        //cas objets de meme classe et valeur des champs différentes
+        Layer l3 = new Layer(3, "Layer 3");
+        l3.addShapeToLayer(cir1);
+        Assert.assertFalse(l2.equals(l3));
+
+        //cas objets de meme classe et valeur des champs identique
+        Assert.assertTrue(l2.equals(l1));
     }
 }

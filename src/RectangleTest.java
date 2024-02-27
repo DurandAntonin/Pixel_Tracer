@@ -43,27 +43,27 @@ public class RectangleTest {
     @Test
     public void testDraw() {
         Pixel[] pixels = {px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12,px13,px14,px15,px16,px17,px18,px19,px20};
-        assertArrayEquals(rec1.draw().toArray(), pixels);
+        assertArrayEquals(pixels, rec1.draw().toArray());
     }
 
     @Test
     public void testGetHeight() {
-        assertEquals(rec1.getHeight(), h);
+        assertEquals(h, rec1.getHeight());
     }
 
     @Test
     public void testGetPoint() {
-        assertEquals(rec1.getPoint(), p1);
+        assertEquals(p1, rec1.getPoint());
     }
 
     @Test
     public void testGetWidth() {
-        assertEquals(rec1.getWidth(), w);
+        assertEquals(w, rec1.getWidth());
     }
 
     @Test
     public void testToString() {
-        assertEquals(rec1.toString(), "Rectangle [point: " + rec1.getPoint().toString() + ", width: " + rec1.getWidth() + ", height: " + rec1.getHeight() + "]");
+        assertEquals("Rectangle [point: " + rec1.getPoint().toString() + ", width: " + rec1.getWidth() + ", height: " + rec1.getHeight() + "]", rec1.toString());
     }
 
     @Test

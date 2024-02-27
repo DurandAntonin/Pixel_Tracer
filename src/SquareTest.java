@@ -52,7 +52,7 @@ public class SquareTest {
     @Test
     public void testDraw() {
         Pixel[] pixels = {px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12};
-        assertArrayEquals(sq1.draw().toArray(), pixels);
+        assertArrayEquals(pixels, sq1.draw().toArray());
     }
 
     @Test

@@ -48,7 +48,7 @@ public class Curve extends Shape {
 
     @Override
     public boolean equals(Object object){
-        return true;
+        return false;
     }
 
     /**

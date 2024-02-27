@@ -18,7 +18,7 @@ public class AreaTest {
 
     @Before
     public void beforeTest(){
-        area = new Area(width, height, id, name);
+        area = new Area(id, width, height, name);
     }
 
 
@@ -36,7 +36,7 @@ public class AreaTest {
 
         int nbOfLayers = area.getNumberOfLayers();
         
-        assertEquals(2, nbOfLayers);
+        assertEquals(3, nbOfLayers);
     }
 
     @Test
@@ -44,9 +44,9 @@ public class AreaTest {
         Layer layerToAdd = new Layer(0, "layer 0");
         area.addLayer(layerToAdd);
 
-        Integer nbOfLayers = area.getNumberOfLayers();
+        int nbOfLayers = area.getNumberOfLayers();
         
-        assertEquals((Integer)1, nbOfLayers);
+        assertEquals(2, nbOfLayers);
     }
 
     @Test
@@ -55,9 +55,9 @@ public class AreaTest {
         area.addLayer(layerToAdd);
 
         area.deleteLayer(layerToAdd);
-        Integer nbOfLayers = area.getNumberOfLayers();
+        int nbOfLayers = area.getNumberOfLayers();
         
-        assertEquals((Integer)0, nbOfLayers);
+        assertEquals(1, nbOfLayers);
     }
 
     @Test
@@ -68,9 +68,9 @@ public class AreaTest {
         area.addLayer(layerToAdd1);
 
         area.deleteLayersList();
-        Integer nbOfLayers = area.getNumberOfLayers();
+        int nbOfLayers = area.getNumberOfLayers();
         
-        assertEquals((Integer)0, nbOfLayers);
+        assertEquals(0, nbOfLayers);
     }
 
     @Test
@@ -82,7 +82,7 @@ public class AreaTest {
 
         ArrayList<Layer> listLayers = area.getAllLayers();
         
-        assertEquals(2, listLayers.size());
+        assertEquals(3, listLayers.size());
     }
 
     @Test
@@ -148,10 +148,10 @@ public class AreaTest {
         Assert.assertFalse(area.equals(new String()));
 
         //cas objets de meme classe et valeur des champs différentes
-        Assert.assertFalse(area.equals(new Area(width, height, 2, name)));
+        Assert.assertFalse(area.equals(new Area(id, height, width, name)));
 
         //cas objets de meme classe et valeur des champs identique
-        Assert.assertTrue(area.equals(new Area(width, height, id, name)));
+        Assert.assertTrue(area.equals(new Area(id, width, height, name)));
     }
 
     @Test
@@ -167,7 +167,7 @@ public class AreaTest {
     @Test
     public void testGetArea(){
         String[][] areaActual = area.getArea();
-        String[][] areaExcepted = new String[width][height];
+        String[][] areaExcepted = new String[height][width];
         for (int i=0;i<height;i++){
             for (int j=0;j<width;j++){
                 areaExcepted[i][j] = ".";

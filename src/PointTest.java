@@ -31,7 +31,7 @@ public class PointTest {
 
         Assert.assertEquals(drawnPointExpected.size(), drawnPointExpected.size());
         
-        assertEquals(drawnPointExpected, drawnPointActual);
+        assertEquals(drawnPointActual, drawnPointExpected);
     }
 
     @Test

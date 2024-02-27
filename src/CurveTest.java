@@ -34,32 +34,32 @@ public class CurveTest {
     @Test
     public void testDraw() {
         Pixel[] pixels = {p1,p2,p3,p4,p5,p6,p7,p8,p9,p10};
-        assertArrayEquals(curve.draw().toArray(),pixels);
+        assertArrayEquals(pixels, curve.draw().toArray());
 
     }
 
     @Test
     public void testGetP1() {
-        assertEquals(curve.getP1(),p1);
+        assertEquals(p1, curve.getP1());
     }
 
     @Test
     public void testGetP2() {
-        assertEquals(curve.getP2(),p2);
+        assertEquals(p2, curve.getP2());
     }
 
     @Test
     public void testGetP3() {
-        assertEquals(curve.getP3(),p3);
+        assertEquals(p3, curve.getP3());
     }   
 
     @Test
     public void testGetP4() {
-        assertEquals(curve.getP4(),p4);
+        assertEquals(p4, curve.getP4());
     }
 
     @Test
     public void testToString() {
-        assertEquals(curve.toString(),"Curve [ p1"+p1.toString()+", " + "p2"+p2.toString()+ "p3"+p3.toString()+ "p4"+p4.toString()+"]");
+        assertEquals("Curve [ p1"+p1.toString()+", " + "p2"+p2.toString()+ "p3"+p3.toString()+ "p4"+p4.toString()+"]", curve.toString());
     }
 }

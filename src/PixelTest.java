@@ -24,22 +24,22 @@ public class PixelTest {
 
     @Test
     public void testGetColor() {
-        assertEquals(pixel.getColor(), color);
+        assertEquals(color,pixel.getColor());
     }
 
     @Test
     public void testGetX() {
-        assertEquals(pixel.getX(), x);
+        assertEquals(x,pixel.getX());
     }
 
     @Test
     public void testGetY() {
-        assertEquals(pixel.getY(), y);
+        assertEquals(y,pixel.getY());
     }
 
     @Test
     public void testToString() {
-        assertEquals(pixel.toString(),"Pixel [x: "+pixel.getX()+", y: "+pixel.getY()+", color: "+pixel.getColor()+"]");
+        assertEquals("Pixel [x: "+pixel.getX()+", y: "+pixel.getY()+", color: "+pixel.getColor()+"]",pixel.toString());
     }
 
     @Test

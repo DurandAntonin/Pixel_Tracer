@@ -55,7 +55,7 @@ public class Pixel_tracer {
 
     public void createArea(String areaName){
         //on créé une nouvelle area et on l'ajoute dans la liste des area
-        Area newArea = new Area(this.listArea.size(), 50, 80, "Default area");
+        Area newArea = new Area(this.listArea.size(), 50, 80, areaName);
         this.listArea.add(newArea);
 
         //cette nouvelle area devient l'area sélectionnée
@@ -109,6 +109,13 @@ public class Pixel_tracer {
                 }
             }
         }
+    }
+
+    public void addShapeToCurrentLayer(Shape shapeToAdd){
+        this.currentLayer.addShapeToLayer(shapeToAdd);
+
+        //on met à jour la forme sélectionnée
+        this.currentShape = shapeToAdd;
     }
 
     public void drawArea(){

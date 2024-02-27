@@ -148,7 +148,7 @@ public class AreaTest {
         Assert.assertFalse(area.equals(new String()));
 
         //cas objets de meme classe et valeur des champs différentes
-        Assert.assertFalse(area.equals(new Area(id, height, width, name)));
+        Assert.assertFalse(area.equals(new Area(id, height, width, "test")));
 
         //cas objets de meme classe et valeur des champs identique
         Assert.assertTrue(area.equals(new Area(id, width, height, name)));

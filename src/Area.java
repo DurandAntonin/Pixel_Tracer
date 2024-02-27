@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * 
@@ -49,6 +50,12 @@ public class Area {
         this.listLayers = new ArrayList<>();
         this.emptyChar = ".";
         this.fullChar = "#";
+
+        for (int i=0; i<parHeight; i++){
+            for (int j=0; j<parWidth; j++){
+                area[i][j] = this.emptyChar;
+            }
+        }
 
         //on créé une layer par défaut
         Layer defaultLayer = new Layer(this.listLayers.size(), "Default layer");
@@ -127,7 +134,7 @@ public class Area {
             return false;
         
         //on vérifie que les valeurs des champs sont identiques
-        return this.id == ((Area) object).getId() && this.name == ((Area) object).getName() && this.area == ((Area) object).getArea() && this.listLayers == ((Area) object).getAllLayers() && this.emptyChar == ((Area) object).getEmptyChar() && this.fullChar == ((Area) object).getFullChar();
+        return this.id == ((Area) object).getId() && this.name == ((Area) object).getName() && Arrays.deepEquals(this.area, ((Area) object).getArea()) && this.listLayers.equals(((Area) object).getAllLayers()) && this.emptyChar == ((Area) object).getEmptyChar() && this.fullChar == ((Area) object).getFullChar();
     }
 
     /**

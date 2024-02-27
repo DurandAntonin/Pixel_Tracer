@@ -54,8 +54,9 @@ public class Pixel_tracerTest {
 
     @Test
     public void testGetCurrentShape() {
-        assertEquals(null,pixel_tracer.getCurrentShape().getId());
+        assertEquals(null,pixel_tracer.getCurrentShape());
         Point p1 = new Point(0,0);
+        pixel_tracer.addShapeToCurrentLayer(p1);
         assertEquals(p1.getId(),pixel_tracer.getCurrentShape().getId());
     }
 
@@ -85,7 +86,6 @@ public class Pixel_tracerTest {
         pixel_tracer.createArea("a1");
         pixel_tracer.createArea("a2");
         pixel_tracer.createArea("a3");
-
         assertEquals(al1, pixel_tracer.getListArea());
     }
 }

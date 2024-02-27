@@ -18,6 +18,11 @@ public class Render {
         return true;
     }
 
+    public static void clearArea(Area area){
+        //TODO implement here
+        return;
+    }
+
     /**
      * @param area 
      * @return

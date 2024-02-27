@@ -34,9 +34,9 @@ public class AreaTest {
         area.addLayer(layerToAdd0);
         area.addLayer(layerToAdd1);
 
-        Integer nbOfLayers = area.getNumberOfLayers();
+        int nbOfLayers = area.getNumberOfLayers();
         
-        assertEquals((Integer)2, nbOfLayers);
+        assertEquals(2, nbOfLayers);
     }
 
     @Test
@@ -155,8 +155,8 @@ public class AreaTest {
     }
 
     @Test
-    public void testgetId() {
-        assertEquals((Integer)id, area.getId());
+    public void testGetId() {
+        assertEquals(id, area.getId());
     }
 
     @Test

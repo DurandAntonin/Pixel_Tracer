@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * 
@@ -23,7 +23,7 @@ public class Area {
     /**
      * 
      */
-    private List<Layer> listLayers;
+    private ArrayList<Layer> listLayers;
 
     /**
      * 
@@ -36,33 +36,50 @@ public class Area {
     private String fullChar;
 
     /**
-     * @param width 
-     * @param height 
-     * @param id 
-     * @param name
+     * @param parId 
+     * @param parWidth 
+     * @param parHeight 
+     * @param parName
      */
-    public Area(Integer width, Integer height, Integer id, String name) {
-        // TODO implement here
+    public Area(Integer parId, Integer parWidth, Integer parHeight, String parName) {
+        //on initialise les champs
+        this.id = parId;
+        this.name = parName;
+        this.area = new String[parHeight][parWidth];
+        this.listLayers = new ArrayList<>();
+        this.emptyChar = ".";
+        this.fullChar = "#";
+
+        //on créé une layer par défaut
+        Layer defaultLayer = new Layer(this.listLayers.size(), "Default layer");
+        this.listLayers.add(defaultLayer);
     }
 
     public String toString(){
-        return null;
+        String areaString = "Area [id: " + this.id + ", name: " + this.name + ", area : , listLayers: [";
+        
+        //on affiche chaque layer de l'area
+        for (Layer layer : this.listLayers) {
+            areaString += layer.toString() + ", ";
+        }
+
+        //on enleve la virgule et l'espace en trop s'il y a des layer
+        if (this.listLayers.size() > 0)
+            areaString = areaString.substring(0, areaString.length()-2);
+
+        areaString += "], emptyChar: " + this.emptyChar + ", fullChar: " + this.fullChar + "]";
+
+        return areaString;
     }
 
     /**
      * @return
      */
-    public void drawArea() {
-        // TODO implement here
-        return;
-    }
-
-    /**
-     * @return
-     */
-    public void printArea() {
-        // TODO implement here
-        return;
+    public void drawAllShapeFromLayer() {
+        //pour chaque layer, on transforme les shapes en pixels pour les stocker dans le champ area
+        for (Layer layer : this.listLayers) {
+            continue;
+        }
     }
 
     /**
@@ -70,8 +87,8 @@ public class Area {
      * @return
      */
     public void addLayer(Layer layerToAdd) {
-        // TODO implement here
-        return;
+        //on ajoute un nouveau layer
+        this.listLayers.add(layerToAdd);
     }
 
     /**
@@ -79,40 +96,49 @@ public class Area {
      * @return
      */
     public void deleteLayer(Layer layerToDelete) {
-        // TODO implement here
-        return;
+        //on supprime le layer
+        this.listLayers.remove(layerToDelete);
     }
 
     /**
      * @return
      */
     public void deleteLayersList() {
-        // TODO implement here
-        return;
+        //on supprime tous les layers
+        this.listLayers = new ArrayList<>();
     }
 
     /**
      * @return
      */
     public ArrayList<Layer> getAllLayers() {
-        // TODO implement here
-        return null;
+        //on renvoie tous les layers
+        return this.listLayers;
     }
 
     @Override
     public boolean equals(Object object){
-        return true;
+        //on regarde si les 2 variables font référence au meme objet
+        if (this == object)
+            return true;
+
+        //on regarde si l'objet à comparer est null ou qu'il n'est pas de la meme classe que this
+        if (object == null || !this.getClass().equals(object.getClass()))
+            return false;
+        
+        //on vérifie que les valeurs des champs sont identiques
+        return this.id == ((Area) object).getId() && this.name == ((Area) object).getName() && this.area == ((Area) object).getArea() && this.listLayers == ((Area) object).getAllLayers() && this.emptyChar == ((Area) object).getEmptyChar() && this.fullChar == ((Area) object).getFullChar();
     }
 
     /**
      * @return
      */
-    public Integer getNumberOfLayers() {
-        // TODO implement here
-        return null;
+    public int getNumberOfLayers() {
+        //on renvoie le nombre de layers
+        return this.listLayers.size();
     }
 
-    public Integer getId() {
+    public int getId() {
         return this.id;
     }
 

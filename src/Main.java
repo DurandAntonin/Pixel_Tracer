@@ -35,17 +35,32 @@ public class Main {
                 case 5:
                     Render.clearScreen();
                     break;
+
+                //cas affichage de l'aide de l'application
+                case 7:
+                    Render.printHelp();
+                    break;
                     
                 //cas changement de l'affichage
                 case 0:
                 case 6:
+                    Render.clearScreen();
                     pixelTracer.drawArea();
                     Render.printArea(pixelTracer.getCurrentArea());
                     break;
-
+                
                 //cas aucun changement de l'affichage
-                case 7:
                 case 8:
+                    continue;
+
+                //cas mauvais nombre de paramètres
+                case 3:
+                    System.out.println("MAUVAIS NOMBRE DE PARAMETRES \n");
+                    continue;
+
+                //cas mauvais id pour la sélection d'une area ou d'un layer
+                case 9:
+                    System.out.println("LAYER/AREA INTROUVABLE \n");
                     continue;
 
                 //cas exit de l'application

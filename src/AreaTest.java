@@ -74,6 +74,11 @@ public class AreaTest {
     }
 
     @Test
+    public void testSetLayerVisibility(){
+        //TODO
+    }
+
+    @Test
     public void testGetAllLayers() {
         Layer layerToAdd0 = new Layer(0, "layer 0");
         Layer layerToAdd1 = new Layer(1, "layer 1");
@@ -102,7 +107,7 @@ public class AreaTest {
         layer1.addShapeToLayer(new Point(-1, -1));
         layer1.addShapeToLayer(new Polygon(3, null));
         layer2.addShapeToLayer(new Circle(new Point(5, 5), 10));
-        layer2.setLayerUnvisible();
+        layer2.setLayerVisibility(false);
 
         String[][] areaActual = area.getArea();
         String[][] areaExcepted = {

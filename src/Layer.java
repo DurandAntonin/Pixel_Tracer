@@ -42,15 +42,8 @@ public class Layer {
     /**
      * @return
      */
-    public void setLayerVisible() {
-        this.visible = true;
-    }
-
-    /**
-     * @return
-     */
-    public void setLayerUnvisible() {
-        this.visible = false;
+    public void setLayerVisibility(boolean newVisibility) {
+        this.visible = newVisibility;
     }
 
     /**

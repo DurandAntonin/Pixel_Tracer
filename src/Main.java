@@ -17,10 +17,10 @@ public class Main {
         //on initialise l'application
         Pixel_tracer pixelTracer = new Pixel_tracer();
 
-        System.out.println(pixelTracer);
+        //System.out.println(pixelTracer);
         
         //on affiche le layer par défaut
-        pixelTracer.drawArea();
+        pixelTracer.drawCurrentArea();
         Render.printArea(pixelTracer.getCurrentArea());
 
         //on lance l'application
@@ -45,7 +45,7 @@ public class Main {
                 case 0:
                 case 6:
                     Render.clearScreen();
-                    pixelTracer.drawArea();
+                    pixelTracer.drawCurrentArea();
                     Render.printArea(pixelTracer.getCurrentArea());
                     break;
                 
@@ -70,6 +70,8 @@ public class Main {
                     break;
 
             }
+
+            System.out.println("\n");
         }
 
         pixelTracer.destroyApp();

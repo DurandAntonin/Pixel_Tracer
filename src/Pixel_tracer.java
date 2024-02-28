@@ -86,7 +86,7 @@ public class Pixel_tracer {
         }
     }
 
-    public void addNewLayer(){
+    public void createLayerInCurrentArea(){
         //on créé un nouveau layer et on le sélectionne
         int idNewLayer = this.currentArea.getNumberOfLayers();
         Layer layer = new Layer(idNewLayer, "Layer " + idNewLayer);
@@ -203,9 +203,21 @@ public class Pixel_tracer {
 
         return shapeDeleted;
     }
+
+    public boolean changeLayerVisibilityInCurrentArea(int layerId, boolean newVisibility){
+        boolean resultChangeLayerVisibility = this.currentArea.setLayerVisibility(layerId, newVisibility);
+
+        //si le layer est maintenant invisible et que c'est le layer sélectionné, on change le layer sélectionné
+        if (this.currentLayer.getId() == layerId && !newVisibility && this.currentArea.getNumberOfLayers() > 0){
+            ArrayList<Layer> listLayersInCurrentArea = this.currentArea.getAllLayers();
+            this.currentLayer = listLayersInCurrentArea.get(listLayersInCurrentArea.size()-1);
+        }
+        
+        return resultChangeLayerVisibility;
+    }
     
 
-    public void drawArea(){
+    public void drawCurrentArea(){
         //pour l'area sélectionnée, on convertit toutes les formes de chaque layer en pixels pour être ensuite affiché
         this.currentArea.drawAllShapeFromLayer();
     }

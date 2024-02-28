@@ -70,7 +70,7 @@ public class LayerTest {
     @Test
     public void testGetVisible() {
         assertEquals(true, l1.getVisible());
-        l1.setLayerUnvisible();
+        l1.setLayerVisibility(false);
         assertEquals(false, l1.getVisible());
     }
 
@@ -82,14 +82,13 @@ public class LayerTest {
     }
 
     @Test
-    public void testSetLayerUnvisible() {
-        l1.setLayerUnvisible();
+    public void testSetLayerVisibility() {
+        //cas layer visible
+        l1.setLayerVisibility(false);
         assertEquals(false, l1.getVisible());
-    }
 
-    @Test
-    public void testSetLayerVisible() {
-        l1.setLayerVisible();
+        //cas layer invisible
+        l1.setLayerVisibility(true);
         assertEquals(true, l1.getVisible());
     }
 

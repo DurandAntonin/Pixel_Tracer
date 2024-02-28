@@ -40,7 +40,7 @@ public class Pixel_tracerTest {
     }
 
     @Test
-    public void testDrawArea() {
+    public void testDrawCurrentArea() {
 
     }
 
@@ -93,7 +93,7 @@ public class Pixel_tracerTest {
 
     @Test
     public void testAddNewLayer(){
-        pixel_tracer.addNewLayer();
+        pixel_tracer.createLayerInCurrentArea();
         assertEquals(2, pixel_tracer.getCurrentArea().getNumberOfLayers());
         assertEquals(1, pixel_tracer.getCurrentLayer().getId());
     }
@@ -155,8 +155,8 @@ public class Pixel_tracerTest {
         assertEquals(null, pixel_tracer.getCurrentLayer());
 
         //cas n areas 
-        pixel_tracer.addNewLayer();
-        pixel_tracer.addNewLayer();
+        pixel_tracer.createLayerInCurrentArea();
+        pixel_tracer.createLayerInCurrentArea();
         assertTrue(pixel_tracer.deleteLayerInCurrentArea(1));
         assertEquals(0, pixel_tracer.getCurrentLayer().getId());
     }
@@ -180,5 +180,9 @@ public class Pixel_tracerTest {
         pixel_tracer.addShapeToCurrentLayer(point2);
         assertTrue(pixel_tracer.deleteShapeInCurrentLayer(1));
         assertEquals(1, (int)pixel_tracer.getCurrentShape().getId());
+    }
+
+    public void testChangeLayerVisibilityInCurrentArea(){
+        //TODO
     }
 }

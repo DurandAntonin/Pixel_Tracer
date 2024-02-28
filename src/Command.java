@@ -1,6 +1,8 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.junit.Test.None;
+
 /**
  * 
  */
@@ -96,7 +98,7 @@ public class Command {
 
     public boolean checkNbParamsPolygon(){
         //on vérifie que le nombre de paramètres d'une commande polygon est correct
-        return this.getStrParams().size() == 1 && this.floatParams.size() == 0 && this.intParams.size() < this.maxParamNumber && this.intParams.size()%2 == 0 ;
+        return this.getStrParams().size() == 1 && this.floatParams.size() == 0 && this.intParams.size() >= 2 && this.intParams.size() < this.maxParamNumber && this.intParams.size()%2 == 0 ;
     }
 
     /**
@@ -105,10 +107,11 @@ public class Command {
     public void readFromStdin() {
          //on demande à l'utilisateur d'entrer une valeur
          Scanner scanner = new Scanner(System.in);
+         System.out.println("-> Saisie : ");
 
          //on récupère la valeur entrée par l'utilisateur
          String input = scanner.nextLine();
-         System.out.println("Valeur entrée : " + input);
+         System.out.println("-> Valeur entrée : " + input);
  
          //on arrete la mise à l'écoute de l'input
          //scanner.close();
@@ -158,10 +161,10 @@ public class Command {
         //on récupère ce que le user a saisi
         this.readFromStdin();
 
-        System.out.println("\n");
-        System.out.println("Liste stringParam : " + this.strParams);
-        System.out.println("Liste intParam : " + this.intParams);
-        System.out.println("Liste floatParam : " + this.floatParams);
+        //System.out.println("\n");
+        //System.out.println("Liste stringParam : " + this.strParams);
+        //System.out.println("Liste intParam : " + this.intParams);
+        //System.out.println("Liste floatParam : " + this.floatParams);
 
         //on vérifie que le user a au moins entré le nom d'une commande
         if (this.strParams.size() > 0){
@@ -198,6 +201,14 @@ public class Command {
                     break;
 
                 case "plot":
+                    if (this.checkNbParams(1, 0, 0)){
+                        //on affiche l'area actuelle
+                        app.drawCurrentArea();
+                        resultCommand = 6;
+                    }
+                    else{
+                        resultCommand = 3;
+                    }
                     break;
 
                 case "point":
@@ -290,6 +301,7 @@ public class Command {
                     else{
                         resultCommand = 3;
                     }
+                    break;
 
                 case "curve":
                     if (this.checkNbParams(1, 8, 0)){
@@ -318,16 +330,19 @@ public class Command {
                             case "layers":
                                 //on affiche la liste des layers de l'area sélectionnée
                                 System.out.println(app.getCurrentArea().getAllLayers());
+                                resultCommand = 8;
                                 break;
 
                             case "areas":
                                 //on affiche la liste des areas
                                 System.out.println(app.getListArea());
+                                resultCommand = 8;
                                 break;
 
                             case "shapes":
                                 //on affiche la liste des formes de l'ara sélectionnée
                                 System.out.println(app.getCurrentLayer().getListShapes());
+                                resultCommand = 8;
                                 break;
                         
                             default:
@@ -351,11 +366,13 @@ public class Command {
                             case "area":
                                 //on sélectionne une nouvelle area et on retourne une erreur si cette dernière n'existe pas
                                 resultSelectElem = app.selectArea(idElemToSelect);
+                                resultCommand = 8;
                                 break;
 
                             case "layer":
                                 //on sélectionne un nouveau layer de l'area sélectionnée et on retourne une erreur si ce dernier n'existe pas
                                 resultSelectElem = app.selectLayer(idElemToSelect);
+                                resultCommand = 8;
                                 break;
                         
                             default:
@@ -364,9 +381,9 @@ public class Command {
                         }
 
                         //on regarde s'il y a eu une erreur ou non
-                        if (resultSelectElem)
+                        if (resultCommand != 3 && resultSelectElem)
                             resultCommand = 8;
-                        else
+                        else if (resultCommand != 3 && !resultSelectElem)
                             resultCommand = 9;
                         
                     }
@@ -385,16 +402,19 @@ public class Command {
                             case "area":
                                 //on affiche la liste des layers de l'area sélectionnée
                                 app.deleteArea(idElemToDelete);
+                                resultCommand = 8;
                                 break;
 
                             case "layer":
                                 //on supprime le layer de l'area sélectionnée
                                 app.deleteLayerInCurrentArea(idElemToDelete);
+                                resultCommand = 8;
                                 break;
 
                             case "shape":
                                 //on supprime la shape du layer sélectionnée
                                 app.deleteShapeInCurrentLayer(idElemToDelete);
+                                resultCommand = 8;
                                 break;
                         
                             default:
@@ -408,9 +428,80 @@ public class Command {
                     break;
 
                 case "new":
+                    if (this.checkNbParams(2, 0, 0)){
+                        //on regarde quel élément il faut créer
+                        String elemToCreate = this.strParams.get(1).toLowerCase();
+
+                        switch (elemToCreate) {
+                            case "area":
+                                //on créé une nouvelle area
+                                app.createArea("Area " + app.getListArea().size());
+                                resultCommand = 8;
+                                break;
+
+                            case "layer":
+                                //on créé un nouveau layer dans l'area sélectionnée
+                                app.createLayerInCurrentArea();
+                                resultCommand = 8;
+                                break;
+                        
+                            default:
+                                resultCommand = 3;
+                                break;
+                        }
+                    }
+                    else{
+                        resultCommand = 3;
+                    }
                     break;
 
                 case "set":
+                    if (this.checkNbParams(3, 1, 0)){
+                        //on regarde si le set concerne un layer ou un char
+                        String elemToSet = this.strParams.get(1).toLowerCase();
+
+                        switch (elemToSet) {
+                            case "char":
+                                //TODO
+                                break;
+
+                            case "layer":
+                                int idLayer = this.intParams.get(0);
+                                String newLayerVisibility = this.strParams.get(2).toLowerCase();
+                                boolean resultChangeLayerVisibility = false;
+
+                                //on regarde s'il faut rendre visible le layer ou non
+                                switch (newLayerVisibility) {
+                                    case "visible":
+                                        //on met le layer visible
+                                        resultChangeLayerVisibility = app.changeLayerVisibilityInCurrentArea(idLayer, true);
+                                        break;
+
+                                    case "unvisible":
+                                        //on met le layer invisible
+                                        resultChangeLayerVisibility = app.changeLayerVisibilityInCurrentArea(idLayer, false);
+                                        break;
+                                
+                                    default:
+                                        resultCommand = 3;
+                                        break;
+                                }
+
+                                //on vérifie que le changement a bien été effectué
+                                if (resultChangeLayerVisibility)
+                                    resultCommand = 8;
+                                else
+                                    resultCommand = 9;
+                                break;
+                        
+                            default:
+                                resultCommand = 3;
+                                break;
+                        }
+                    }
+                    else{
+                        resultCommand = 3;
+                    }
                     break;
             
                 default:

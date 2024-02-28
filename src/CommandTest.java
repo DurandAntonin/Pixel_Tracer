@@ -323,24 +323,24 @@ public class CommandTest {
 
         //// CAS SQARE ////
         //cas erreur 0
-        provideInput("sqare 1 2 3");
+        provideInput("square 1 2 3");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
         //cas erreur 3
-        provideInput("sqare 1 2");
+        provideInput("square 1 2");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
-        provideInput("sqare");
+        provideInput("square");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
-        provideInput("sqare test");
+        provideInput("square test");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
-        provideInput("sqare 1.2");
+        provideInput("square 1.2");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
@@ -451,11 +451,11 @@ public class CommandTest {
 
         //// CAS NEW  ////
         //cas erreur 8
-        provideInput("new layer layer_test");
+        provideInput("new layer");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        provideInput("new area area_test");
+        provideInput("new area");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
@@ -492,20 +492,12 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        provideInput("select shape 0");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 8);
-
         //cas erreur 9
-        provideInput("select area 1");
+        provideInput("select area 2");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
         provideInput("select layer 2");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 9);
-
-        provideInput("select shape 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
@@ -535,7 +527,7 @@ public class CommandTest {
         //on créé une nouvelle area 
         app.createArea("area test");
         //on créé une shape dans le layer actuel
-        app.getCurrentLayer().addShapeToLayer(new Point(1, 2));
+        app.addShapeToCurrentLayer(new Point(1, 2));
 
         //cas erreur 8
         provideInput("delete shape 0");

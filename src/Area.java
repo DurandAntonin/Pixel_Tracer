@@ -125,6 +125,21 @@ public class Area {
         this.listLayers = new ArrayList<>();
     }
 
+    public boolean setLayerVisibility(int layerId, boolean newVisibility){
+        boolean layerVisibilityChanged = false;
+
+        //on modifie la visibilité d'un layer
+        for (int i=0; i<this.listLayers.size(); i++){
+            if (this.listLayers.get(i).getId() == layerId){
+                this.listLayers.get(i).setLayerVisibility(newVisibility);;
+                layerVisibilityChanged = true;
+                break;
+            }
+        }
+
+        return layerVisibilityChanged;
+    } 
+
     /**
      * @return
      */

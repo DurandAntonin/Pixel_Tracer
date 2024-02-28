@@ -99,12 +99,22 @@ public class Area {
     }
 
     /**
-     * @param layerToDelete 
+     * @param layerIdToDelete 
      * @return
      */
-    public void deleteLayer(Layer layerToDelete) {
-        //on supprime le layer
-        this.listLayers.remove(layerToDelete);
+    public boolean removeLayerFromArea(int layerIdToDelete) {
+        boolean isLayerDeleted = false;
+
+        //on supprime le layer en fonction de son id
+        for (int i=0; i<this.listLayers.size(); i++){
+            if (this.listLayers.get(i).getId() == layerIdToDelete){
+                this.listLayers.remove(i);
+                isLayerDeleted = true;
+                break;
+            }
+        }
+
+        return isLayerDeleted;
     }
 
     /**

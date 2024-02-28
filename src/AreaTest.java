@@ -50,11 +50,11 @@ public class AreaTest {
     }
 
     @Test
-    public void testDeleteLayer() {
+    public void testRemoveLayerFromArea() {
         Layer layerToAdd = new Layer(0, "layer 0");
         area.addLayer(layerToAdd);
 
-        area.deleteLayer(layerToAdd);
+        area.removeLayerFromArea(0);
         int nbOfLayers = area.getNumberOfLayers();
         
         assertEquals(1, nbOfLayers);

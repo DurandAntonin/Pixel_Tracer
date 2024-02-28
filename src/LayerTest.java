@@ -51,6 +51,7 @@ public class LayerTest {
         assertArrayEquals(emptyList, l1.getListShapes().toArray());
     }
 
+
     @Test
     public void testGetId() {
         assertEquals(layerId, l1.getId());
@@ -76,7 +77,7 @@ public class LayerTest {
     @Test
     public void testRemoveShapeFromLayer() {
         assertArrayEquals(fullList1, l1.getListShapes().toArray());
-        l1.removeShapeFromLayer(rec1);
+        l1.removeShapeFromLayer(0);
         assertArrayEquals(partList, l1.getListShapes().toArray());
     }
 

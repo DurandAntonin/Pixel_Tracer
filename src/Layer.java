@@ -62,11 +62,22 @@ public class Layer {
     }
 
     /**
-     * @param shapeToRemove 
+     * @param shapeIdToRemove 
      * @return
      */
-    public void removeShapeFromLayer(Shape shapeToRemove) {
-        this.listShapes.remove(shapeToRemove);
+    public boolean removeShapeFromLayer(int shapeIdToRemove) {
+        boolean isShapeDeleted = false;
+
+        //on supprime la forme en fonction de son id
+        for (int i=0; i<this.listShapes.size(); i++){
+            if (this.listShapes.get(i).getId() == shapeIdToRemove){
+                this.listShapes.remove(i);
+                isShapeDeleted = true;
+                break;
+            }
+        }
+
+        return isShapeDeleted;
     }
 
     /**

@@ -50,11 +50,11 @@ public class AreaTest {
     }
 
     @Test
-    public void testDeleteLayer() {
+    public void testRemoveLayerFromArea() {
         Layer layerToAdd = new Layer(0, "layer 0");
         area.addLayer(layerToAdd);
 
-        area.deleteLayer(layerToAdd);
+        area.removeLayerFromArea(0);
         int nbOfLayers = area.getNumberOfLayers();
         
         assertEquals(1, nbOfLayers);
@@ -71,6 +71,11 @@ public class AreaTest {
         int nbOfLayers = area.getNumberOfLayers();
         
         assertEquals(0, nbOfLayers);
+    }
+
+    @Test
+    public void testSetLayerVisibility(){
+        //TODO
     }
 
     @Test
@@ -102,7 +107,7 @@ public class AreaTest {
         layer1.addShapeToLayer(new Point(-1, -1));
         layer1.addShapeToLayer(new Polygon(3, null));
         layer2.addShapeToLayer(new Circle(new Point(5, 5), 10));
-        layer2.setLayerUnvisible();
+        layer2.setLayerVisibility(false);
 
         String[][] areaActual = area.getArea();
         String[][] areaExcepted = {

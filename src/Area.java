@@ -99,12 +99,22 @@ public class Area {
     }
 
     /**
-     * @param layerToDelete 
+     * @param layerIdToDelete 
      * @return
      */
-    public void deleteLayer(Layer layerToDelete) {
-        //on supprime le layer
-        this.listLayers.remove(layerToDelete);
+    public boolean removeLayerFromArea(int layerIdToDelete) {
+        boolean isLayerDeleted = false;
+
+        //on supprime le layer en fonction de son id
+        for (int i=0; i<this.listLayers.size(); i++){
+            if (this.listLayers.get(i).getId() == layerIdToDelete){
+                this.listLayers.remove(i);
+                isLayerDeleted = true;
+                break;
+            }
+        }
+
+        return isLayerDeleted;
     }
 
     /**
@@ -114,6 +124,21 @@ public class Area {
         //on supprime tous les layers
         this.listLayers = new ArrayList<>();
     }
+
+    public boolean setLayerVisibility(int layerId, boolean newVisibility){
+        boolean layerVisibilityChanged = false;
+
+        //on modifie la visibilité d'un layer
+        for (int i=0; i<this.listLayers.size(); i++){
+            if (this.listLayers.get(i).getId() == layerId){
+                this.listLayers.get(i).setLayerVisibility(newVisibility);;
+                layerVisibilityChanged = true;
+                break;
+            }
+        }
+
+        return layerVisibilityChanged;
+    } 
 
     /**
      * @return

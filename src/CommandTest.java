@@ -61,7 +61,7 @@ public class CommandTest {
 
     @Test
     public void testGetMaxParamNumber() {
-        Assert.assertEquals((Integer)30, command.getMaxParamNumber());  
+        Assert.assertEquals(30, command.getMaxParamNumber());  
     }
 
     @Test
@@ -134,12 +134,51 @@ public class CommandTest {
 
     @Test
     public void testCheckNbParamsPolygon(){
-        Assert.assertFalse(command.checkNbParams(0, 0, 0));
-        Assert.assertFalse(command.checkNbParams(1, 0, 0));
-        Assert.assertFalse(command.checkNbParams(1, 30, 0));
-        Assert.assertFalse(command.checkNbParams(0, 0, 1));
-        Assert.assertTrue(command.checkNbParams(1, 2, 0));
-        Assert.assertFalse(command.checkNbParams(0, 3, 0));
+        command.addStrParam("polygon");
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addStrParam("test");
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addFloatParam((float)1.00);
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addIntParam(1);
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addIntParam(1);
+        command.addIntParam(2);
+        Assert.assertTrue(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addIntParam(1);
+        command.addIntParam(2);
+        command.addIntParam(3);
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        for (int i=0;i<30;i++){
+            command.addIntParam(i);
+        }
+        Assert.assertTrue(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        for (int i=0;i<31;i++){
+            command.addIntParam(i);
+        }
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
     }
 
     @Test
@@ -323,24 +362,24 @@ public class CommandTest {
 
         //// CAS SQARE ////
         //cas erreur 0
-        provideInput("sqare 1 2 3");
+        provideInput("square 1 2 3");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
         //cas erreur 3
-        provideInput("sqare 1 2");
+        provideInput("square 1 2");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
-        provideInput("sqare");
+        provideInput("square");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
-        provideInput("sqare test");
+        provideInput("square test");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
-        provideInput("sqare 1.2");
+        provideInput("square 1.2");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
@@ -451,11 +490,11 @@ public class CommandTest {
 
         //// CAS NEW  ////
         //cas erreur 8
-        provideInput("new layer layer_test");
+        provideInput("new layer");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        provideInput("new area area_test");
+        provideInput("new area");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
@@ -492,20 +531,12 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        provideInput("select shape 0");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 8);
-
         //cas erreur 9
-        provideInput("select area 1");
+        provideInput("select area 2");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
         provideInput("select layer 2");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 9);
-
-        provideInput("select shape 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
@@ -535,7 +566,7 @@ public class CommandTest {
         //on créé une nouvelle area 
         app.createArea("area test");
         //on créé une shape dans le layer actuel
-        app.getCurrentLayer().addShapeToLayer(new Point(1, 2));
+        app.addShapeToCurrentLayer(new Point(1, 2));
 
         //cas erreur 8
         provideInput("delete shape 0");
@@ -550,7 +581,7 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        //cas erreur 8
+        //cas erreur 9
         provideInput("delete shape 0");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
@@ -562,7 +593,7 @@ public class CommandTest {
         provideInput("delete area 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
-
+        
         //cas erreur 3
         provideInput("delete");
         errorNum = command.readExecCommand(app);
@@ -586,37 +617,37 @@ public class CommandTest {
 
 
         //// CAS SET  ////
-        //cas erreur 0
+        //cas erreur 8
         provideInput("set layer visible 0");
         errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
+        Assert.assertTrue(errorNum == 8);
 
         provideInput("set layer unvisible 0");
         errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
+        Assert.assertTrue(errorNum == 8);
 
-        provideInput("set char border CD5C5C");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
-
-        provideInput("set char background CD5C5C");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
-
-        //cas erreur 8
-        provideInput("set shape 0");
+        //cas erreur 9
+        provideInput("set layer visible 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
-        provideInput("set layer 0");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 9);
-
-        provideInput("set area 1");
+        provideInput("set layer unvisible 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
         //cas erreur 3
+        provideInput("set shape 0");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
+        provideInput("set layer 0");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
+        provideInput("set area 1");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
         provideInput("set char");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);

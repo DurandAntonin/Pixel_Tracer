@@ -86,14 +86,67 @@ public class Pixel_tracer {
         }
     }
 
+    public void createLayerInCurrentArea(){
+        //on créé un nouveau layer et on le sélectionne
+        int idNewLayer = this.currentArea.getNumberOfLayers();
+        Layer layer = new Layer(idNewLayer, "Layer " + idNewLayer);
+        this.currentArea.addLayer(layer);
+
+        this.currentLayer = layer;
+    }
+
+    public void addShapeToCurrentLayer(Shape shapeToAdd){
+        this.currentLayer.addShapeToLayer(shapeToAdd);
+
+        //on met à jour la forme sélectionnée
+        this.currentShape = shapeToAdd;
+    }
+
+    public boolean selectArea(int areaIdToSelect){
+        //on change l'area sélectionnée si cette derniere existe
+        boolean isAreaeExists = false;
+
+        for (Area area : listArea) {
+            if (area.getId() == areaIdToSelect){
+                this.currentArea = area;
+                isAreaeExists = true;
+                break;
+            }
+        }
+
+        return isAreaeExists;
+    }
+
+    public boolean selectLayer(int layerIdToSelect){
+        //on change le layer de l'area sélectionnée
+        boolean isLayerExists = false;
+        ArrayList<Layer> listLayerInCurrentArea = this.currentArea.getAllLayers();
+
+        if (listLayerInCurrentArea.size() > 0){
+            for (Layer layer : listLayerInCurrentArea) {
+                if (layer.getId() == layerIdToSelect){
+                    this.currentLayer = layer;
+                    isLayerExists = true;
+                    break;
+                }
+            }
+        }
+        
+        return isLayerExists;
+    }
+
     /**
      * @return
      */
-    public void deleteArea(int areaIdToDelete) {
+    public boolean deleteArea(int areaIdToDelete) {
+        boolean isAreaDeleted = false;
+
         //on supprime l'area ayant l'id indiqué en paramètre
         for (int i=0; i<this.listArea.size(); i++) {
             Area area = this.listArea.get(i);
             if (area.getId() == areaIdToDelete){
+                isAreaDeleted = true;
+
                 this.listArea.remove(i);
 
                 //on change l'area sélectionnée 
@@ -107,18 +160,64 @@ public class Pixel_tracer {
                         this.currentArea = null;
 
                 }
+
+                break;
             }
         }
+
+        return isAreaDeleted;
     }
 
-    public void addShapeToCurrentLayer(Shape shapeToAdd){
-        this.currentLayer.addShapeToLayer(shapeToAdd);
+    public boolean deleteLayerInCurrentArea(int layerIdToDelete){
+        boolean layerDeleted = false;
 
-        //on met à jour la forme sélectionnée
-        this.currentShape = shapeToAdd;
+        //on vérifie que le layer n'est pas nul, i.e s'il existe
+        if (currentArea != null){
+            layerDeleted = this.currentArea.removeLayerFromArea(layerIdToDelete);
+
+            //on change le layer sélectionné
+            ArrayList<Layer> layerListInCurrentArea = this.currentArea.getAllLayers();
+            if (layerListInCurrentArea.size() > 0)
+                this.currentLayer = layerListInCurrentArea.get(layerListInCurrentArea.size()-1);
+            else
+                this.currentLayer = null;
+        }
+
+        return layerDeleted;
+    } 
+
+    public boolean deleteShapeInCurrentLayer(int shapeIdToDelete){
+        boolean shapeDeleted = false;
+
+        //on vérifie que la forme sélectionnée n'est pas nulle, i.e si elle existe
+        if (currentLayer != null){
+            shapeDeleted = this.currentLayer.removeShapeFromLayer(shapeIdToDelete);
+
+            //on change la forme sélectionnée
+            ArrayList<Shape> shapeListInCurrent = this.currentLayer.getListShapes();
+            if (shapeListInCurrent.size() > 0)
+                this.currentShape = shapeListInCurrent.get(shapeListInCurrent.size()-1);
+            else
+                this.currentShape = null;
+        }
+
+        return shapeDeleted;
     }
 
-    public void drawArea(){
+    public boolean changeLayerVisibilityInCurrentArea(int layerId, boolean newVisibility){
+        boolean resultChangeLayerVisibility = this.currentArea.setLayerVisibility(layerId, newVisibility);
+
+        //si le layer est maintenant invisible et que c'est le layer sélectionné, on change le layer sélectionné
+        if (this.currentLayer.getId() == layerId && !newVisibility && this.currentArea.getNumberOfLayers() > 0){
+            ArrayList<Layer> listLayersInCurrentArea = this.currentArea.getAllLayers();
+            this.currentLayer = listLayersInCurrentArea.get(listLayersInCurrentArea.size()-1);
+        }
+        
+        return resultChangeLayerVisibility;
+    }
+    
+
+    public void drawCurrentArea(){
         //pour l'area sélectionnée, on convertit toutes les formes de chaque layer en pixels pour être ensuite affiché
         this.currentArea.drawAllShapeFromLayer();
     }

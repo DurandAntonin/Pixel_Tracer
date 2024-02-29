@@ -134,12 +134,51 @@ public class CommandTest {
 
     @Test
     public void testCheckNbParamsPolygon(){
-        //Assert.assertFalse(command.checkNbParams(0, 0, 0));
-        //Assert.assertFalse(command.checkNbParams(1, 0, 0));
-        //Assert.assertFalse(command.checkNbParams(1, 30, 0));
-        //Assert.assertFalse(command.checkNbParams(0, 0, 1));
-        //Assert.assertTrue(command.checkNbParams(1, 2, 0));
-        //Assert.assertFalse(command.checkNbParams(0, 3, 0));
+        command.addStrParam("polygon");
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addStrParam("test");
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addFloatParam((float)1.00);
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addIntParam(1);
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addIntParam(1);
+        command.addIntParam(2);
+        Assert.assertTrue(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        command.addIntParam(1);
+        command.addIntParam(2);
+        command.addIntParam(3);
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        for (int i=0;i<30;i++){
+            command.addIntParam(i);
+        }
+        Assert.assertTrue(command.checkNbParamsPolygon());
+        command.clearParamList();
+
+        command.addStrParam("polygon");
+        for (int i=0;i<31;i++){
+            command.addIntParam(i);
+        }
+        Assert.assertFalse(command.checkNbParamsPolygon());
+        command.clearParamList();
     }
 
     @Test
@@ -542,7 +581,7 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        //cas erreur 8
+        //cas erreur 9
         provideInput("delete shape 0");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
@@ -554,7 +593,7 @@ public class CommandTest {
         provideInput("delete area 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
-
+        
         //cas erreur 3
         provideInput("delete");
         errorNum = command.readExecCommand(app);
@@ -578,37 +617,37 @@ public class CommandTest {
 
 
         //// CAS SET  ////
-        //cas erreur 0
+        //cas erreur 8
         provideInput("set layer visible 0");
         errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
+        Assert.assertTrue(errorNum == 8);
 
         provideInput("set layer unvisible 0");
         errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
+        Assert.assertTrue(errorNum == 8);
 
-        provideInput("set char border CD5C5C");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
-
-        provideInput("set char background CD5C5C");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 0);
-
-        //cas erreur 8
-        provideInput("set shape 0");
+        //cas erreur 9
+        provideInput("set layer visible 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
-        provideInput("set layer 0");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 9);
-
-        provideInput("set area 1");
+        provideInput("set layer unvisible 1");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
         //cas erreur 3
+        provideInput("set shape 0");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
+        provideInput("set layer 0");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
+        provideInput("set area 1");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
         provideInput("set char");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);

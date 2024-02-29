@@ -98,7 +98,7 @@ public class Command {
 
     public boolean checkNbParamsPolygon(){
         //on vérifie que le nombre de paramètres d'une commande polygon est correct
-        return this.getStrParams().size() == 1 && this.floatParams.size() == 0 && this.intParams.size() >= 2 && this.intParams.size() < this.maxParamNumber && this.intParams.size()%2 == 0 ;
+        return this.getStrParams().size() == 1 && this.floatParams.size() == 0 && this.intParams.size() >= 2 && this.intParams.size() <= this.maxParamNumber && this.intParams.size()%2 == 0 ;
     }
 
     /**

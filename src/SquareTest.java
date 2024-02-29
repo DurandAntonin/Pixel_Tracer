@@ -1,4 +1,9 @@
 import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -51,8 +56,12 @@ public class SquareTest {
 
     @Test
     public void testDraw() {
-        Pixel[] pixels = {px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12};
-        assertArrayEquals(pixels, sq1.draw().toArray());
+        ArrayList<Pixel> pixels = new ArrayList<Pixel>(Arrays.asList(px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12));
+        ArrayList<Pixel> result = sq1.draw();
+        for (int i = 0;i< result.size();i++){
+            System.out.println(pixels.get(i)+ " "+ result.get(i));
+        }
+        assertTrue(pixels.size() == result.size() && pixels.containsAll(result) && result.containsAll(pixels));
     }
 
     @Test

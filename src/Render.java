@@ -13,25 +13,6 @@ public class Render {
         return;
     }
 
-    @Override
-    public boolean equals(Object object){
-        return true;
-    }
-
-    public static void clearArea(Area area){
-        //TODO implement here
-        return;
-    }
-
-    /**l2
-     * @param area 
-     * @return
-     */
-    public static void drawArea(Area area) {
-        // TODO implement here
-        return;
-    }
-
     /**
      * @param area 
      * @return
@@ -51,7 +32,7 @@ public class Render {
         System.out.println("\t\nclear : clear screen ");
         System.out.println("\t\nexit : exit the program ");
         System.out.println("\t\nhelp : print this help ");
-        System.out.println("\t\nplot : draw dcreen");
+        System.out.println("\t\nplot : draw screen");
 
         System.out.println("\t\n==== Draw shapes ====");
 

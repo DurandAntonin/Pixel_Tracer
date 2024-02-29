@@ -79,7 +79,7 @@ public class Area {
         return areaString;
     }
 
-    public void clearArea () {
+    public void clearArea() {
         int height = this.area.length;
         int width = this.area[0].length;
         this.area = new String[height][width];

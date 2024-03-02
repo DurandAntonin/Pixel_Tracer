@@ -105,16 +105,16 @@ public class Command {
      * @return
      */
     public void readFromStdin() {
-         //on demande à l'utilisateur d'entrer une valeur
-         Scanner scanner = new Scanner(System.in);
-         System.out.println("-> Saisie : ");
+        //on demande à l'utilisateur d'entrer une valeur
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("-> Saisie : ");
 
-         //on récupère la valeur entrée par l'utilisateur
-         String input = scanner.nextLine();
-         System.out.println("-> Valeur entrée : " + input);
+        //on récupère la valeur entrée par l'utilisateur
+        String input = scanner.nextLine();
+        //System.out.println("-> Valeur entrée : " + input);
  
-         //on arrete la mise à l'écoute de l'input
-         //scanner.close();
+        //on arrete la mise à l'écoute de l'input
+        //scanner.close();
         
         //on split la commande
         String[] command = input.split(" ");
@@ -258,7 +258,6 @@ public class Command {
 
                 case "square":
                     if (this.checkNbParams(1, 3, 0)){
-                        
                         //on créé l'id pour cette forme
                         ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
                         ArrayList<Integer> listId = new ArrayList<>();
@@ -456,20 +455,35 @@ public class Command {
                         switch (elemToDelete) {
                             case "area":
                                 //on affiche la liste des layers de l'area sélectionnée
-                                app.deleteArea(idElemToDelete);
-                                resultCommand = 8;
+                                boolean isAreadDeleted = app.deleteArea(idElemToDelete);
+
+                                //on vérifie que la suppression a bien été effectuée
+                                if (isAreadDeleted)
+                                    resultCommand = 8;
+                                else
+                                    resultCommand = 9;
                                 break;
 
                             case "layer":
                                 //on supprime le layer de l'area sélectionnée
-                                app.deleteLayerInCurrentArea(idElemToDelete);
-                                resultCommand = 8;
+                                boolean isLayerDeleted = app.deleteLayerInCurrentArea(idElemToDelete);
+                                
+                                //on vérifie que la suppression a bien été effectuée
+                                if (isLayerDeleted)
+                                    resultCommand = 8;
+                                else
+                                    resultCommand = 9;
                                 break;
 
                             case "shape":
                                 //on supprime la shape du layer sélectionnée
-                                app.deleteShapeInCurrentLayer(idElemToDelete);
-                                resultCommand = 8;
+                                boolean isShapeDeleted = app.deleteShapeInCurrentLayer(idElemToDelete);
+
+                                //on vérifie que la suppression a bien été effectuée
+                                if (isShapeDeleted)
+                                    resultCommand = 8;
+                                else
+                                    resultCommand = 10;
                                 break;
                         
                             default:

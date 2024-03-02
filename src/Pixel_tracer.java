@@ -148,15 +148,20 @@ public class Pixel_tracer {
 
                 this.listArea.remove(i);
 
-                //on change l'area sélectionnée 
+                //on change l'area et le layer sélectionnés
                 if (this.currentArea == area){
                     //la nouvelle area sélectionnée par défaut est la première de la liste
                     if (this.listArea.size() > 0)
                         this.currentArea = this.listArea.get(0);
+                        ArrayList<Layer> listLayersInCurrentArea = this.currentArea.getAllLayers();
+
+                        if (listLayersInCurrentArea.size() > 0)
+                            this.currentLayer = listLayersInCurrentArea.get(0);
                     
-                    //il n'y a plus d'area, on met l'area par défaut à null
+                    //il n'y a plus d'area, on met l'area et le layer par défaut à null
                     else
                         this.currentArea = null;
+                        this.currentLayer = null;
 
                 }
 

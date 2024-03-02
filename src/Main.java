@@ -27,9 +27,10 @@ public class Main {
         Command command = new Command("Command");
         boolean endOfExecution = false; //indique si l'application doit se terminer
         Render.printHelp();
+
         while (!endOfExecution){
             int resultCommand = command.readExecCommand(pixelTracer);
-            System.out.println("Résultat de la commande : " + resultCommand);
+            //System.out.println("Résultat de la commande : " + resultCommand);
 
             switch (resultCommand) {
                 //cas clear de l'écran
@@ -61,7 +62,12 @@ public class Main {
 
                 //cas mauvais id pour la sélection d'une area ou d'un layer
                 case 9:
-                    System.out.println("LAYER/AREA INTROUVABLE \n");
+                    System.out.println("AREA/LAYER INTROUVABLE \n");
+                    continue;
+
+                //cas mauvais id pour la manipulation d'une shape
+                case 10:
+                    System.out.println("SHAPE INTROUVABLE \n");
                     continue;
 
                 //cas exit de l'application

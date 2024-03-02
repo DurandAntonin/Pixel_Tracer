@@ -213,8 +213,15 @@ public class Command {
 
                 case "point":
                     if (this.checkNbParams(1, 2, 0)){
+                        //on récupère les id de chaque form pris
+                        ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
+                        ArrayList<Integer> listId = new ArrayList<>();
+                        for (Shape shape : listShapesInLayer) {
+                            listId.add(shape.getId());
+                        }
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
-                        Point point = new Point(this.intParams.get(0), this.intParams.get(1));
+                        Point point = new Point(app.getIdForNewElem(listId), COLOR.BLACK, 1, this.intParams.get(0), this.intParams.get(1));
                         app.addShapeToCurrentLayer(point);
                         resultCommand = 0;
                     }
@@ -225,10 +232,17 @@ public class Command {
 
                 case "line":
                     if (this.checkNbParams(1, 4, 0)){
+                        //on récupère les id de chaque form pris
+                        ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
+                        ArrayList<Integer> listId = new ArrayList<>();
+                        for (Shape shape : listShapesInLayer) {
+                            listId.add(shape.getId());
+                        }
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point1 = new Point(this.intParams.get(0), this.intParams.get(1));
                         Point point2 = new Point(this.intParams.get(2), this.intParams.get(3));
-                        Line line = new Line(point1, point2);
+                        Line line = new Line(app.getIdForNewElem(listId), COLOR.BLACK, 1, point1, point2);
                         app.addShapeToCurrentLayer(line);
 
                         resultCommand = 0;
@@ -431,17 +445,36 @@ public class Command {
                     if (this.checkNbParams(2, 0, 0)){
                         //on regarde quel élément il faut créer
                         String elemToCreate = this.strParams.get(1).toLowerCase();
+                        ArrayList<Integer> listId;
 
                         switch (elemToCreate) {
                             case "area":
+                                //on calcule l'id pour la nouvelle area
+                                ArrayList<Area> listAreaInLayer = app.getListArea();
+                                listId = new ArrayList<>();
+                                for (Area area : listAreaInLayer) {
+                                    listId.add(area.getId());
+                                }
+
+                                int newAreaId = app.getIdForNewElem(listId);
+
                                 //on créé une nouvelle area
-                                app.createArea("Area " + app.getListArea().size());
+                                app.createArea(newAreaId, "Area " + newAreaId);
                                 resultCommand = 8;
                                 break;
 
                             case "layer":
+                                //on calcule l'id pour le nouveau layer
+                                ArrayList<Layer> listLayerInLayer = app.getCurrentArea().getAllLayers();
+                                listId = new ArrayList<>();
+                                for (Layer layer : listLayerInLayer) {
+                                    listId.add(layer.getId());
+                                }
+
+                                int newLayerId = app.getIdForNewElem(listId);
+
                                 //on créé un nouveau layer dans l'area sélectionnée
-                                app.createLayerInCurrentArea();
+                                app.createLayerInCurrentArea(newLayerId);
                                 resultCommand = 8;
                                 break;
                         

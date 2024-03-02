@@ -85,15 +85,15 @@ public class Pixel_tracerTest {
         al1.add(a2);
         al1.add(a3);
 
-        pixel_tracer.createArea("a1");
-        pixel_tracer.createArea("a2");
-        pixel_tracer.createArea("a3");
+        pixel_tracer.createArea(1, "a1");
+        pixel_tracer.createArea(2, "a2");
+        pixel_tracer.createArea(3, "a3");
         assertEquals(al1, pixel_tracer.getListArea());
     }
 
     @Test
     public void testAddNewLayer(){
-        pixel_tracer.createLayerInCurrentArea();
+        pixel_tracer.createLayerInCurrentArea(1);
         assertEquals(2, pixel_tracer.getCurrentArea().getNumberOfLayers());
         assertEquals(1, pixel_tracer.getCurrentLayer().getId());
     }
@@ -138,10 +138,10 @@ public class Pixel_tracerTest {
         assertEquals(null, pixel_tracer.getCurrentArea());
 
         //cas n areas 
-        pixel_tracer.createArea("area 0");
-        pixel_tracer.createArea("area 1");
+        pixel_tracer.createArea(1, "area 0");
+        pixel_tracer.createArea(2, "area 1");
         assertTrue(pixel_tracer.deleteArea(1));
-        assertEquals(0, pixel_tracer.getCurrentArea().getId());
+        assertEquals(2, pixel_tracer.getCurrentArea().getId());
     }
 
     @Test
@@ -155,10 +155,10 @@ public class Pixel_tracerTest {
         assertEquals(null, pixel_tracer.getCurrentLayer());
 
         //cas n areas 
-        pixel_tracer.createLayerInCurrentArea();
-        pixel_tracer.createLayerInCurrentArea();
+        pixel_tracer.createLayerInCurrentArea(1);
+        pixel_tracer.createLayerInCurrentArea(2);
         assertTrue(pixel_tracer.deleteLayerInCurrentArea(1));
-        assertEquals(0, pixel_tracer.getCurrentLayer().getId());
+        assertEquals(2, pixel_tracer.getCurrentLayer().getId());
     }
 
     public void testDeleteShapeInCurrentLayer(){

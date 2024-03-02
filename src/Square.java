@@ -15,36 +15,49 @@ public class Square extends Shape {
      */
     private Integer length;
 
+
+    public Square(int parId, COLOR parColor, int parThickness, Point parPoint, Integer parLength) {
+        //on initialise les champs
+        super(parId, 0, 0, parColor, parThickness);
+        this.point = parPoint;
+        this.length = parLength;
+    }
+
     /**
      * @param parPoint 
      * @param parLength
      */
+
     public Square(Point parPoint, Integer parLength) {
         super(null, null, null, null, null);
         this.point = parPoint;
         this.length = parLength;
     }
 
+
     /**
      * @return
      */
     public ArrayList<Pixel> draw() {
-        ArrayList<Pixel> pixels = new ArrayList<>();
+        ArrayList<Pixel> listPixelsSquare = new ArrayList<>();
         int departX = this.point.getPosX();
         int departY =  this.point.getPosY();
-        pixels.add(new Pixel(departX, departY));
  
-        for(int i = 1;i < this.length -1;i++){
-            pixels.add(new Pixel(departX, departY+i));
-            pixels.add(new Pixel(departX+i, departY));
+        for(int x = departX; x < this.length + departX;x++){
+            listPixelsSquare.add(new Pixel(x, departY));
+            listPixelsSquare.add(new Pixel(x, departY+this.length-1));     
         }
 
-        for (int i = 1; i<this.length;i++){
-            pixels.add(new Pixel(departX+this.length,departY+i ));
-            pixels.add(new Pixel(departX+i,departY+this.length ));
+        for(int y = departY+1; y < this.length + departY - 1;y++){
+            listPixelsSquare.add(new Pixel(departX, y));
+            listPixelsSquare.add(new Pixel(departX+this.length-1,y));
         }
+
+        
+
+        System.out.println("Square draw : " + listPixelsSquare);
     
-        return pixels;
+        return listPixelsSquare;
     }
 
     @Override
@@ -65,8 +78,8 @@ public class Square extends Shape {
      * @return
      */
     public String toString() {
-        // TODO implement here
-        return "";
+        String squareString = "Square [" + super.toString() + ", point: " + this.point.toString() + ", lenght: " + this.length.toString() + "]";
+        return squareString;
     }
 
     public Point getPoint() {

@@ -220,8 +220,10 @@ public class Command {
                             listId.add(shape.getId());
                         }
 
+                        int pointId = app.getIdForNewElem(listId);
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
-                        Point point = new Point(app.getIdForNewElem(listId), COLOR.BLACK, 1, this.intParams.get(0), this.intParams.get(1));
+                        Point point = new Point(pointId, COLOR.BLACK, 1, this.intParams.get(0), this.intParams.get(1));
                         app.addShapeToCurrentLayer(point);
                         resultCommand = 0;
                     }
@@ -238,11 +240,13 @@ public class Command {
                         for (Shape shape : listShapesInLayer) {
                             listId.add(shape.getId());
                         }
+                        
+                        int lineId = app.getIdForNewElem(listId);
 
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point1 = new Point(this.intParams.get(0), this.intParams.get(1));
                         Point point2 = new Point(this.intParams.get(2), this.intParams.get(3));
-                        Line line = new Line(app.getIdForNewElem(listId), COLOR.BLACK, 1, point1, point2);
+                        Line line = new Line(lineId, COLOR.BLACK, 1, point1, point2);
                         app.addShapeToCurrentLayer(line);
 
                         resultCommand = 0;
@@ -254,10 +258,20 @@ public class Command {
 
                 case "square":
                     if (this.checkNbParams(1, 3, 0)){
+                        
+                        //on créé l'id pour cette forme
+                        ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
+                        ArrayList<Integer> listId = new ArrayList<>();
+                        for (Shape shape : listShapesInLayer) {
+                            listId.add(shape.getId());
+                        }
+
+                        int squareId = app.getIdForNewElem(listId);
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point = new Point(this.intParams.get(0), this.intParams.get(1));
                         int length = this.intParams.get(2);
-                        Square square = new Square(point, length);
+                        Square square = new Square(squareId, COLOR.BLACK, 1, point, length);
                         app.addShapeToCurrentLayer(square);
 
                         resultCommand = 0;
@@ -269,11 +283,20 @@ public class Command {
 
                 case "rectangle":
                     if (this.checkNbParams(1, 4, 0)){
+                        //on créé un id pour cette forme
+                        ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
+                        ArrayList<Integer> listId = new ArrayList<>();
+                        for (Shape shape : listShapesInLayer) {
+                            listId.add(shape.getId());
+                        }
+
+                        int newRectangleId = app.getIdForNewElem(listId);
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point = new Point(this.intParams.get(0), this.intParams.get(1));
                         int width = this.intParams.get(2);
                         int height = this.intParams.get(3);
-                        Rectangle rectangle = new Rectangle(point, width, height);
+                        Rectangle rectangle = new Rectangle(newRectangleId, COLOR.BLACK, 1, point, width, height);
                         app.addShapeToCurrentLayer(rectangle);
 
                         resultCommand = 0;
@@ -352,19 +375,28 @@ public class Command {
                         switch (elemToDisplay) {
                             case "layers":
                                 //on affiche la liste des layers de l'area sélectionnée
-                                System.out.println(app.getCurrentArea().getAllLayers());
+                                ArrayList<Layer> listLayers = app.getCurrentArea().getAllLayers();
+                                for(int i=0;i<listLayers.size();i++){
+                                    System.out.println(listLayers.get(i) + "\n");
+                                }
                                 resultCommand = 8;
                                 break;
 
                             case "areas":
                                 //on affiche la liste des areas
-                                System.out.println(app.getListArea());
+                                ArrayList<Area> listAreas = app.getListArea();
+                                for(int i=0;i<listAreas.size();i++){
+                                    System.out.println(listAreas.get(i) + "\n");
+                                }
                                 resultCommand = 8;
                                 break;
 
                             case "shapes":
                                 //on affiche la liste des formes de l'ara sélectionnée
-                                System.out.println(app.getCurrentLayer().getListShapes());
+                                ArrayList<Shape> listeShapes = app.getCurrentLayer().getListShapes();
+                                for(int i=0;i<listeShapes.size();i++){
+                                    System.out.println(listeShapes.get(i) + "\n");
+                                }
                                 resultCommand = 8;
                                 break;
                         

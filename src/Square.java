@@ -53,9 +53,7 @@ public class Square extends Shape {
             listPixelsSquare.add(new Pixel(departX+this.length-1,y));
         }
 
-        
-
-        System.out.println("Square draw : " + listPixelsSquare);
+        //System.out.println("Square draw : " + listPixelsSquare);
     
         return listPixelsSquare;
     }
@@ -71,7 +69,7 @@ public class Square extends Shape {
             return false;
         
         //on vérifie que les valeurs des champs sont identiques
-        return this.point == ((Square) object).getPoint() && this.length == ((Square) object).getLength();
+        return this.point == ((Square) object).getPoint() && this.length == ((Square) object).getLength() && this.getX() == ((Square) object).getX() && this.getY() == ((Square) object).getY() && this.getColor() == ((Square) object).getColor() && this.getThickness() == ((Square) object).getThickness();
     }
 
     /**

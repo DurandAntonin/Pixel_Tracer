@@ -307,10 +307,19 @@ public class Command {
 
                 case "circle":
                     if (this.checkNbParams(1, 3, 0)){
+                        //on créé l'id pour cette forme
+                        ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
+                        ArrayList<Integer> listId = new ArrayList<>();
+                        for (Shape shape : listShapesInLayer) {
+                            listId.add(shape.getId());
+                        }
+ 
+                        int circleId = app.getIdForNewElem(listId);
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point = new Point(this.intParams.get(0), this.intParams.get(1));
                         int radius = this.intParams.get(2);
-                        Circle circle = new Circle(point, radius);
+                        Circle circle = new Circle(circleId, COLOR.BLACK, 1, point, radius);
                         app.addShapeToCurrentLayer(circle);
 
                         resultCommand = 0;

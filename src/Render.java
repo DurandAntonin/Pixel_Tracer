@@ -37,8 +37,14 @@ public class Render {
      * @return
      */
     public static void printArea(Area area) {
-        // TODO implement here
-        return;
+        String[][] tabArea = area.getArea();
+        for (int i=0; i<tabArea.length; i++){
+            System.out.print("|");
+            for (int j=0; j<tabArea[i].length; j++){
+                System.out.print(tabArea[i][j] + " ");
+            }
+            System.out.println("|\n");
+        }
     }
 
     public static void printHelp(){

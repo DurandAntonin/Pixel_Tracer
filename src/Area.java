@@ -79,13 +79,36 @@ public class Area {
         return areaString;
     }
 
+    public void clearArea(){
+    }
+
     /**
      * @return
      */
     public void drawAllShapeFromLayer() {
+        int width = this.area.length;
+        int height = this.area[0].length;
+
         //pour chaque layer, on transforme les shapes en pixels pour les stocker dans le champ area
         for (Layer layer : this.listLayers) {
-            continue;
+
+            //on regarde si ce layer est visible
+            if (layer.getVisible()){
+                ArrayList<Shape> listShapesInLayer = layer.getListShapes();
+
+                for (Shape shape : listShapesInLayer) {
+                    ArrayList<Pixel> listPixelShape = shape.draw();
+
+                    //on stocke dans le tableau seulement les pixels qui sont dans le cadre
+                    for (Pixel pixel : listPixelShape) {
+                        int pX = pixel.getX();
+                        int pY = pixel.getY();
+                        if (pX < width && pY < height){
+                            area[pY][pX] = this.fullChar;
+                        }
+                    }
+                }
+            }
         }
     }
 

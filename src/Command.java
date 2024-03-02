@@ -302,12 +302,21 @@ public class Command {
                     if (this.checkNbParamsPolygon()){
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
 
+                        //on créé l'id pour cette forme
+                        ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
+                        ArrayList<Integer> listId = new ArrayList<>();
+                        for (Shape shape : listShapesInLayer) {
+                            listId.add(shape.getId());
+                        }
+
+                        int polygonId = app.getIdForNewElem(listId);
+
                         //on créé une liste de points en fonction des coordonnées entrées dans la commande
                         ArrayList<Point> pointList = new ArrayList<>();
                         for (int i=0; i<this.intParams.size()-1; i+=2){
                             pointList.add(new Point(this.intParams.get(i), this.intParams.get(i+1)));
                         }
-                        Polygon polygon = new Polygon(pointList.size(), pointList);
+                        Polygon polygon = new Polygon(polygonId, COLOR.BLACK, 1, pointList);
                         app.addShapeToCurrentLayer(polygon);
 
                         resultCommand = 0;

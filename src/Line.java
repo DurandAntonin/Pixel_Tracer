@@ -37,24 +37,14 @@ public class Line extends Shape {
         this.p2 = parP2;
     }
 
-    /**
-     * Utilise l'algorithme de tracé de segment version Nicolas Flasque
-     * 
-     * @return
-     */
-    public ArrayList<Pixel> draw() {
-        ArrayList<Pixel> pixelLine = new ArrayList<>();
-
-        int dx = Math.abs(this.p2.getPosX() - this.p1.getPosX());
-        int dy = Math.abs(this.p2.getPosY() - this.p1.getPosY());
+    public static ArrayList<Pixel> drawSegment(int x, int y, int dx, int dy){
+        ArrayList<Pixel> listPixelSegment = new ArrayList<>();
 
         int cumul;
         int xinc = (dx > 0) ? 1 : -1;
         int yinc = (dy > 0) ? 1 : -1;
-        int x = this.p1.getPosX();
-        int y = this.p1.getPosY();
 
-        pixelLine.add(new Pixel(x, y, COLOR.BLACK));
+        listPixelSegment.add(new Pixel(x, y, COLOR.BLACK));
         if (dx > dy){
             cumul = dx /2;
             for (int i=1; i<=dx; i++){
@@ -65,7 +55,7 @@ public class Line extends Shape {
                     y += yinc;
                 }
 
-                pixelLine.add(new Pixel(x, y, COLOR.BLACK));
+                listPixelSegment.add(new Pixel(x, y, COLOR.BLACK));
             }
         }
         else{
@@ -78,11 +68,26 @@ public class Line extends Shape {
                     x += xinc;
                 }
 
-                pixelLine.add(new Pixel(x, y, COLOR.BLACK));
+                listPixelSegment.add(new Pixel(x, y, COLOR.BLACK));
             }
         }
 
-        return pixelLine;
+        return listPixelSegment;
+    }
+
+    /**
+     * Utilise l'algorithme de tracé de segment version Nicolas Flasque
+     * 
+     * @return
+     */
+    public ArrayList<Pixel> draw() {
+        int dx = Math.abs(this.p2.getPosX() - this.p1.getPosX());
+        int dy = Math.abs(this.p2.getPosY() - this.p1.getPosY());
+
+        int x = this.p1.getPosX();
+        int y = this.p1.getPosY();
+
+        return Line.drawSegment(x, y, dx, dy);
     }
 
     @Override

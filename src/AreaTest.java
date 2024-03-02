@@ -105,7 +105,7 @@ public class AreaTest {
         layer0.addShapeToLayer(new Circle(new Point(0, 0), 3));
         layer1.addShapeToLayer(new Line(new Point(6, 6), new Point(6, 10)));
         layer1.addShapeToLayer(new Point(-1, -1));
-        layer1.addShapeToLayer(new Polygon(3, null));
+        layer1.addShapeToLayer(new Polygon(listPointsInPolygon));
         layer2.addShapeToLayer(new Circle(new Point(5, 5), 10));
         layer2.setLayerVisibility(false);
 

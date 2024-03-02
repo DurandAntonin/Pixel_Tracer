@@ -24,8 +24,8 @@ public class LayerTest {
     public void init(){
         layerId = 1;
         layerName = "testLayer1";
-        rec1 = new Rectangle(new Point(4,4), 4, 4);
-        cir1 = new Circle(new Point(4,4), 4);
+        rec1 = new Rectangle(0, COLOR.BLACK, 1, new Point(4,4), 4, 4);
+        cir1 = new Circle(1, COLOR.BLACK, 1, new Point(4,4), 4);
         pnt1 = new Point(1, 2);
 
         l1 = new Layer(layerId, layerName);

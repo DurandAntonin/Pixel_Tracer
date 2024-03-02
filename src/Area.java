@@ -86,8 +86,8 @@ public class Area {
      * @return
      */
     public void drawAllShapeFromLayer() {
-        int width = this.area.length;
-        int height = this.area[0].length;
+        int height = this.area.length;
+        int width = this.area[0].length;
 
         //pour chaque layer, on transforme les shapes en pixels pour les stocker dans le champ area
         for (Layer layer : this.listLayers) {

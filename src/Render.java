@@ -80,7 +80,7 @@ public class Render {
         System.out.println("\t\nset char {border, background} ascii_code");
         System.out.println("\t\nset layer {visible, unvisible} {id}");
         System.out.println("\t\n==== Bugs ====");
-        System.out.println("\t\nIf you find any bug please send an email to : hdd@halim.info");
+        System.out.println("\t\nIf you find any bug please send an email to : hdd@halim.info" + "\n \n \n");
         }
 
 }

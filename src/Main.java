@@ -26,6 +26,7 @@ public class Main {
         //on lance l'application
         Command command = new Command("Command");
         boolean endOfExecution = false; //indique si l'application doit se terminer
+        Render.printHelp();
         while (!endOfExecution){
             int resultCommand = command.readExecCommand(pixelTracer);
             System.out.println("Résultat de la commande : " + resultCommand);

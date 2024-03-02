@@ -50,12 +50,6 @@ public class Polygon extends Shape {
                 listPixelsPolygon.remove(listPixelsPolygon.size()-1);
         }
 
-        if (this.pointList.size() % 2 != 0){
-
-        }
-
-        System.out.println("Polygon draw : " + listPixelsPolygon);
-
         return listPixelsPolygon;
     }
 
@@ -70,7 +64,7 @@ public class Polygon extends Shape {
             return false;
         
         //on vérifie que les valeurs des champs sont identiques
-        return this.getId() == ((Polygon) object).getId() && this.getPointList().equals(((Polygon) object).getPointList()) && this.getX() == ((Polygon) object).getX() && this.getY() == ((Polygon) object).getY() && this.getColor() == ((Polygon) object).getColor() && this.getThickness() == ((Polygon) object).getThickness();
+        return this.getId() == ((Polygon) object).getId() && this.pointList.equals(((Polygon) object).getPointList()) && this.getX() == ((Polygon) object).getX() && this.getY() == ((Polygon) object).getY() && this.getColor() == ((Polygon) object).getColor() && this.getThickness() == ((Polygon) object).getThickness();
 
     }
 

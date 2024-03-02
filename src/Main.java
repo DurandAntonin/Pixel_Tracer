@@ -44,7 +44,7 @@ public class Main {
                 //cas changement de l'affichage
                 case 0:
                 case 6:
-                    Render.clearScreen();
+                    pixelTracer.getCurrentArea().clearArea();
                     pixelTracer.drawCurrentArea();
                     Render.printArea(pixelTracer.getCurrentArea());
                     break;

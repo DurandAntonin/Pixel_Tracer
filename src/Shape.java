@@ -50,7 +50,7 @@ public abstract class Shape {
     /**
      * @return
      */
-    public abstract List<Pixel> draw();
+    public abstract ArrayList<Pixel> draw();
 
     @Override
     public abstract boolean equals(Object object);
@@ -59,7 +59,7 @@ public abstract class Shape {
      * @return
      */
     public String toString() {
-        return "id : " + this.id + ", x : "+this.x+ ", y : "+this.y+", color : " + this.color+", thickness"+this.thickness;
+        return "id: " + this.id + ", x: "+this.x+ ", y: "+this.y+", color: " + this.color+", thickness: "+this.thickness;
     }
 
     public Integer getX() {

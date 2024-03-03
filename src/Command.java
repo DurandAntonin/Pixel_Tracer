@@ -360,12 +360,22 @@ public class Command {
                 case "curve":
                     if (this.checkNbParams(1, 8, 0)){
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
+
+                        //on créé l'id pour cette forme
+                        ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
+                        ArrayList<Integer> listId = new ArrayList<>();
+                        for (Shape shape : listShapesInLayer) {
+                            listId.add(shape.getId());
+                        }
+
+                        int curveId = app.getIdForNewElem(listId);
+
                         Point point1 = new Point(this.intParams.get(0), this.intParams.get(1));
                         Point point2 = new Point(this.intParams.get(2), this.intParams.get(3));
                         Point point3 = new Point(this.intParams.get(4), this.intParams.get(5));
                         Point point4 = new Point(this.intParams.get(6), this.intParams.get(7));
 
-                        Curve curve = new Curve(point1, point2, point3, point4);
+                        Curve curve = new Curve(curveId, COLOR.BLACK, 1, point1, point2, point3, point4);
                         app.addShapeToCurrentLayer(curve);
 
                         resultCommand = 0;

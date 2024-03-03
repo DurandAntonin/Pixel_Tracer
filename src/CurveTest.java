@@ -40,26 +40,26 @@ public class CurveTest {
 
     @Test
     public void testGetP1() {
-        assertEquals(p1, curve.getP1());
+        assertEquals(c1, curve.getP1());
     }
 
     @Test
     public void testGetP2() {
-        assertEquals(p2, curve.getP2());
+        assertEquals(c2, curve.getP2());
     }
 
     @Test
     public void testGetP3() {
-        assertEquals(p3, curve.getP3());
+        assertEquals(c3, curve.getP3());
     }   
 
     @Test
     public void testGetP4() {
-        assertEquals(p4, curve.getP4());
+        assertEquals(c4, curve.getP4());
     }
 
     @Test
     public void testToString() {
-        assertEquals("Curve [ p1"+p1.toString()+", " + "p2"+p2.toString()+ "p3"+p3.toString()+ "p4"+p4.toString()+"]", curve.toString());
+        assertEquals("Curve [id: " + curve.getId() + ", x: " + curve.getX() + ", y: " + curve.getY() + ", color: " + curve.getColor() + ", thickness: " + curve.getThickness() + ", p1: " + c1.toString() + ", p2: " + c2.toString()+ ", p3: " + c3.toString()+ ", p4: " + c4.toString()+"]", curve.toString());
     }
 }

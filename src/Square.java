@@ -44,13 +44,13 @@ public class Square extends Shape {
         int departY =  this.point.getPosY();
  
         for(int x = departX; x < this.length + departX;x++){
-            listPixelsSquare.add(new Pixel(x, departY));
-            listPixelsSquare.add(new Pixel(x, departY+this.length-1));     
+            listPixelsSquare.add(new Pixel(x, departY, this.getColor()));
+            listPixelsSquare.add(new Pixel(x, departY+this.length-1, this.getColor()));     
         }
 
         for(int y = departY+1; y < this.length + departY - 1;y++){
-            listPixelsSquare.add(new Pixel(departX, y));
-            listPixelsSquare.add(new Pixel(departX+this.length-1,y));
+            listPixelsSquare.add(new Pixel(departX, y, this.getColor()));
+            listPixelsSquare.add(new Pixel(departX+this.length-1,y, this.getColor()));
         }
 
         //System.out.println("Square draw : " + listPixelsSquare);

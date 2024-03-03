@@ -24,6 +24,11 @@ public class Area {
     /**
      * 
      */
+    private COLOR[][] areaColor;
+
+    /**
+     * 
+     */
     private ArrayList<Layer> listLayers;
 
     /**
@@ -47,13 +52,15 @@ public class Area {
         this.id = parId;
         this.name = parName;
         this.area = new String[parHeight][parWidth];
+        this.areaColor = new COLOR[parHeight][parWidth];
         this.listLayers = new ArrayList<>();
         this.emptyChar = ".";
         this.fullChar = "#";
 
         for (int i=0; i<parHeight; i++){
             for (int j=0; j<parWidth; j++){
-                area[i][j] = this.emptyChar;
+                this.area[i][j] = this.emptyChar;
+                this.areaColor[i][j] = COLOR.WHITE;
             }
         }
 
@@ -104,7 +111,8 @@ public class Area {
                         int pX = pixel.getX();
                         int pY = pixel.getY();
                         if (pX < width && pY < height){
-                            area[pY][pX] = this.fullChar;
+                            this.area[pY][pX] = this.fullChar;
+                            this.areaColor[pY][pX] = pixel.getColor();
                         }
                     }
                 }
@@ -203,6 +211,10 @@ public class Area {
 
     public String[][] getArea() {
         return this.area;
+    }
+
+    public COLOR[][] getAreaColors() {
+        return this.areaColor;
     }
 
     public String getEmptyChar() {

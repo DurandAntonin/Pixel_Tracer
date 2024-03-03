@@ -182,6 +182,18 @@ public class AreaTest {
     }
 
     @Test
+    public void testGetAreaColor(){
+        COLOR[][] areaColorActual = area.getAreaColors();
+        COLOR[][] areaColorExcepted = new COLOR[height][width];
+        for (int i=0;i<height;i++){
+            for (int j=0;j<width;j++){
+                areaColorExcepted[i][j] = COLOR.WHITE;
+            }
+        }
+        assertArrayEquals(areaColorExcepted, areaColorActual);
+    }
+
+    @Test
     public void testGetEmptyChar() {
         assertEquals(".", area.getEmptyChar());
     }

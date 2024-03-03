@@ -45,14 +45,14 @@ public class Circle extends Shape {
         int posYCenter = this.center.getPosY();
 
         while (y >= x){
-            Pixel p1 = new Pixel(posXCenter+x, posYCenter+y);
-            Pixel p2 = new Pixel(posXCenter+y, posYCenter+x);
-            Pixel p3 = new Pixel(posXCenter-x, posYCenter+y);
-            Pixel p4 = new Pixel(posXCenter-y, posYCenter+x);
-            Pixel p5 = new Pixel(posXCenter+x, posYCenter-y);
-            Pixel p6 = new Pixel(posXCenter+y, posYCenter-x);
-            Pixel p7 = new Pixel(posXCenter-x, posYCenter-y);
-            Pixel p8 = new Pixel(posXCenter-y, posYCenter-x);
+            Pixel p1 = new Pixel(posXCenter+x, posYCenter+y, this.getColor());
+            Pixel p2 = new Pixel(posXCenter+y, posYCenter+x, this.getColor());
+            Pixel p3 = new Pixel(posXCenter-x, posYCenter+y, this.getColor());
+            Pixel p4 = new Pixel(posXCenter-y, posYCenter+x, this.getColor());
+            Pixel p5 = new Pixel(posXCenter+x, posYCenter-y, this.getColor());
+            Pixel p6 = new Pixel(posXCenter+y, posYCenter-x, this.getColor());
+            Pixel p7 = new Pixel(posXCenter-x, posYCenter-y, this.getColor());
+            Pixel p8 = new Pixel(posXCenter-y, posYCenter-x, this.getColor());
 
             listPixelsCicle.add(p1);
             listPixelsCicle.add(p2);
@@ -78,7 +78,7 @@ public class Circle extends Shape {
             }
         }
 
-        System.out.println(listPixelsCicle);
+        //System.out.println(listPixelsCicle);
 
         return listPixelsCicle;
     }

@@ -28,7 +28,7 @@ public class Point extends Shape {
 
     public Point(int px, int py) {
         //on initialise les champs
-        super(null, 0, 0, COLOR.BLACK, 1);
+        super(null, 0, 0, null, 1);
         this.posX = px;
         this.posY = py;
     }
@@ -39,7 +39,7 @@ public class Point extends Shape {
     public ArrayList<Pixel> draw() {
         //on convertit l'objet en pixels
         ArrayList<Pixel> pixelPoint = new ArrayList<>();
-        pixelPoint.add(new Pixel(this.posX, this.posY));
+        pixelPoint.add(new Pixel(this.posX, this.posY, this.getColor()));
         
         return pixelPoint;
     }

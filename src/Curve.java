@@ -86,7 +86,7 @@ public class Curve extends Shape {
 
         for (t = 0; t < 1.0; t += 0.0001) {
             Point cjp1 = cjCalc(points, t);
-            Pixel px = new Pixel(cjp1.getPosX(), cjp1.getPosY(), COLOR.BLACK);
+            Pixel px = new Pixel(cjp1.getPosX(), cjp1.getPosY(), this.getColor());
             listPixelsCurve.add(px);
         }
 

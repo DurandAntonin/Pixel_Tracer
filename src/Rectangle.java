@@ -61,7 +61,7 @@ public class Rectangle extends Shape {
         //segment supérieur
         int dxP1P2 = Math.abs(p2.getPosX() - p1.getPosX());
         int dyP1P2 = Math.abs(p2.getPosY() - p1.getPosY());
-        ArrayList<Pixel> listPixelsP1P2 = Line.drawSegment(p1.getPosX(), p1.getPosY(), dxP1P2, dyP1P2);
+        ArrayList<Pixel> listPixelsP1P2 = Line.drawSegment(p1.getPosX(), p1.getPosY(), dxP1P2, dyP1P2, this.getColor());
         //on enlève le premier et le dernier pixel du segment pour éviter la redondance
         if (listPixelsP1P2.size() > 1)
             listPixelsP1P2.remove(0);
@@ -72,12 +72,12 @@ public class Rectangle extends Shape {
         //segment droite
         int dxP2P3 = Math.abs(p3.getPosX() - p2.getPosX());
         int dyP2P3 = Math.abs(p3.getPosY() - p2.getPosY());
-        ArrayList<Pixel> listPixelsP2P3 = Line.drawSegment(p2.getPosX(), p2.getPosY(), dxP2P3, dyP2P3);
+        ArrayList<Pixel> listPixelsP2P3 = Line.drawSegment(p2.getPosX(), p2.getPosY(), dxP2P3, dyP2P3, this.getColor());
 
         //segment inférieur
         int dxP3P4 = Math.abs(p3.getPosX() - p4.getPosX());
         int dyP3P4 = Math.abs(p3.getPosY() - p4.getPosY());
-        ArrayList<Pixel> listPixelsP3P4 = Line.drawSegment(p4.getPosX(), p4.getPosY(), dxP3P4, dyP3P4);
+        ArrayList<Pixel> listPixelsP3P4 = Line.drawSegment(p4.getPosX(), p4.getPosY(), dxP3P4, dyP3P4, this.getColor());
         //on enlève le premier et le dernier pixel du segment pour éviter la redondance
         if (listPixelsP3P4.size() > 1)
             listPixelsP3P4.remove(0);
@@ -87,7 +87,7 @@ public class Rectangle extends Shape {
         //segment gauche
         int dxP4P1 = Math.abs(p4.getPosX() - p1.getPosX());
         int dyP4P1 = Math.abs(p4.getPosY() - p1.getPosY());
-        ArrayList<Pixel> listPixelsP4P1 = Line.drawSegment(p1.getPosX(), p1.getPosY(), dxP4P1, dyP4P1);
+        ArrayList<Pixel> listPixelsP4P1 = Line.drawSegment(p1.getPosX(), p1.getPosY(), dxP4P1, dyP4P1, this.getColor());
 
         listPixelsRectangle.addAll(listPixelsP1P2);
         listPixelsRectangle.addAll(listPixelsP2P3);

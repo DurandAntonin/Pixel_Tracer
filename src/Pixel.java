@@ -32,7 +32,7 @@ public class Pixel {
     public Pixel(Integer parX, Integer parY) {
         this.x = parX;
         this.y = parY;
-        this.color = COLOR.BLACK;
+        this.color = null;
     }
 
     @Override

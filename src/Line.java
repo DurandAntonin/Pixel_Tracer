@@ -37,14 +37,14 @@ public class Line extends Shape {
         this.p2 = parP2;
     }
 
-    public static ArrayList<Pixel> drawSegment(int x, int y, int dx, int dy){
+    public static ArrayList<Pixel> drawSegment(int x, int y, int dx, int dy, COLOR pixelColor){
         ArrayList<Pixel> listPixelSegment = new ArrayList<>();
 
         int cumul;
         int xinc = (dx > 0) ? 1 : -1;
         int yinc = (dy > 0) ? 1 : -1;
 
-        listPixelSegment.add(new Pixel(x, y, COLOR.BLACK));
+        listPixelSegment.add(new Pixel(x, y, pixelColor));
         if (dx > dy){
             cumul = dx /2;
             for (int i=1; i<=dx; i++){
@@ -55,7 +55,7 @@ public class Line extends Shape {
                     y += yinc;
                 }
 
-                listPixelSegment.add(new Pixel(x, y, COLOR.BLACK));
+                listPixelSegment.add(new Pixel(x, y, pixelColor));
             }
         }
         else{
@@ -68,7 +68,7 @@ public class Line extends Shape {
                     x += xinc;
                 }
 
-                listPixelSegment.add(new Pixel(x, y, COLOR.BLACK));
+                listPixelSegment.add(new Pixel(x, y, pixelColor));
             }
         }
 
@@ -87,7 +87,7 @@ public class Line extends Shape {
         int x = this.p1.getPosX();
         int y = this.p1.getPosY();
 
-        return Line.drawSegment(x, y, dx, dy);
+        return Line.drawSegment(x, y, dx, dy, this.getColor());
     }
 
     @Override

@@ -96,7 +96,61 @@ public class Command {
 
     public boolean checkNbParamsPolygon(){
         //on vérifie que le nombre de paramètres d'une commande polygon est correct
-        return this.getStrParams().size() == 1 && this.floatParams.size() == 0 && this.intParams.size() >= 2 && this.intParams.size() <= this.maxParamNumber && this.intParams.size()%2 == 0 ;
+        return (this.getStrParams().size() == 1 || this.getStrParams().size() == 2) && this.floatParams.size() == 0 && this.intParams.size() >= 2 && this.intParams.size() <= this.maxParamNumber && this.intParams.size()%2 == 0 ;
+    }
+
+    public COLOR getColorTypeForShape(){
+        
+
+        //on regarde si une couleur a été entrée dans la commande
+        if (this.strParams.size() == 2){
+            String colorInParam = this.strParams.get(1).toUpperCase();
+            
+
+            COLOR colorShape;
+            switch (colorInParam) {
+                case "WHITE":
+                    colorShape = COLOR.WHITE;
+                    break;
+                    
+                case "BLACK":
+                    colorShape = COLOR.BLACK;
+                    break;
+
+                case "RED":
+                    colorShape = COLOR.RED;
+                    break;
+
+                case "GREEN":
+                    colorShape = COLOR.GREEN;
+                    break;
+
+                case "PURPLE":
+                    colorShape = COLOR.PURPLE;
+                    break;
+
+                case "YELLOW":
+                    colorShape = COLOR.YELLOW;
+                    break;
+
+                case "BLUE":
+                    colorShape = COLOR.BLUE;
+                    break;
+
+                case "CYAN":
+                    colorShape = COLOR.CYAN;
+                    break;
+            
+                default:
+                    colorShape = COLOR.WHITE;
+                    break;
+            }
+
+            return colorShape;
+        }
+        
+        //couleur par défaut
+        return COLOR.WHITE;
     }
 
     /**
@@ -210,7 +264,7 @@ public class Command {
                     break;
 
                 case "point":
-                    if (this.checkNbParams(1, 2, 0)){
+                    if (this.checkNbParams(1, 2, 0) || this.checkNbParams(2, 2, 0)){
                         //on récupère les id de chaque form pris
                         ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
                         ArrayList<Integer> listId = new ArrayList<>();
@@ -220,8 +274,12 @@ public class Command {
 
                         int pointId = app.getIdForNewElem(listId);
 
+                        //on regarde si l'utilisateur a entré une couleur dans la commande
+                        COLOR shapeColor = this.getColorTypeForShape();
+                        //System.out.print(shapeColor.getValue() + "Couleur de la forme" + COLOR.RESET.getValue());
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
-                        Point point = new Point(pointId, COLOR.BLACK, 1, this.intParams.get(0), this.intParams.get(1));
+                        Point point = new Point(pointId, shapeColor, 1, this.intParams.get(0), this.intParams.get(1));
                         app.addShapeToCurrentLayer(point);
                         resultCommand = 0;
                     }
@@ -231,7 +289,7 @@ public class Command {
                     break;
 
                 case "line":
-                    if (this.checkNbParams(1, 4, 0)){
+                    if (this.checkNbParams(1, 4, 0) || this.checkNbParams(2, 4, 0)){
                         //on récupère les id de chaque form pris
                         ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
                         ArrayList<Integer> listId = new ArrayList<>();
@@ -241,10 +299,13 @@ public class Command {
                         
                         int lineId = app.getIdForNewElem(listId);
 
+                        //on regarde si l'utilisateur a entré une couleur dans la commande
+                        COLOR shapeColor = this.getColorTypeForShape();
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point1 = new Point(this.intParams.get(0), this.intParams.get(1));
                         Point point2 = new Point(this.intParams.get(2), this.intParams.get(3));
-                        Line line = new Line(lineId, COLOR.BLACK, 1, point1, point2);
+                        Line line = new Line(lineId, shapeColor, 1, point1, point2);
                         app.addShapeToCurrentLayer(line);
 
                         resultCommand = 0;
@@ -255,7 +316,7 @@ public class Command {
                     break;
 
                 case "square":
-                    if (this.checkNbParams(1, 3, 0)){
+                    if (this.checkNbParams(1, 3, 0) || this.checkNbParams(2, 3, 0)){
                         //on créé l'id pour cette forme
                         ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
                         ArrayList<Integer> listId = new ArrayList<>();
@@ -265,10 +326,13 @@ public class Command {
 
                         int squareId = app.getIdForNewElem(listId);
 
+                        //on regarde si l'utilisateur a entré une couleur dans la commande
+                        COLOR shapeColor = this.getColorTypeForShape();
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point = new Point(this.intParams.get(0), this.intParams.get(1));
                         int length = this.intParams.get(2);
-                        Square square = new Square(squareId, COLOR.BLACK, 1, point, length);
+                        Square square = new Square(squareId, shapeColor, 1, point, length);
                         app.addShapeToCurrentLayer(square);
 
                         resultCommand = 0;
@@ -279,7 +343,7 @@ public class Command {
                     break;
 
                 case "rectangle":
-                    if (this.checkNbParams(1, 4, 0)){
+                    if (this.checkNbParams(1, 4, 0) || this.checkNbParams(2, 4, 0)){
                         //on créé un id pour cette forme
                         ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
                         ArrayList<Integer> listId = new ArrayList<>();
@@ -289,11 +353,14 @@ public class Command {
 
                         int newRectangleId = app.getIdForNewElem(listId);
 
+                        //on regarde si l'utilisateur a entré une couleur dans la commande
+                        COLOR shapeColor = this.getColorTypeForShape();
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point = new Point(this.intParams.get(0), this.intParams.get(1));
                         int width = this.intParams.get(2);
                         int height = this.intParams.get(3);
-                        Rectangle rectangle = new Rectangle(newRectangleId, COLOR.BLACK, 1, point, width, height);
+                        Rectangle rectangle = new Rectangle(newRectangleId, shapeColor, 1, point, width, height);
                         app.addShapeToCurrentLayer(rectangle);
 
                         resultCommand = 0;
@@ -304,7 +371,7 @@ public class Command {
                     break;
 
                 case "circle":
-                    if (this.checkNbParams(1, 3, 0)){
+                    if (this.checkNbParams(1, 3, 0) || this.checkNbParams(2, 3, 0)){
                         //on créé l'id pour cette forme
                         ArrayList<Shape> listShapesInLayer = app.getCurrentLayer().getListShapes();
                         ArrayList<Integer> listId = new ArrayList<>();
@@ -314,10 +381,13 @@ public class Command {
  
                         int circleId = app.getIdForNewElem(listId);
 
+                        //on regarde si l'utilisateur a entré une couleur dans la commande
+                        COLOR shapeColor = this.getColorTypeForShape();
+
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
                         Point point = new Point(this.intParams.get(0), this.intParams.get(1));
                         int radius = this.intParams.get(2);
-                        Circle circle = new Circle(circleId, COLOR.BLACK, 1, point, radius);
+                        Circle circle = new Circle(circleId, shapeColor, 1, point, radius);
                         app.addShapeToCurrentLayer(circle);
 
                         resultCommand = 0;
@@ -340,12 +410,15 @@ public class Command {
 
                         int polygonId = app.getIdForNewElem(listId);
 
+                        //on regarde si l'utilisateur a entré une couleur dans la commande
+                        COLOR shapeColor = this.getColorTypeForShape();
+
                         //on créé une liste de points en fonction des coordonnées entrées dans la commande
                         ArrayList<Point> pointList = new ArrayList<>();
                         for (int i=0; i<this.intParams.size()-1; i+=2){
                             pointList.add(new Point(this.intParams.get(i), this.intParams.get(i+1)));
                         }
-                        Polygon polygon = new Polygon(polygonId, COLOR.BLACK, 1, pointList);
+                        Polygon polygon = new Polygon(polygonId, shapeColor, 1, pointList);
                         app.addShapeToCurrentLayer(polygon);
 
                         resultCommand = 0;
@@ -356,7 +429,7 @@ public class Command {
                     break;
 
                 case "curve":
-                    if (this.checkNbParams(1, 8, 0)){
+                    if (this.checkNbParams(1, 8, 0) || this.checkNbParams(2, 8, 0)){
                         //on créé une nouvelle forme qu'on ajoute dans le layer sélectionnée
 
                         //on créé l'id pour cette forme
@@ -368,12 +441,15 @@ public class Command {
 
                         int curveId = app.getIdForNewElem(listId);
 
+                        //on regarde si l'utilisateur a entré une couleur dans la commande
+                        COLOR shapeColor = this.getColorTypeForShape();
+
                         Point point1 = new Point(this.intParams.get(0), this.intParams.get(1));
                         Point point2 = new Point(this.intParams.get(2), this.intParams.get(3));
                         Point point3 = new Point(this.intParams.get(4), this.intParams.get(5));
                         Point point4 = new Point(this.intParams.get(6), this.intParams.get(7));
 
-                        Curve curve = new Curve(curveId, COLOR.BLACK, 1, point1, point2, point3, point4);
+                        Curve curve = new Curve(curveId, shapeColor, 1, point1, point2, point3, point4);
                         app.addShapeToCurrentLayer(curve);
 
                         resultCommand = 0;

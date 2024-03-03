@@ -42,7 +42,7 @@ public class Polygon extends Shape {
             int x = p1.getPosX();
             int y = p1.getPosY();
 
-            ArrayList<Pixel> listPixelsSegment = Line.drawSegment(x, y, dx, dy);
+            ArrayList<Pixel> listPixelsSegment = Line.drawSegment(x, y, dx, dy, this.getColor());
             listPixelsPolygon.addAll(listPixelsSegment);
 
             //on enlève un pixel pour éviter le doublon sauf le dernier

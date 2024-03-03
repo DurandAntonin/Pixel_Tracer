@@ -1,4 +1,4 @@
-import java.util.*;
+import java.io.IOException;
 
 /**
  * 
@@ -9,8 +9,21 @@ public class Render {
      * @return
      */
     public static void clearScreen() {
-        // TODO implement here
-        return;
+        //on clear la console différemment en fonction de l'os
+        String osName = System.getProperty("os.name").toLowerCase();
+
+        try{
+            if (osName.contains("windows")){
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            }
+            else if (osName.contains("liunx")){
+                Runtime.getRuntime().exec("clear");
+            }
+        }
+        catch(IOException |InterruptedException e){
+            System.out.println(e);
+        }
+        
     }
 
     @Override

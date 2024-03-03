@@ -93,7 +93,7 @@ public class Pixel_tracerTest {
 
     @Test
     public void testAddNewLayer(){
-        pixel_tracer.createLayerInCurrentArea(1);
+        pixel_tracer.createLayerInCurrentArea(1, "Layer 1");
         assertEquals(2, pixel_tracer.getCurrentArea().getNumberOfLayers());
         assertEquals(1, pixel_tracer.getCurrentLayer().getId());
     }
@@ -155,8 +155,8 @@ public class Pixel_tracerTest {
         assertEquals(null, pixel_tracer.getCurrentLayer());
 
         //cas n areas 
-        pixel_tracer.createLayerInCurrentArea(1);
-        pixel_tracer.createLayerInCurrentArea(2);
+        pixel_tracer.createLayerInCurrentArea(1, "Layer 1");
+        pixel_tracer.createLayerInCurrentArea(2, "Layer 2");
         assertTrue(pixel_tracer.deleteLayerInCurrentArea(1));
         assertEquals(2, pixel_tracer.getCurrentLayer().getId());
     }

@@ -516,9 +516,10 @@ public class Command {
                     break;
 
                 case "new":
-                    if (this.checkNbParams(2, 0, 0)){
+                    if (this.checkNbParams(3, 0, 0)){
                         //on regarde quel élément il faut créer
                         String elemToCreate = this.strParams.get(1).toLowerCase();
+                        String elemName = this.strParams.get(2);
                         ArrayList<Integer> listId;
 
                         switch (elemToCreate) {
@@ -533,7 +534,7 @@ public class Command {
                                 int newAreaId = app.getIdForNewElem(listId);
 
                                 //on créé une nouvelle area
-                                app.createArea(newAreaId, "Area " + newAreaId);
+                                app.createArea(newAreaId, elemName);
                                 resultCommand = 8;
                                 break;
 
@@ -548,7 +549,7 @@ public class Command {
                                 int newLayerId = app.getIdForNewElem(listId);
 
                                 //on créé un nouveau layer dans l'area sélectionnée
-                                app.createLayerInCurrentArea(newLayerId);
+                                app.createLayerInCurrentArea(newLayerId, elemName);
                                 resultCommand = 8;
                                 break;
                         

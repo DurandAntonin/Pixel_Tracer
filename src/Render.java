@@ -74,7 +74,7 @@ public class Render {
         System.out.println("\t\nlist {layers, areas, shapes}");
         System.out.println("\t\nselect {area, layer} {id}");
         System.out.println("\t\ndelete {area, layer, shape} {id}");
-        System.out.println("\t\nnew {area, layer}");
+        System.out.println("\t\nnew {area, layer} name");
 
         System.out.println("\t\n==== Set ====");
         System.out.println("\t\nset char {border, background} ascii_code");

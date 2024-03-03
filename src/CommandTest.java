@@ -490,15 +490,23 @@ public class CommandTest {
 
         //// CAS NEW  ////
         //cas erreur 8
-        provideInput("new layer");
+        provideInput("new layer layerTest");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        provideInput("new area");
+        provideInput("new area areaTest");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
         //cas erreur 9
+        provideInput("new layer");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+        
+        provideInput("new area");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
         provideInput("new");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
@@ -518,7 +526,7 @@ public class CommandTest {
 
         //// CAS SELECT  ////
         //on créé une nouvelle area 
-        app.createLayerInCurrentArea(1);
+        app.createLayerInCurrentArea(1, "Layer 1");
         //on créé une shape dans le layer actuel
         app.addShapeToCurrentLayer(new Point(10, 2));
 

@@ -86,9 +86,9 @@ public class Pixel_tracer {
         }
     }
 
-    public void createLayerInCurrentArea(int layerId){
+    public void createLayerInCurrentArea(int layerId, String layerName){
         //on créé un nouveau layer et on le sélectionne
-        Layer layer = new Layer(layerId, "Layer " + layerId);
+        Layer layer = new Layer(layerId, layerName);
         this.currentArea.addLayer(layer);
 
         this.currentLayer = layer;

@@ -11,19 +11,18 @@ public class Render {
     public static void clearScreen() {
         //on clear la console différemment en fonction de l'os
         String osName = System.getProperty("os.name").toLowerCase();
-
+        
         try{
             if (osName.contains("windows")){
                 new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
             }
-            else if (osName.contains("liunx")){
-                Runtime.getRuntime().exec("clear");
+            else if (osName.contains("linux")){
+                new ProcessBuilder("bash", "-c", "clear").inheritIO().start().waitFor();
             }
         }
-        catch(IOException |InterruptedException e){
+        catch(IOException | InterruptedException e){
             System.out.println(e);
-        }
-        
+        }        
     }
 
     @Override

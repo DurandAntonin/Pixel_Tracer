@@ -645,11 +645,13 @@ public class CommandTest {
         //cas erreur 10
         app.createArea(2, "area test", 100, 20);
         provideInput("delete shape 0");
+        provideInput("delete shape 15");
+
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 10);
 
         //cas erreur 9
-        provideInput("delete layer 1");
+        provideInput("delete layer 15");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
@@ -690,11 +692,11 @@ public class CommandTest {
         Assert.assertTrue(errorNum == 8);
 
         //cas erreur 9
-        provideInput("set layer visible 1");
+        provideInput("set layer visible 15");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
-        provideInput("set layer unvisible 1");
+        provideInput("set layer unvisible 15");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 

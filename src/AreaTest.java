@@ -75,7 +75,16 @@ public class AreaTest {
 
     @Test
     public void testSetLayerVisibility(){
-        //TODO
+        ArrayList<Layer> layers = area.getAllLayers();
+        Layer layer0 = layers.get(0);
+
+        area.setLayerVisibility(0, false);
+        assertEquals(false, layer0.getVisible());
+
+        area.setLayerVisibility(0, true);
+        assertEquals(true, layer0.getVisible());
+        
+        
     }
 
     @Test
@@ -92,38 +101,65 @@ public class AreaTest {
 
     @Test
     public void testDrawArea() {
-        Layer layer0 = new Layer(0, "Layer 0");
+        ArrayList<Layer> layers = area.getAllLayers();
+        Layer layer0 = layers.get(0);
         Layer layer1 = new Layer(1, "Layer 1");
         Layer layer2 = new Layer(2, "Layer 2");
+
+        layer0.addShapeToLayer(new Point(0, COLOR.BLUE, 1, 0, 0));
+        layer0.addShapeToLayer(new Rectangle(0, COLOR.BLUE, 1, new Point(5, 0), 3, 3));
+        layer0.addShapeToLayer(new Circle(0, COLOR.BLUE, 1, new Point(9, 9), 3));
+        layer1.addShapeToLayer(new Point(-1, -1));
+        layer1.addShapeToLayer(new Circle(0, COLOR.BLUE, 1, new Point(0, 0),3));
+        layer0.addShapeToLayer(new Point(0, COLOR.BLUE, 1, 0, 8));
+
+        ArrayList<Point> listPointsP1 = new ArrayList<>();
+        listPointsP1.add(new Point(0, 9));
+        listPointsP1.add(new Point(1, 9));
+        layer0.addShapeToLayer(new Polygon(0, COLOR.BLUE, 1, listPointsP1));
+
         ArrayList<Point> listPointsInPolygon = new ArrayList<>();
         listPointsInPolygon.add(new Point(6, 1));
         listPointsInPolygon.add(new Point(7, 1));
         listPointsInPolygon.add(new Point(7, 2));
-
-        layer0.addShapeToLayer(new Point(5, 5));
-        layer0.addShapeToLayer(new Rectangle(new Point(5, 0), 3, 3));
-        layer0.addShapeToLayer(new Circle(new Point(0, 0), 3));
-        layer1.addShapeToLayer(new Line(new Point(6, 6), new Point(6, 10)));
-        layer1.addShapeToLayer(new Point(-1, -1));
-        layer1.addShapeToLayer(new Polygon(listPointsInPolygon));
-        layer2.addShapeToLayer(new Circle(new Point(5, 5), 10));
+        layer2.addShapeToLayer(new Polygon(0, COLOR.BLUE, 1, listPointsInPolygon));
         layer2.setLayerVisibility(false);
+
+        area.addLayer(layer1);
+        area.addLayer(layer2);
+        area.drawAllShapeFromLayer();
 
         String[][] areaActual = area.getArea();
         String[][] areaExcepted = {
-            {".", ".", ".", "#", ".", "#", "#", "#", ".", "."},
+            {"#", ".", ".", "#", ".", "#", "#", "#", ".", "."},
             {".", ".", ".", "#", ".", "#", ".", "#", ".", "."},
             {".", ".", "#", ".", ".", "#", "#", "#", ".", "."},
             {"#", "#", ".", ".", ".", ".", ".", ".", ".", "."},
             {".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
-            {".", ".", ".", ".", "#", ".", ".", ".", ".", "."},
-            {".", "#", ".", ".", ".", "#", "#", "#", "#", "#"},
-            {".", "#", "#", ".", ".", ".", ".", ".", ".", "."},
             {".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
-            {".", ".", ".", ".", ".", ".", ".", ".", ".", "."}
+            {".", ".", ".", ".", ".", ".", ".", ".", "#", "#"},
+            {".", ".", ".", ".", ".", ".", ".", "#", ".", "."},
+            {"#", ".", ".", ".", ".", ".", "#", ".", ".", "."},
+            {"#", "#", ".", ".", ".", ".", "#", ".", ".", "."}
         };
 
         assertArrayEquals(areaExcepted, areaActual);
+        COLOR[][] areaColorActual = area.getAreaColors();
+        COLOR[][] areaColorExpected = {
+            {COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.BLUE, COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.BLUE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE}
+        };
+
+        assertArrayEquals(areaColorExpected, areaColorActual);
+        
     }
 
     @Test

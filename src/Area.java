@@ -110,7 +110,7 @@ public class Area {
                     for (Pixel pixel : listPixelShape) {
                         int pX = pixel.getX();
                         int pY = pixel.getY();
-                        if (pX < width && pY < height){
+                        if (pX >= 0 && pY >= 0 && pX < width && pY < height){
                             this.area[pY][pX] = this.fullChar;
                             this.areaColor[pY][pX] = pixel.getColor();
                         }

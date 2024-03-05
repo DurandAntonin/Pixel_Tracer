@@ -39,7 +39,7 @@ public class RenderTest {
     @Test
     public void testPrintArea() {
         Render.printArea(a1);
-        String[][] areaExcepted = {
+        String[][] areaExpected = {
             {"#", "#", "#", ".", "."},
             {"#", ".", "#", ".", "."},
             {"#", "#", "#", ".", "."},
@@ -47,6 +47,6 @@ public class RenderTest {
             {".", ".", ".", ".", "."},
         };
 
-        assertEquals(areaExcepted, outContent.toString());
+        assertEquals(areaExpected.toString(), outContent.toString());
     }
 }

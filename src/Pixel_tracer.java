@@ -45,7 +45,7 @@ public class Pixel_tracer {
         this.fullChar = "#";
 
         //on créé une area par défaut
-        this.createArea(0, "Default Area");
+        this.createArea(0, "Default Area", 50, 20);
 
         //le layer par défaut est le premier layer de l'area créée
         ArrayList<Layer> layerList = this.currentArea.getAllLayers();
@@ -53,9 +53,27 @@ public class Pixel_tracer {
             this.currentLayer = layerList.get(0);
     }
 
-    public void createArea(int areaId, String areaName){
+    /**
+     */
+    public Pixel_tracer(int parWidthArea, int parHeightArea) {
+        //on initialise les autre champs
+        this.listArea = new ArrayList<>();
+        this.currentShape = null;
+        this.emptyChar = ".";
+        this.fullChar = "#";
+
+        //on créé une area par défaut
+        this.createArea(0, "Default Area", parWidthArea, parHeightArea);
+
+        //le layer par défaut est le premier layer de l'area créée
+        ArrayList<Layer> layerList = this.currentArea.getAllLayers();
+        if (layerList.size() > 0)
+            this.currentLayer = layerList.get(0);
+    }
+
+    public void createArea(int areaId, String areaName, int parWidthArea, int parHeightArea){
         //on créé une nouvelle area et on l'ajoute dans la liste des area
-        Area newArea = new Area(areaId, 50, 20, areaName);
+        Area newArea = new Area(areaId, parWidthArea, parHeightArea, areaName);
         this.listArea.add(newArea);
 
         //cette nouvelle area devient l'area sélectionnée

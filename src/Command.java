@@ -590,7 +590,7 @@ public class Command {
                     break;
 
                 case "new":
-                    if (this.checkNbParams(3, 0, 0)){
+                    if (this.checkNbParams(3, 0, 0) || this.checkNbParams(3, 2, 0)){
                         //on regarde quel élément il faut créer
                         String elemToCreate = this.strParams.get(1).toLowerCase();
                         String elemName = this.strParams.get(2);
@@ -598,6 +598,20 @@ public class Command {
 
                         switch (elemToCreate) {
                             case "area":
+                                //on regarde si le user a entré la taille de l'area
+                                int areaWidth = 50;
+                                int areaHeight = 20;
+                                if (this.checkNbParams(3, 2, 0)){
+                                    areaWidth = this.intParams.get(0);
+                                    areaHeight = this.intParams.get(1);
+
+                                    //on vérifie que les bornes sont cohérantes
+                                    if (areaWidth < 1 || areaHeight < 1 || areaWidth > 1000 || areaHeight > 1000){
+                                        resultCommand = 11;
+                                        break;
+                                    }
+                                }
+
                                 //on calcule l'id pour la nouvelle area
                                 ArrayList<Area> listAreaInLayer = app.getListArea();
                                 listId = new ArrayList<>();
@@ -608,23 +622,30 @@ public class Command {
                                 int newAreaId = app.getIdForNewElem(listId);
 
                                 //on créé une nouvelle area
-                                app.createArea(newAreaId, elemName);
+                                app.createArea(newAreaId, elemName, areaWidth, areaHeight);
                                 resultCommand = 8;
                                 break;
 
                             case "layer":
-                                //on calcule l'id pour le nouveau layer
-                                ArrayList<Layer> listLayerInLayer = app.getCurrentArea().getAllLayers();
-                                listId = new ArrayList<>();
-                                for (Layer layer : listLayerInLayer) {
-                                    listId.add(layer.getId());
+                                //on vérifie qu'il y a le bon nombre de paramètres 
+                                if (this.checkNbParams(3, 0, 0)){
+                                    //on calcule l'id pour le nouveau layer
+                                    ArrayList<Layer> listLayerInLayer = app.getCurrentArea().getAllLayers();
+                                    listId = new ArrayList<>();
+                                    for (Layer layer : listLayerInLayer) {
+                                        listId.add(layer.getId());
+                                    }
+
+                                    int newLayerId = app.getIdForNewElem(listId);
+
+                                    //on créé un nouveau layer dans l'area sélectionnée
+                                    app.createLayerInCurrentArea(newLayerId, elemName);
+                                    resultCommand = 8;
                                 }
-
-                                int newLayerId = app.getIdForNewElem(listId);
-
-                                //on créé un nouveau layer dans l'area sélectionnée
-                                app.createLayerInCurrentArea(newLayerId, elemName);
-                                resultCommand = 8;
+                                else{
+                                    resultCommand = 3;
+                                }
+                                
                                 break;
                         
                             default:

@@ -75,19 +75,19 @@ public class Pixel_tracerTest {
     @Test
     public void testGetListArea() {
         ArrayList<Area> al1 = new ArrayList<>();
-        Area a0 = new Area(0, 80, 40, "Default Area");
-        Area a1 = new Area(1, 80, 40, "a1");
-        Area a2 = new Area(2, 80, 40, "a2");
-        Area a3 = new Area(3, 80, 40, "a3");
+        Area a0 = new Area(0, 50, 20, "Default Area");
+        Area a1 = new Area(1, 50, 20, "a1");
+        Area a2 = new Area(2, 50, 20, "a2");
+        Area a3 = new Area(3, 50, 20, "a3");
 
         al1.add(a0);
         al1.add(a1);
         al1.add(a2);
         al1.add(a3);
 
-        pixel_tracer.createArea(1, "a1");
-        pixel_tracer.createArea(2, "a2");
-        pixel_tracer.createArea(3, "a3");
+        pixel_tracer.createArea(1, "a1", 50, 20);
+        pixel_tracer.createArea(2, "a2", 50, 20);
+        pixel_tracer.createArea(3, "a3", 50, 20);
         assertEquals(al1, pixel_tracer.getListArea());
     }
 
@@ -138,8 +138,8 @@ public class Pixel_tracerTest {
         assertEquals(null, pixel_tracer.getCurrentArea());
 
         //cas n areas 
-        pixel_tracer.createArea(1, "area 0");
-        pixel_tracer.createArea(2, "area 1");
+        pixel_tracer.createArea(1, "area 0", 50, 20);
+        pixel_tracer.createArea(2, "area 1", 50, 20);
         assertTrue(pixel_tracer.deleteArea(1));
         assertEquals(2, pixel_tracer.getCurrentArea().getId());
     }

@@ -15,13 +15,13 @@ public class Main {
      */
     public static void main(String[] Args) {
         //on initialise l'application
-        Pixel_tracer pixelTracer = new Pixel_tracer();
+        Pixel_tracer pixelTracer = new Pixel_tracer(100, 20);
 
         //System.out.println(pixelTracer);
         
         //on affiche le layer par défaut
         pixelTracer.drawCurrentArea();
-        Render.printArea(pixelTracer.getCurrentArea());
+        //Render.printArea(pixelTracer.getCurrentArea());
 
         //on lance l'application
         Command command = new Command("Command");
@@ -68,6 +68,11 @@ public class Main {
                 //cas mauvais id pour la manipulation d'une shape
                 case 10:
                     System.out.println("SHAPE INTROUVABLE \n");
+                    continue;
+
+                //cas mauvais id pour la manipulation d'une shape
+                case 11:
+                    System.out.println("MAUVAISES VALEURS \n");
                     continue;
 
                 //cas exit de l'application

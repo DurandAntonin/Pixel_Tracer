@@ -515,7 +515,7 @@ public class Command {
                                     if (shape.equals(currentShape))
                                         System.out.println("  *\t" + shape.getId() + " " + shape.getClass().getSimpleName() + " " + shape.getColor());
                                     else
-                                        System.out.println("  -\t" + shape.getId() + " " + shape.getClass() + " " + shape.getColor());
+                                        System.out.println("  -\t" + shape.getId() + " " + shape.getClass().getSimpleName() + " " + shape.getColor());
 
                                     //System.out.println(shape + "\n");
                                 }

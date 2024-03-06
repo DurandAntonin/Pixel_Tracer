@@ -78,6 +78,8 @@ public class Pixel_tracer {
 
         //cette nouvelle area devient l'area sélectionnée
         this.currentArea = newArea;
+        this.currentLayer = newArea.getAllLayers().get(0);
+        this.currentShape = null;
     }
 
     /**
@@ -126,6 +128,8 @@ public class Pixel_tracer {
         for (Area area : listArea) {
             if (area.getId() == areaIdToSelect){
                 this.currentArea = area;
+                this.currentLayer = this.currentArea.getAllLayers().get(0);
+                this.currentShape = null;
                 isAreaeExists = true;
                 break;
             }

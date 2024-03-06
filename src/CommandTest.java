@@ -578,6 +578,7 @@ public class CommandTest {
 
 
         //// CAS SELECT  ////
+        app = new Pixel_tracer();
         //on créé une nouvelle area 
         app.createLayerInCurrentArea(1, "Layer 1");
         //on créé une shape dans le layer actuel
@@ -625,6 +626,7 @@ public class CommandTest {
 
         //// CAS DELETE  ////
         //on créé une nouvelle area 
+        app = new Pixel_tracer();
         app.createArea(2, "area test", 100, 20);
         //on créé une shape dans le layer actuel
         app.addShapeToCurrentLayer(new Point(0, COLOR.BLACK, 1, 1, 2));
@@ -643,10 +645,7 @@ public class CommandTest {
         Assert.assertTrue(errorNum == 8);
 
         //cas erreur 10
-        app.createArea(2, "area test", 100, 20);
-        provideInput("delete shape 0");
         provideInput("delete shape 15");
-
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 10);
 

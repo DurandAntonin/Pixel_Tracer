@@ -1,6 +1,4 @@
-
-import java.io.*;
-import java.util.*;
+import java.util.ArrayList;
 
 /**
  * 
@@ -57,21 +55,22 @@ public class Curve extends Shape {
         this.p4 = parP4;
     }
 
-    public static Point calcPointMedian(Point p1, Point p2, double t) {
-        double x = p1.getPosX() * (1 - t) + p2.getPosX() * t;
-        double y = p1.getPosY() * (1 - t) + p2.getPosY() * t;
-        return new Point((int)x, (int)y);
+    private Point calcPointMedian(Point p1, Point p2, double t) {
+        int x = (int)Math.round(p1.getPosY() * (1-t) + p2.getPosY() * t);
+        int y = (int)Math.round(p1.getPosX() * (1-t) + p2.getPosX() * t);
+
+        return new Point(x, y);
     }
 
-    public static Point cjCalc(Point[] points, double t) {
-        Point[] tmpPt = new Point[points.length];
-        System.arraycopy(points, 0, tmpPt, 0, points.length);
+    private Point cjCalc(double t) {
+        Point[] tmpPt = {this.p1, this.p2, this.p3, this.p4};
 
-        for (int i = points.length - 1; i > 0; --i) {
-            for (int j = 0; j < i; ++j) {
+        for (int i=tmpPt.length-1; i>0; i--) {
+            for (int j=0; j<i; j++) {
                 tmpPt[j] = calcPointMedian(tmpPt[j], tmpPt[j + 1], t);
             }
         }
+
         return tmpPt[0];
     }
 
@@ -79,13 +78,10 @@ public class Curve extends Shape {
      * @return
      */
     public ArrayList<Pixel> draw() {
-        ArrayList<Pixel> listPixelsCurve = new ArrayList<>();
+        ArrayList<Pixel> listPixelsCurve = new ArrayList<>();        
 
-        Point[] points = {this.p1, this.p2, this.p3, this.p4};
-        double t = 0;
-
-        for (t = 0; t < 1.0; t += 0.0001) {
-            Point cjp1 = cjCalc(points, t);
+        for (double t=0; t<1.0; t+=0.001) {
+            Point cjp1 = cjCalc(t);
             Pixel px = new Pixel(cjp1.getPosX(), cjp1.getPosY(), this.getColor());
             listPixelsCurve.add(px);
         }

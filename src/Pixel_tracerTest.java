@@ -26,17 +26,40 @@ public class Pixel_tracerTest {
 
     @Test
     public void testClearArea() {
-        
+        String[][] area;
+        int height = 80;
+        int width = 50;
+        area = new String[height][width];
+
+        if (height != 0 && width != 0){
+            for (int i=0; i<height; i++){
+                for (int j=0; j<width; j++){
+                    area[i][j] = ".";
+                }
+            }
+        }
+        pixel_tracer.getCurrentArea().clearArea();
+        assertArrayEquals(area,pixel_tracer.getCurrentArea().getArea());
     }
 
     @Test
     public void testDestroyApp() {
-        
+        pixel_tracer.destroyApp();
+        assertEquals(0, pixel_tracer.getListArea().size());
+        assertEquals(null, pixel_tracer.getCurrentArea());
+        assertEquals(null, pixel_tracer.getCurrentLayer());
+        assertEquals(null, pixel_tracer.getFullChar());
+        assertEquals(null, pixel_tracer.getEmptyChar());
     }
 
     @Test
     public void testEraseArea() {
+        pixel_tracer.eraseArea();
+        ArrayList<Layer> layerList = pixel_tracer.getCurrentArea().getAllLayers();
 
+        for (int i=0; i<layerList.size(); i++){
+            assertEquals(0, layerList.get(i).getListShapes().size());
+        }
     }
 
     @Test

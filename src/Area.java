@@ -86,7 +86,20 @@ public class Area {
         return areaString;
     }
 
-    public void clearArea(){
+
+    public void clearArea() {
+        int height = this.area.length;
+        int width = this.area[0].length;
+        this.area = new String[height][width];
+
+        if (height != 0 && width != 0){
+            for (int i=0; i<height; i++){
+                for (int j=0; j<width; j++){
+                    area[i][j] = this.emptyChar;
+                }
+            }
+        }
+
     }
 
     /**

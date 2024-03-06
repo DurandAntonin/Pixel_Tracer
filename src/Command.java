@@ -468,8 +468,18 @@ public class Command {
                             case "layers":
                                 //on affiche la liste des layers de l'area sélectionnée
                                 ArrayList<Layer> listLayers = app.getCurrentArea().getAllLayers();
+                                Layer currentLayer = app.getCurrentLayer();
+                
                                 for(int i=0;i<listLayers.size();i++){
-                                    System.out.println(listLayers.get(i) + "\n");
+                                    Layer layer = listLayers.get(i);
+
+                                    //on met une annotation indiquant le layer sélectionné
+                                    if (layer.equals(currentLayer))
+                                        System.out.println("  *\t" + layer.getId() + " (" + layer.getVisible() + ") " + " " + layer.getName());
+                                    else
+                                        System.out.println("  -\t" + layer.getId() + " " + layer.getName());
+
+                                    //System.out.println(layer + "\n");
                                 }
                                 resultCommand = 8;
                                 break;
@@ -477,8 +487,18 @@ public class Command {
                             case "areas":
                                 //on affiche la liste des areas
                                 ArrayList<Area> listAreas = app.getListArea();
+                                Area currentArea = app.getCurrentArea();
+
                                 for(int i=0;i<listAreas.size();i++){
-                                    System.out.println(listAreas.get(i) + "\n");
+                                    Area area = listAreas.get(i);
+
+                                    //on met une annotation indiquant l'area sélectionnée
+                                    if (area.equals(currentArea))
+                                        System.out.println("  *\t" + area.getId() + " " + area.getName());
+                                    else
+                                        System.out.println("  -\t" + area.getId() + " " + area.getName());
+
+                                    //System.out.println(area + "\n");
                                 }
                                 resultCommand = 8;
                                 break;
@@ -486,8 +506,18 @@ public class Command {
                             case "shapes":
                                 //on affiche la liste des formes de l'ara sélectionnée
                                 ArrayList<Shape> listeShapes = app.getCurrentLayer().getListShapes();
+                                Shape currentShape = app.getCurrentShape();
+
                                 for(int i=0;i<listeShapes.size();i++){
-                                    System.out.println(listeShapes.get(i) + "\n");
+                                    Shape shape = listeShapes.get(i);
+
+                                    //on met une annotation indiquant l'area sélectionnée
+                                    if (shape.equals(currentShape))
+                                        System.out.println("  *\t" + shape.getId() + " " + shape.getClass().getSimpleName() + " " + shape.getColor());
+                                    else
+                                        System.out.println("  -\t" + shape.getId() + " " + shape.getClass() + " " + shape.getColor());
+
+                                    //System.out.println(shape + "\n");
                                 }
                                 resultCommand = 8;
                                 break;
@@ -662,16 +692,13 @@ public class Command {
                     if (this.checkNbParams(3, 1, 0) || this.checkNbParams(3, 2, 0)){
                         //on regarde si le set concerne un layer ou un char
                         String elemToSet = this.strParams.get(1).toLowerCase();
-                        System.out.println("ici");
-                        System.out.println(this.strParams);
-                        System.out.println(this.intParams);
+
                         switch (elemToSet) {
                             case "char":
                                 //TODO
                                 break;
 
                             case "layer":
-                                System.out.println("la");
                                 //opération de changement de position d'un layer
                                 if (this.strParams.get(2).toLowerCase().equals("position")){
                                     if (this.intParams.size() == 2){
@@ -689,7 +716,6 @@ public class Command {
                                         System.out.println(resultCommand);
                                     }
                                     else{
-                                        System.out.print("ohoh");
                                         resultCommand = 3;
                                     }
                                     break;

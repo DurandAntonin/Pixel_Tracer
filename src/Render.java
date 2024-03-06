@@ -57,13 +57,13 @@ public class Render {
 
         System.out.println("\t\n==== Draw shapes ====");
 
-        System.out.println("\t\npoint px py [color : optional] : create point a position (px, px) with color");
-        System.out.println("\t\nline x1 y1 x2 x2 [color : optional] : draw line from (x1, y1) to (x1, y1)");
-        System.out.println("\t\nsquare x1 y1 l [color : optional] : draw square (x1, y1)  length ");
-        System.out.println("\t\nrectangle x1 y1 w h [color : optional] : draw square (x1, y1)  width height ");
-        System.out.println("\t\ncircle x y r [color : optional] : center at (x, y) radus r");
-        System.out.println("\t\npolygon x1 y1 x2 y2 ... [color : optional] : draw polygon ");
-        System.out.println("\t\ncurve x1 y1 x2 y2 x3 y3 x4 y4 [color : optional] : draw Bezier curve ");
+        System.out.println("\t\npoint px py [color] : create point a position (px, px) with color");
+        System.out.println("\t\nline x1 y1 x2 x2 [color] : draw line from (x1, y1) to (x1, y1)");
+        System.out.println("\t\nsquare x1 y1 l [color] : draw square (x1, y1)  length ");
+        System.out.println("\t\nrectangle x1 y1 w h [color] : draw square (x1, y1)  width height ");
+        System.out.println("\t\ncircle x y r [color] : center at (x, y) radus r");
+        System.out.println("\t\npolygon x1 y1 x2 y2 ... [color] : draw polygon ");
+        System.out.println("\t\ncurve x1 y1 x2 y2 x3 y3 x4 y4 [color] : draw Bezier curve ");
         System.out.println("\t\nColor list : [white (default), black, red, green, purple, yellow, blue, cyan]");
 
         System.out.println("\t\n==== Draw manager ====");

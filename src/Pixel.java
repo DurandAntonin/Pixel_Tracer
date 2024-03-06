@@ -24,19 +24,36 @@ public class Pixel {
      * @param parY
      */
     public Pixel(Integer parX, Integer parY, COLOR parColor) {
-        // TODO implement here
+        this.x = parX;
+        this.y = parY;
+        this.color = parColor;
     }
 
     public Pixel(Integer parX, Integer parY) {
-        // TODO implement here
+        this.x = parX;
+        this.y = parY;
+        this.color = null;
+    }
+
+    @Override
+    public boolean equals(Object object){
+        //on regarde si les 2 variables font référence au meme objet
+        if (this == object)
+            return true;
+
+        //on regarde si l'objet à comparer est null ou qu'il n'est pas de la meme classe que this
+        if (object == null || !this.getClass().equals(object.getClass()))
+            return false;
+        
+        //on vérifie que les valeurs des champs sont identiques
+        return this.x == ((Pixel) object).getX() && this.y == ((Pixel) object).getY() && this.color == ((Pixel) object).getColor();
     }
 
     /**
      * @return
      */
     public String toString() {
-        // TODO implement here
-        return "";
+        return "Pixel [x: " + this.x + ", y: "+this.y + ", color: "+this.color +"]";
     }
 
     public Integer getX() {

@@ -10,8 +10,8 @@ import org.junit.Assert;
 public class PointTest {
 
     private Point point;
-    private final Integer x = 5;
-    private final Integer y = 10;
+    private final int x = 5;
+    private final int y = 10;
 
     @Before
     public void beforeTest(){
@@ -36,18 +36,18 @@ public class PointTest {
 
     @Test
     public void testGetPosX() {
-        Assert.assertEquals("Test méthode getPosX", this.x, point.getPosX());
+        assertEquals(this.x, point.getPosX());
     }
 
     @Test
     public void testGetPosY() {
-        Assert.assertEquals("Test méthode getPosY", this.y, point.getPosY());
+        assertEquals(this.y, point.getPosY());
     }
 
     @Test
     public void testToString() {
         String stringPointReal = point.toString();
-        String stringPointExpected = "Point [posX: " + point.getPosX() + ", posY: " + point.getPosY() + "]";
+        String stringPointExpected = "Point [id: " + point.getId() + ", x: " + point.getX() + ", y: " + point.getY() + ", color: " + point.getColor() + ", thickness: " + point.getThickness() + ", posX: " + point.getPosX() + ", posY: " + point.getPosY() + "]";
         Assert.assertEquals("Test méthode toString", stringPointExpected, stringPointReal);
     }
 

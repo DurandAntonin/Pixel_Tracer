@@ -15,20 +15,22 @@ public class Main {
      */
     public static void main(String[] Args) {
         //on initialise l'application
-        Pixel_tracer pixelTracer = new Pixel_tracer();
+        Pixel_tracer pixelTracer = new Pixel_tracer(100, 20);
 
         //System.out.println(pixelTracer);
         
         //on affiche le layer par défaut
         pixelTracer.drawCurrentArea();
-        Render.printArea(pixelTracer.getCurrentArea());
+        //Render.printArea(pixelTracer.getCurrentArea());
 
         //on lance l'application
         Command command = new Command("Command");
         boolean endOfExecution = false; //indique si l'application doit se terminer
+        Render.printHelp();
+
         while (!endOfExecution){
             int resultCommand = command.readExecCommand(pixelTracer);
-            System.out.println("Résultat de la commande : " + resultCommand);
+            //System.out.println("Résultat de la commande : " + resultCommand);
 
             switch (resultCommand) {
                 //cas clear de l'écran
@@ -44,7 +46,7 @@ public class Main {
                 //cas changement de l'affichage
                 case 0:
                 case 6:
-                    Render.clearScreen();
+                    pixelTracer.getCurrentArea().clearArea();
                     pixelTracer.drawCurrentArea();
                     Render.printArea(pixelTracer.getCurrentArea());
                     break;
@@ -60,7 +62,17 @@ public class Main {
 
                 //cas mauvais id pour la sélection d'une area ou d'un layer
                 case 9:
-                    System.out.println("LAYER/AREA INTROUVABLE \n");
+                    System.out.println("AREA/LAYER INTROUVABLE \n");
+                    continue;
+
+                //cas mauvais id pour la manipulation d'une shape
+                case 10:
+                    System.out.println("SHAPE INTROUVABLE \n");
+                    continue;
+
+                //cas mauvais id pour la manipulation d'une shape
+                case 11:
+                    System.out.println("MAUVAISES VALEURS \n");
                     continue;
 
                 //cas exit de l'application

@@ -6,7 +6,6 @@ import static org.junit.Assert.assertTrue;
 import java.util.ArrayList;
 
 import org.junit.After;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +15,7 @@ public class Pixel_tracerTest {
 
     @Before
     public void beforeTest() {
-        pixel_tracer = new Pixel_tracer();
+        pixel_tracer = new Pixel_tracer(10,10);
     }
 
     @After 
@@ -65,7 +64,63 @@ public class Pixel_tracerTest {
 
     @Test
     public void testDrawCurrentArea() {
-        
+        Layer layer0 = pixel_tracer.getCurrentLayer();
+        Layer layer1 = new Layer(1, "Layer 1");
+        Layer layer2 = new Layer(2, "Layer 2");
+
+        layer0.addShapeToLayer(new Point(0, COLOR.BLUE, 1, 0, 0));
+        layer0.addShapeToLayer(new Rectangle(0, COLOR.BLUE, 1, new Point(5, 0), 3, 3));
+        layer0.addShapeToLayer(new Circle(0, COLOR.BLUE, 1, new Point(9, 9), 3));
+        layer1.addShapeToLayer(new Point(-1, -1));
+        layer1.addShapeToLayer(new Circle(0, COLOR.BLUE, 1, new Point(0, 0),3));
+        layer0.addShapeToLayer(new Point(0, COLOR.BLUE, 1, 0, 8));
+
+        ArrayList<Point> listPointsP1 = new ArrayList<>();
+        listPointsP1.add(new Point(0, 9));
+        listPointsP1.add(new Point(1, 9));
+        layer0.addShapeToLayer(new Polygon(0, COLOR.BLUE, 1, listPointsP1));
+
+        ArrayList<Point> listPointsInPolygon = new ArrayList<>();
+        listPointsInPolygon.add(new Point(6, 1));
+        listPointsInPolygon.add(new Point(7, 1));
+        listPointsInPolygon.add(new Point(7, 2));
+        layer2.addShapeToLayer(new Polygon(0, COLOR.BLUE, 1, listPointsInPolygon));
+        layer2.setLayerVisibility(false);
+
+        pixel_tracer.getCurrentArea().addLayer(layer1);
+        pixel_tracer.getCurrentArea().addLayer(layer2);
+        pixel_tracer.drawCurrentArea();
+
+        String[][] areaActual = pixel_tracer.getCurrentArea().getArea();
+        String[][] areaExcepted = {
+            {"#", ".", ".", "#", ".", "#", "#", "#", ".", "."},
+            {".", ".", ".", "#", ".", "#", ".", "#", ".", "."},
+            {".", ".", "#", ".", ".", "#", "#", "#", ".", "."},
+            {"#", "#", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", ".", "."},
+            {".", ".", ".", ".", ".", ".", ".", ".", "#", "#"},
+            {".", ".", ".", ".", ".", ".", ".", "#", ".", "."},
+            {"#", ".", ".", ".", ".", ".", "#", ".", ".", "."},
+            {"#", "#", ".", ".", ".", ".", "#", ".", ".", "."}
+        };
+
+        assertArrayEquals(areaExcepted, areaActual);
+        COLOR[][] areaColorActual = pixel_tracer.getCurrentArea().getAreaColors();
+        COLOR[][] areaColorExpected = {
+            {COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.BLUE, COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.BLUE},
+            {COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE},
+            {COLOR.BLUE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE, COLOR.BLUE, COLOR.WHITE, COLOR.WHITE, COLOR.WHITE}
+        };
+
+        assertArrayEquals(areaColorExpected, areaColorActual);
     }
 
     @Test
@@ -98,26 +153,27 @@ public class Pixel_tracerTest {
 
     @Test
     public void testGetListArea() {
+        pixel_tracer = new Pixel_tracer(50, 20);
         ArrayList<Area> al1 = new ArrayList<>();
-        Area a0 = new Area(0, 80, 40, "Default Area");
-        Area a1 = new Area(1, 80, 40, "a1");
-        Area a2 = new Area(2, 80, 40, "a2");
-        Area a3 = new Area(3, 80, 40, "a3");
+        Area a0 = new Area(0, 50, 20, "Default Area");
+        Area a1 = new Area(1, 50, 20, "a1");
+        Area a2 = new Area(2, 50, 20, "a2");
+        Area a3 = new Area(3, 50, 20, "a3");
 
         al1.add(a0);
         al1.add(a1);
         al1.add(a2);
         al1.add(a3);
 
-        pixel_tracer.createArea("a1");
-        pixel_tracer.createArea("a2");
-        pixel_tracer.createArea("a3");
+        pixel_tracer.createArea(1, "a1", 50, 20);
+        pixel_tracer.createArea(2, "a2", 50, 20);
+        pixel_tracer.createArea(3, "a3", 50, 20);
         assertEquals(al1, pixel_tracer.getListArea());
     }
 
     @Test
     public void testAddNewLayer(){
-        pixel_tracer.createLayerInCurrentArea();
+        pixel_tracer.createLayerInCurrentArea(1, "Layer 1");
         assertEquals(2, pixel_tracer.getCurrentArea().getNumberOfLayers());
         assertEquals(1, pixel_tracer.getCurrentLayer().getId());
     }
@@ -162,10 +218,10 @@ public class Pixel_tracerTest {
         assertEquals(null, pixel_tracer.getCurrentArea());
 
         //cas n areas 
-        pixel_tracer.createArea("area 0");
-        pixel_tracer.createArea("area 1");
+        pixel_tracer.createArea(1, "area 0", 50, 20);
+        pixel_tracer.createArea(2, "area 1", 50, 20);
         assertTrue(pixel_tracer.deleteArea(1));
-        assertEquals(0, pixel_tracer.getCurrentArea().getId());
+        assertEquals(2, pixel_tracer.getCurrentArea().getId());
     }
 
     @Test
@@ -179,10 +235,10 @@ public class Pixel_tracerTest {
         assertEquals(null, pixel_tracer.getCurrentLayer());
 
         //cas n areas 
-        pixel_tracer.createLayerInCurrentArea();
-        pixel_tracer.createLayerInCurrentArea();
+        pixel_tracer.createLayerInCurrentArea(1, "Layer 1");
+        pixel_tracer.createLayerInCurrentArea(2, "Layer 2");
         assertTrue(pixel_tracer.deleteLayerInCurrentArea(1));
-        assertEquals(0, pixel_tracer.getCurrentLayer().getId());
+        assertEquals(2, pixel_tracer.getCurrentLayer().getId());
     }
 
     public void testDeleteShapeInCurrentLayer(){

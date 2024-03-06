@@ -15,34 +15,69 @@ public class Square extends Shape {
      */
     private Integer length;
 
+
+    public Square(int parId, COLOR parColor, int parThickness, Point parPoint, Integer parLength) {
+        //on initialise les champs
+        super(parId, 0, 0, parColor, parThickness);
+        this.point = parPoint;
+        this.length = parLength;
+    }
+
     /**
      * @param parPoint 
      * @param parLength
      */
+
     public Square(Point parPoint, Integer parLength) {
-        // TODO implement here
         super(null, null, null, null, null);
+        this.point = parPoint;
+        this.length = parLength;
     }
+
 
     /**
      * @return
      */
-    public List<Pixel> draw() {
-        // TODO implement here
-        return null;
+    public ArrayList<Pixel> draw() {
+        ArrayList<Pixel> listPixelsSquare = new ArrayList<>();
+        int departX = this.point.getPosX();
+        int departY =  this.point.getPosY();
+ 
+        for(int x = departX; x < this.length + departX;x++){
+            listPixelsSquare.add(new Pixel(x, departY, this.getColor()));
+            listPixelsSquare.add(new Pixel(x, departY+this.length-1, this.getColor()));     
+        }
+
+        for(int y = departY+1; y < this.length + departY - 1;y++){
+            listPixelsSquare.add(new Pixel(departX, y, this.getColor()));
+            listPixelsSquare.add(new Pixel(departX+this.length-1,y, this.getColor()));
+        }
+
+        //System.out.println("Square draw : " + listPixelsSquare);
+    
+        return listPixelsSquare;
     }
 
     @Override
     public boolean equals(Object object){
-        return false;
+        //on regarde si les 2 variables font référence au meme objet
+        if (this == object)
+            return true;
+
+        //on regarde si l'objet à comparer est null ou qu'il n'est pas de la meme classe que this
+        if (object == null || !this.getClass().equals(object.getClass()))
+            return false;
+        
+        //on vérifie que les valeurs des champs sont identiques
+        return this.point == ((Square) object).getPoint() && this.length == ((Square) object).getLength() && this.getX() == ((Square) object).getX() && this.getY() == ((Square) object).getY() && this.getColor() == ((Square) object).getColor() && this.getThickness() == ((Square) object).getThickness();
     }
 
     /**
      * @return
      */
     public String toString() {
-        // TODO implement here
-        return "";
+        String squareString = "Square [" + super.toString() + ", point: " + this.point.toString() + ", lenght: " + this.length.toString() + "]";
+        return squareString;
     }
 
     public Point getPoint() {

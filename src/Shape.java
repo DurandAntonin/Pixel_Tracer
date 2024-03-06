@@ -1,5 +1,4 @@
 
-import java.io.*;
 import java.util.*;
 
 /**
@@ -40,13 +39,17 @@ public abstract class Shape {
      * @param parThickness
      */
     public Shape(Integer parId, Integer parX, Integer parY, COLOR parColor, Integer parThickness) {
-        // TODO implement here
+        this.id = parId;
+        this.x = parX;
+        this.y = parY;
+        this.color = parColor;
+        this.thickness = parThickness;
     }
 
     /**
      * @return
      */
-    public abstract List<Pixel> draw();
+    public abstract ArrayList<Pixel> draw();
 
     @Override
     public abstract boolean equals(Object object);
@@ -55,8 +58,7 @@ public abstract class Shape {
      * @return
      */
     public String toString() {
-        // TODO implement here
-        return "";
+        return "id: " + this.id + ", x: "+this.x+ ", y: "+this.y+", color: " + this.color+", thickness: "+this.thickness;
     }
 
     public Integer getX() {

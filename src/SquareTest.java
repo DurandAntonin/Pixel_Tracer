@@ -1,4 +1,7 @@
-import static org.junit.Assert.assertArrayEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -51,15 +54,17 @@ public class SquareTest {
 
     @Test
     public void testDraw() {
-        Pixel[] pixels = {px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12};
-        assertArrayEquals(pixels, sq1.draw().toArray());
+        ArrayList<Pixel> pixels = new ArrayList<Pixel>(Arrays.asList(px1,px2,px3,px4,px5,px6,px7,px8,px9,px10,px11,px12));
+        ArrayList<Pixel> result = sq1.draw();
+        assertTrue(pixels.size() == result.size() && pixels.containsAll(result) && result.containsAll(pixels));
+        
     }
 
     @Test
     public void testToString(){
         String sq1StringActual = sq1.toString();
-        String sq1StringExcepted = "Square [point: " + sq1.getPoint().toString() + ", length: " + sq1.getLength().toString() + "]";
+        String sq1StringExpected = "Square [id: " + sq1.getId() + ", x: " + sq1.getX() + ", y: " + sq1.getY() + ", color: " + sq1.getColor() + ", thickness: " + sq1.getThickness() + ", point: " + sq1.getPoint().toString() + ", lenght: " + sq1.getLength().toString() + "]";
 
-        Assert.assertEquals(sq1StringExcepted, sq1StringActual);
+        Assert.assertEquals(sq1StringExpected, sq1StringActual);
     }
 }

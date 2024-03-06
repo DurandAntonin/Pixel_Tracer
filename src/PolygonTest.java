@@ -26,7 +26,7 @@ public class PolygonTest {
         pointList.add(p4);
         pointList.add(p5);
 
-        polygon = new Polygon(pointList.size(), pointList);
+        polygon = new Polygon(pointList);
     }
 
     @After
@@ -50,7 +50,7 @@ public class PolygonTest {
         pointList2.add(p1);
         pointList2.add(p2);
         pointList2.add(p3);
-        Assert.assertFalse(polygon.equals(new Polygon(pointList2.size(), pointList2)));
+        Assert.assertFalse(polygon.equals(new Polygon(pointList2)));
 
         //cas objets de meme classe avec un nombre de points identique mais pas les meme valeurs
         ArrayList<Point> pointList3 = new ArrayList<>();
@@ -59,10 +59,10 @@ public class PolygonTest {
         pointList3.add(p3);
         pointList3.add(p5);
         pointList3.add(p4);
-        Assert.assertFalse(polygon.equals(new Polygon(pointList3.size(), pointList3)));
+        Assert.assertFalse(polygon.equals(new Polygon(pointList3)));
 
         //cas objets de meme classe et valeur des champs identique
-        Assert.assertTrue(polygon.equals(new Polygon(pointList.size(), pointList)));
+        Assert.assertTrue(polygon.equals(new Polygon(pointList)));
     }
 
     @Test
@@ -81,14 +81,14 @@ public class PolygonTest {
         listPixelsExcepted.add(new Pixel(9, 10));
         listPixelsExcepted.add(new Pixel(10, 10));
 
-        Assert.assertEquals(listPixelsExcepted.size(), listPixelsActual.size());
+        assertEquals(listPixelsExcepted.size(), listPixelsActual.size());
 
         assertEquals(listPixelsExcepted, listPixelsActual);
     }
 
     @Test
     public void testGetNbOfPoints() {
-        assertEquals((Integer)pointList.size(), polygon.getNbOfPoints());
+        assertEquals(pointList.size(), polygon.getNbOfPoints());
     }
 
     @Test
@@ -102,11 +102,13 @@ public class PolygonTest {
         String polygonStringActual = polygon.toString();
 
         ArrayList<Point> pointListPolygon = polygon.getPointList();
-        String polygonStringExcepted = "Polygon [ nbOfPoints: " + polygon.getNbOfPoints() + ", pointList: [";
+        String polygonStringExcepted = "Polygon [id: " + polygon.getId() + ", x: " + polygon.getX() + ", y: " + polygon.getY() + ", color: " + polygon.getColor() + ", thickness: " + polygon.getThickness() + ", nbOfPoints: " + polygon.getNbOfPoints() + ", pointList: [";
         for (int i=0; i<pointListPolygon.size(); i++){
             polygonStringExcepted += pointListPolygon.get(i).toString() + ", ";
         }
-        polygonStringExcepted = polygonStringExcepted.substring(0, polygonStringExcepted.length()-2);
+        if (polygon.getNbOfPoints() > 0)
+            polygonStringExcepted = polygonStringExcepted.substring(0, polygonStringExcepted.length()-2);
+        
         polygonStringExcepted += "]]";
 
         Assert.assertEquals(polygonStringExcepted, polygonStringActual);

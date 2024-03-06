@@ -24,6 +24,11 @@ public class Area {
     /**
      * 
      */
+    private COLOR[][] areaColor;
+
+    /**
+     * 
+     */
     private ArrayList<Layer> listLayers;
 
     /**
@@ -47,13 +52,15 @@ public class Area {
         this.id = parId;
         this.name = parName;
         this.area = new String[parHeight][parWidth];
+        this.areaColor = new COLOR[parHeight][parWidth];
         this.listLayers = new ArrayList<>();
         this.emptyChar = ".";
         this.fullChar = "#";
 
         for (int i=0; i<parHeight; i++){
             for (int j=0; j<parWidth; j++){
-                area[i][j] = this.emptyChar;
+                this.area[i][j] = this.emptyChar;
+                this.areaColor[i][j] = COLOR.WHITE;
             }
         }
 
@@ -79,6 +86,7 @@ public class Area {
         return areaString;
     }
 
+
     public void clearArea() {
         int height = this.area.length;
         int width = this.area[0].length;
@@ -91,15 +99,37 @@ public class Area {
                 }
             }
         }
+
     }
 
     /**
      * @return
      */
     public void drawAllShapeFromLayer() {
+        int height = this.area.length;
+        int width = this.area[0].length;
+
         //pour chaque layer, on transforme les shapes en pixels pour les stocker dans le champ area
         for (Layer layer : this.listLayers) {
-            continue;
+
+            //on regarde si ce layer est visible
+            if (layer.getVisible()){
+                ArrayList<Shape> listShapesInLayer = layer.getListShapes();
+
+                for (Shape shape : listShapesInLayer) {
+                    ArrayList<Pixel> listPixelShape = shape.draw();
+
+                    //on stocke dans le tableau seulement les pixels qui sont dans le cadre
+                    for (Pixel pixel : listPixelShape) {
+                        int pX = pixel.getX();
+                        int pY = pixel.getY();
+                        if (pX >= 0 && pY >= 0 && pX < width && pY < height){
+                            this.area[pY][pX] = this.fullChar;
+                            this.areaColor[pY][pX] = pixel.getColor();
+                        }
+                    }
+                }
+            }
         }
     }
 
@@ -194,6 +224,10 @@ public class Area {
 
     public String[][] getArea() {
         return this.area;
+    }
+
+    public COLOR[][] getAreaColors() {
+        return this.areaColor;
     }
 
     public String getEmptyChar() {

@@ -54,7 +54,7 @@ public class PixelTest {
         Assert.assertFalse(pixel.equals(new String()));
 
         //cas objets de meme classe et valeur des champs différentes
-        Assert.assertFalse(pixel.equals(new Pixel(y, x, color)));
+        Assert.assertFalse(pixel.equals(new Pixel(y+1, x, color)));
 
         //cas objets de meme classe et valeur des champs identique
         Assert.assertTrue(pixel.equals(new Pixel(x, y, color)));

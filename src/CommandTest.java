@@ -295,6 +295,10 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
+        provideInput("point 1 2 cyan");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 0);
+
         //cas erreur 3
         provideInput("point 1");
         errorNum = command.readExecCommand(app);
@@ -315,6 +319,10 @@ public class CommandTest {
         //// CAS LINE ////
         //cas erreur 0
         provideInput("line 1 2 4 1");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 0);
+
+        provideInput("line 1 2 4 1 black");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
@@ -342,6 +350,10 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
+        provideInput("circle 1 2 3 green");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 0);
+
         //cas erreur 3
         provideInput("circle 1 2");
         errorNum = command.readExecCommand(app);
@@ -360,9 +372,13 @@ public class CommandTest {
         Assert.assertTrue(errorNum == 3);
 
 
-        //// CAS SQARE ////
+        //// CAS SQUARE ////
         //cas erreur 0
         provideInput("square 1 2 3");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 0);
+
+        provideInput("square 1 2 3 purple");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
@@ -390,6 +406,10 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
+        provideInput("rectangle 1 2 3 3 yellow");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 0);
+
         //cas erreur 3
         provideInput("rectangle 1 2");
         errorNum = command.readExecCommand(app);
@@ -414,8 +434,12 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
+        provideInput("polygon 1 2 3 3 blue");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 0);
+
         //cas erreur 3
-        provideInput("polygon 1 2 3 3 4 6 7 8 9 10 12 6 8 12 2 3 3 4 7 6 2 1 0 4 3 2 1 2 8 10");
+        provideInput("polygon 1 2 3 3 4 6 7 8 9 10 12 6 8 12 2 3 3 4 7 6 2 1 0 4 3 2 1 2 8 10 12");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
 
@@ -439,6 +463,10 @@ public class CommandTest {
         //// CAS CURVE ////
         //cas erreur 0
         provideInput("curve 1 2 3 3 6 8 10 10");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 0);
+
+        provideInput("curve 1 2 3 3 6 8 10 10 white");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 0);
 
@@ -490,15 +518,48 @@ public class CommandTest {
 
         //// CAS NEW  ////
         //cas erreur 8
+        provideInput("new layer layerTest");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 8);
+
+        provideInput("new area areaTest");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 8);
+
+        provideInput("new area areaTest 100 20");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 8);
+
+        //cas erreur 11
+        provideInput("new area test 1001 100");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 11);
+
+        provideInput("new area test 100 1001");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 11);
+
+        provideInput("new area test 0 100");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 11);
+
+        provideInput("new area test 100 0");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 11);
+
+        //cas erreur 3
         provideInput("new layer");
         errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 8);
-
+        Assert.assertTrue(errorNum == 3);
+        
         provideInput("new area");
         errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 8);
+        Assert.assertTrue(errorNum == 3);
 
-        //cas erreur 9
+        provideInput("new area test 1");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
         provideInput("new");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);
@@ -517,10 +578,11 @@ public class CommandTest {
 
 
         //// CAS SELECT  ////
+        app = new Pixel_tracer();
         //on créé une nouvelle area 
-        app.getCurrentArea().addLayer(new Layer(1, "New layer test 1"));
+        app.createLayerInCurrentArea(1, "Layer 1");
         //on créé une shape dans le layer actuel
-        app.getCurrentLayer().addShapeToLayer(new Point(1, 2));
+        app.addShapeToCurrentLayer(new Point(10, 2));
 
         //cas erreur 8
         provideInput("select area 0");
@@ -564,9 +626,10 @@ public class CommandTest {
 
         //// CAS DELETE  ////
         //on créé une nouvelle area 
-        app.createArea("area test");
+        app = new Pixel_tracer();
+        app.createArea(2, "area test", 100, 20);
         //on créé une shape dans le layer actuel
-        app.addShapeToCurrentLayer(new Point(1, 2));
+        app.addShapeToCurrentLayer(new Point(0, COLOR.BLACK, 1, 1, 2));
 
         //cas erreur 8
         provideInput("delete shape 0");
@@ -577,20 +640,21 @@ public class CommandTest {
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
-        provideInput("delete area 1");
+        provideInput("delete area 2");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
 
+        //cas erreur 10
+        provideInput("delete shape 15");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 10);
+
         //cas erreur 9
-        provideInput("delete shape 0");
+        provideInput("delete layer 15");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
-        provideInput("delete layer 0");
-        errorNum = command.readExecCommand(app);
-        Assert.assertTrue(errorNum == 9);
-
-        provideInput("delete area 1");
+        provideInput("delete area 3");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
         
@@ -627,11 +691,11 @@ public class CommandTest {
         Assert.assertTrue(errorNum == 8);
 
         //cas erreur 9
-        provideInput("set layer visible 1");
+        provideInput("set layer visible 15");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 
-        provideInput("set layer unvisible 1");
+        provideInput("set layer unvisible 15");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
 

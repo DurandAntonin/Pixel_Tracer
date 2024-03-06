@@ -12,10 +12,12 @@ import org.junit.Test;
 public class Pixel_tracerTest {
 
     private Pixel_tracer pixel_tracer;
+    int height = 10;
+    int width = 10;
 
     @Before
     public void beforeTest() {
-        pixel_tracer = new Pixel_tracer(10,10);
+        pixel_tracer = new Pixel_tracer(width, height);
     }
 
     @After 
@@ -27,19 +29,25 @@ public class Pixel_tracerTest {
     @Test
     public void testClearArea() {
         String[][] area;
-        int height = 80;
-        int width = 50;
+        COLOR[][] areaColor;
+
+        pixel_tracer.addShapeToCurrentLayer(new Point(0, COLOR.BLACK, 1, 9, 9));
+        pixel_tracer.drawCurrentArea();
+        
         area = new String[height][width];
+        areaColor = new COLOR[height][width];
 
         if (height != 0 && width != 0){
             for (int i=0; i<height; i++){
                 for (int j=0; j<width; j++){
                     area[i][j] = ".";
+                    areaColor[i][j] = COLOR.WHITE;
                 }
             }
         }
         pixel_tracer.getCurrentArea().clearArea();
         assertArrayEquals(area,pixel_tracer.getCurrentArea().getArea());
+        assertArrayEquals(areaColor,pixel_tracer.getCurrentArea().getAreaColors());
     }
 
     @Test

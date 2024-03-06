@@ -682,6 +682,16 @@ public class CommandTest {
 
         //// CAS SET  ////
         //cas erreur 8
+        app = new Pixel_tracer();
+        app.createLayerInCurrentArea(1, "Layer1");
+        provideInput("set layer position 1 0");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 8);
+
+        provideInput("set layer position 0 1");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 8);
+
         provideInput("set layer visible 0");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 8);
@@ -691,6 +701,15 @@ public class CommandTest {
         Assert.assertTrue(errorNum == 8);
 
         //cas erreur 9
+        provideInput("set layer position 2 0");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 9);
+
+        app.deleteLayerInCurrentArea(1);
+        provideInput("set layer position 0 1");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 9);
+
         provideInput("set layer visible 15");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 9);
@@ -700,6 +719,18 @@ public class CommandTest {
         Assert.assertTrue(errorNum == 9);
 
         //cas erreur 3
+        provideInput("set layer test 1 2");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
+        provideInput("set layer position");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
+        provideInput("set layer position 1");
+        errorNum = command.readExecCommand(app);
+        Assert.assertTrue(errorNum == 3);
+
         provideInput("set shape 0");
         errorNum = command.readExecCommand(app);
         Assert.assertTrue(errorNum == 3);

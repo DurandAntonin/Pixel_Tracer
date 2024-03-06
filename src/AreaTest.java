@@ -100,6 +100,22 @@ public class AreaTest {
     }
 
     @Test
+    public void testChangeLayerPosition(){
+        Layer layer0 = area.getAllLayers().get(0);
+        Layer layer1 = new Layer(1, "layer 1");
+        area.addLayer(layer1);
+        ArrayList<Layer> listLayers = area.getAllLayers();
+
+        assertEquals(layer1, listLayers.get(1));
+        assertEquals(layer0, listLayers.get(0));
+
+        area.changeLayerPosition(1, 0);
+        listLayers = area.getAllLayers();
+        assertEquals(layer1, listLayers.get(0));
+        assertEquals(layer0, listLayers.get(1));
+    }
+
+    @Test
     public void testDrawArea() {
         ArrayList<Layer> layers = area.getAllLayers();
         Layer layer0 = layers.get(0);

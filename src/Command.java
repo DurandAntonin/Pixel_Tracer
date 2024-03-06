@@ -659,43 +659,74 @@ public class Command {
                     break;
 
                 case "set":
-                    if (this.checkNbParams(3, 1, 0)){
+                    if (this.checkNbParams(3, 1, 0) || this.checkNbParams(3, 2, 0)){
                         //on regarde si le set concerne un layer ou un char
                         String elemToSet = this.strParams.get(1).toLowerCase();
-
+                        System.out.println("ici");
+                        System.out.println(this.strParams);
+                        System.out.println(this.intParams);
                         switch (elemToSet) {
                             case "char":
                                 //TODO
                                 break;
 
                             case "layer":
-                                int idLayer = this.intParams.get(0);
-                                String newLayerVisibility = this.strParams.get(2).toLowerCase();
-                                boolean resultChangeLayerVisibility = false;
+                                System.out.println("la");
+                                //opération de changement de position d'un layer
+                                if (this.strParams.get(2).toLowerCase().equals("position")){
+                                    if (this.intParams.size() == 2){
+                                        System.out.println("hola");
+                                        int idLayerToChangePosition = this.intParams.get(0);
+                                        int idLayerTarget = this.intParams.get(1);
+                                        boolean resultChangeLayerPosition = app.getCurrentArea().changeLayerPosition(idLayerToChangePosition, idLayerTarget);
+    
+                                        //on regarde si le changement a bien été effectué
+                                        if (resultChangeLayerPosition)
+                                            resultCommand = 8;
+                                        else
+                                            resultCommand = 9;
 
-                                //on regarde s'il faut rendre visible le layer ou non
-                                switch (newLayerVisibility) {
-                                    case "visible":
-                                        //on met le layer visible
-                                        resultChangeLayerVisibility = app.changeLayerVisibilityInCurrentArea(idLayer, true);
-                                        break;
-
-                                    case "unvisible":
-                                        //on met le layer invisible
-                                        resultChangeLayerVisibility = app.changeLayerVisibilityInCurrentArea(idLayer, false);
-                                        break;
-                                
-                                    default:
+                                        System.out.println(resultCommand);
+                                    }
+                                    else{
+                                        System.out.print("ohoh");
                                         resultCommand = 3;
-                                        break;
+                                    }
+                                    break;
                                 }
 
-                                //on vérifie que le changement a bien été effectué
-                                if (resultChangeLayerVisibility)
-                                    resultCommand = 8;
+                                //opération de changement de visibilité d'un layer
+                                else if (this.intParams.size() == 1){
+                                    int idLayer = this.intParams.get(0);
+                                    String newLayerVisibility = this.strParams.get(2).toLowerCase();
+                                    boolean resultChangeLayerVisibility = false;
+    
+                                    //on regarde s'il faut rendre visible le layer ou non
+                                    switch (newLayerVisibility) {
+                                        case "visible":
+                                            //on met le layer visible
+                                            resultChangeLayerVisibility = app.changeLayerVisibilityInCurrentArea(idLayer, true);
+                                            break;
+    
+                                        case "unvisible":
+                                            //on met le layer invisible
+                                            resultChangeLayerVisibility = app.changeLayerVisibilityInCurrentArea(idLayer, false);
+                                            break;
+                                    
+                                        default:
+                                            resultCommand = 3;
+                                            break;
+                                    }
+    
+                                    //on vérifie que le changement a bien été effectué
+                                    if (resultChangeLayerVisibility)
+                                        resultCommand = 8;
+                                    else
+                                        resultCommand = 9;
+                                    break;
+                                }
                                 else
-                                    resultCommand = 9;
-                                break;
+                                    resultCommand = 3;
                         
                             default:
                                 resultCommand = 3;

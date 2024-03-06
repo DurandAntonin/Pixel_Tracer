@@ -135,6 +135,34 @@ public class Area {
         }
     }
 
+    public boolean changeLayerPosition(int layerIdToChangePosition, int layerIdTarget){
+        boolean isLayerPositionChanged = false;
+        Layer layerToChange = null;
+        int layerToChangePosition = -1;
+        int layerTargetPosition = -1;
+
+        //on regarde si le layer a déplacer et le layer target sont présents dans la liste
+        for (int i=0; i<this.listLayers.size(); i++){
+            if (layerToChangePosition != -1 && layerTargetPosition != -1)
+                break;
+
+            if (listLayers.get(i).getId() == layerIdToChangePosition)
+                layerToChangePosition = i;
+            else if (listLayers.get(i).getId() == layerIdTarget)
+                layerTargetPosition = i;
+        }
+
+        //on insère le layer à déplacer au dessous du layer target
+        if (layerToChangePosition != -1 && layerTargetPosition != -1){
+            layerToChange = this.listLayers.remove(layerToChangePosition);
+            this.listLayers.add(layerTargetPosition, layerToChange);
+            isLayerPositionChanged = true;
+        }
+
+
+        return isLayerPositionChanged;
+    }
+
     /**
      * @param layerToAdd 
      * @return

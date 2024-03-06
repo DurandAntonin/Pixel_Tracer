@@ -1,7 +1,8 @@
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
 
 import org.junit.After;
 import org.junit.Before;
@@ -18,7 +19,7 @@ public class RenderTest {
     @Before
     public void init(){
         a1 = new Area(1, 5, 5, "area1");
-        r1 = new Rectangle(new Point(0, 0), 3, 3);
+        r1 = new Rectangle(0, COLOR.BLUE, 1, new Point(0, 0), 3, 3);
         l1 = new Layer(1, "layer1");
         l1.addShapeToLayer(r1);
         a1.addLayer(l1);
@@ -32,21 +33,22 @@ public class RenderTest {
     }
 
     @Test
-    public void testClearScreen() {
-
-    }
-
-    @Test
-    public void testPrintArea() {
+    public void testPrintArea() throws UnsupportedEncodingException {
         Render.printArea(a1);
-        String[][] areaExpected = {
-            {"#", "#", "#", ".", "."},
-            {"#", ".", "#", ".", "."},
-            {"#", "#", "#", ".", "."},
-            {".", ".", ".", ".", "."},
-            {".", ".", ".", ".", "."},
-        };
 
-        assertEquals(areaExpected.toString(), outContent.toString());
+        String[][] area = a1.getArea();
+        COLOR[][] areaColor = a1.getAreaColors();
+
+        String areaExceptedStr = "";
+        for (int i=0; i< area.length; i++){
+            areaExceptedStr += "|";
+            for (int j=0; j<area[i].length; j++){
+                //on affiche la case avec la couleur associée à cette dernière
+                areaExceptedStr += areaColor[i][j].getValue() + area[i][j] + COLOR.RESET.getValue();
+            }
+            areaExceptedStr += "|\n";
+        }
+
+        assertArrayEquals(areaExceptedStr.getBytes(), outContent.toByteArray());
     }
 }
